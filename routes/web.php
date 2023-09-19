@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewBlogController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SignupController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MyProfileController;
+use App\Http\Controllers\ProfilePostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'render']);
+Route::get('/login', [LoginController::class, 'render']);
+Route::get('/signup', [SignupController::class, 'render']);
+Route::get('/blog/new', [NewBlogController::class, 'render']);
+Route::get('/blog/{id}', [BlogController::class, 'render']);
+Route::get('/me', [MyProfileController::class, 'render']);
+Route::get('/me/posts', [ProfilePostsController::class, 'render']);
+Route::get('/me/likes', [ProfilePostsController::class, 'render']);
