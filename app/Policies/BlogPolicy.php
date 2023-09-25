@@ -31,7 +31,7 @@ class BlogPolicy
         return Response::denyAsNotFound();
     }
 
-    public function create(User $user): Response
+    public function create(?User $user): Response
     {
         if ($user) {
             return Response::allow();

@@ -23,7 +23,9 @@ class BlogController extends Controller
         try {
             $this->authorize('view', $blog);
         } catch (\Throwable $th) {
-            abort(404);
+            if ($blog->status !== 'published') {
+                abort(404);
+            }
         }
 
         $liked = $blog->liked();
