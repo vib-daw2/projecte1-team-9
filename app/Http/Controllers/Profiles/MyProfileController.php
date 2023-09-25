@@ -19,7 +19,7 @@ class MyProfileController extends Controller
 
         $user = DB::table('users')->where('id', $user_id)->first();
 
-        return view('ProfileView',
+        return view('profiles/mine',
             ['id' => $user_id,
                 'posts_count' => $posts_count,
                 'up_since' => $up_since,

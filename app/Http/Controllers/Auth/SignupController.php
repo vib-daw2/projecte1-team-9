@@ -18,7 +18,7 @@ class SignupController extends Controller
         if (auth()->check()) {
             return redirect('/');
         }
-        return view('signup');
+        return view('auth/signup');
     }
 
     public function signup(): RedirectResponse
@@ -40,6 +40,6 @@ class SignupController extends Controller
         $user->password = Hash::make($validated['password1']);
         $user->save();
 
-        return redirect('/login');
+        return redirect('auth/login');
     }
 }

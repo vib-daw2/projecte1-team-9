@@ -17,7 +17,7 @@ class EditBlogController extends Controller
             return redirect('/blog/'.$id);
         }
 
-        return view('editblog', ['blog' => $blog, 'id' => $id]);
+        return view('blog/edit', ['blog' => $blog, 'id' => $id]);
     }
 
     public function edit(){

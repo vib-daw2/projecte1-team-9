@@ -16,7 +16,7 @@ class NewBlogController extends Controller
         } catch (\Throwable $th) {
             abort(403);
         }
-        return view('newblog');
+        return view('blog/new');
     }
 
     public function create(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application

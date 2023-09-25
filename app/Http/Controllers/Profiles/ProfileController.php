@@ -15,7 +15,7 @@ class ProfileController extends Controller
         $likes = User::getTotalRecivedLikes($id);
         $user = DB::table('users')->where('id', $id)->first();
 
-        return view('ProfileView',
+        return view('profiles/profile',
             ['id' => $id,
             'posts_count' => $posts_count,
             'up_since' => $up_since,

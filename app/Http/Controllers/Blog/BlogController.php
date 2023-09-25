@@ -29,7 +29,7 @@ class BlogController extends Controller
         $likesAndDislikes = $blog->getLikesAndDislikes();
         $blog->username = $blog->user->username;
 
-        return view('blog', [
+        return view('blog/blog', [
             'blog' => $blog,
             'id' => $id,
             'liked' => $liked,

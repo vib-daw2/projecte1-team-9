@@ -9,6 +9,6 @@ class UserAdminController extends Controller
     //
 
     public function render(){
-        return view('UserAdmin');
+        return view('admin/users');
     }
 }
