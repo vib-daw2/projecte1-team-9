@@ -2,7 +2,8 @@
 <div class="w-full flex justify-center items-center min-h-screen bg-gray-50 overflow-hidden">
     <div class="rounded-lg border h-fit shadow-lg w-full max-w-md p-8 bg-white">
         <div class="text-2xl font-medium">Log In</div>
-        <form class="w-full mt-8 flex flex-col gap-4 ">
+        <form class="w-full mt-8 flex flex-col gap-4 " method="POST">
+            @csrf
             <div class="w-full">
                 <label class="block">Username</label>
                 <input type="text" name="username" id="username" class="px-2 py-1 ring-black rounded-lg ring-1 w-full">

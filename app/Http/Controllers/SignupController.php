@@ -21,7 +21,7 @@ class SignupController extends Controller
     {
         try {
             $validated = $this->validate(request(), [
-                'username' => 'required|min:3|max:255|unique:users,name',
+                'username' => 'required|min:3|max:255|unique:users,username',
                 'email' => 'required|email|unique:users,email',
                 'password1' => 'required|min:8|max:255',
                 'password2' => 'required|same:password1',
@@ -31,7 +31,7 @@ class SignupController extends Controller
         }
 
         $user = new User();
-        $user->name = $validated['username'];
+        $user->username = $validated['username'];
         $user->email = $validated['email'];
         $user->password = Hash::make($validated['password1']);
         $user->save();

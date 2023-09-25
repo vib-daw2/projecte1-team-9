@@ -22,7 +22,9 @@ use App\Http\Controllers\EditBlogController;
 */
 
 Route::get('/', [HomeController::class, 'render']);
+
 Route::get('/login', [LoginController::class, 'render']);
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/signup', [SignupController::class, 'render']);
 Route::post('/signup', [SignupController::class, 'signup']);
