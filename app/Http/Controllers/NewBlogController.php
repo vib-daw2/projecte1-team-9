@@ -34,7 +34,9 @@ class NewBlogController extends Controller
         $blog->status = $validated['status'];
         $blog->user_id = Auth::id();
         $blog->save();
+        
+        $insertedId = $blog->id;
 
-        return redirect('/');
+        return redirect('/blog/' . $insertedId);
     }
 }

@@ -60,11 +60,11 @@
                 </a>
             </div>
         </div>
-        <input type="text" name="title" id="title" placeholder="Title"
-            class="w-full text-5xl px-2 outline-none font-medium focus:border-0 py-2" />
-        <input type="text" name="subtitle" id="subtitle"
-            class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle">
-        <textarea class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
+        <textarea style="resize:none" maxlength="255" name="title" id="title" placeholder="Title" rows="2"
+            class="w-full text-5xl px-2 outline-none font-medium focus:border-0 py-2"></textarea>
+        <textarea style="resize:none" type="text" name="subtitle" id="subtitle"
+            class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle" maxlength="100" rows="1"></textarea>
+        <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
             rows="20" placeholder="Content"></textarea>
     </form>
 </div>
