@@ -22,9 +22,9 @@ class LoginController extends Controller
     public function login(): RedirectResponse
     {
         try {
-            $validated = $this->validate(request(), [
-                'username' => 'required|min:3|max:255',
-                'password' => 'required|min:8|max:255',
+            $validated = request()->validate([
+                'username' => 'required',
+                'password' => 'required'
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
