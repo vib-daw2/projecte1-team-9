@@ -18,6 +18,8 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         if (!$blog) {
             abort(404);
+        } elseif ($request->user()->cannot('view', $blog)) {
+            abort(403);
         }
 
         $liked = $blog->liked();
