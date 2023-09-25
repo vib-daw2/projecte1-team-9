@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class EditBlogController extends Controller
 {
@@ -28,10 +30,17 @@ class EditBlogController extends Controller
             return redirect('/blog/'.request('id'));
         }
 
-        $blog->title = request('title');
-        $blog->subtitle = request('subtitle');
-        $blog->body = request('body');
-        $blog->status = request('status');
+        try {
+            $validated = $this->validate(request(), Blog::validate());
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
+
+        $blog->title = $validated['title'];
+        $blog->subtitle = $validated['subtitle'];
+        $blog->body = $validated['body'];
+        $blog->status = $validated['status'];
+        $blog->user_id = Auth::id();
         $blog->save();
 
         return redirect('/blog/'.request('id'));

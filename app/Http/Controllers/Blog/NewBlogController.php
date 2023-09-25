@@ -29,12 +29,7 @@ class NewBlogController extends Controller
         }
 
         try {
-            $validated = $this->validate(request(), [
-                'title' => 'required|min:3|max:255',
-                'subtitle' => 'required|min:3|max:255',
-                'body' => 'required|min:3',
-                'status' => 'required|in:draft,published'
-            ]);
+            $validated = $this->validate(request(), Blog::validate());
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
