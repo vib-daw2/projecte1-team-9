@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserAdminController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\SignupController;
+use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\EditBlogController;
+use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\NewBlogController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\SignupController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MyProfileController;
-use App\Http\Controllers\ProfilePostsController;
-use App\Http\Controllers\EditBlogController;
+use App\Http\Controllers\Profiles\MyProfileController;
+use App\Http\Controllers\Profiles\ProfileController;
+use App\Http\Controllers\Profiles\ProfilePostsController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
