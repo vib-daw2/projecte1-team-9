@@ -1,10 +1,10 @@
 @extends('layout')
-<div class="w-full min-h-screen flex justify-start flex-col items-center px-12 pt-20">
+<div class="w-full min-h-screen flex justify-start flex-col items-center pt-20">
     <div class="max-w-5xl mt-4 w-full mx-auto h-fit flex flex-col justify-start items-start gap-3">
         <x-profiletabs selected="profile" />
-        <div class="flex flex-row w-full h-fit justify-between mt-4 gap-4">
+        <div class="flex flex-col w-full h-fit justify-center items-center mt-4 gap-4">
             <x-profilestats />
-            <form class="flex flex-col gap-3 w-2/3 pt-6">
+            <form class="flex flex-col gap-3 w-2/3 pt-6 max-w-3xl">
                 <div class="w-full">
                     <label class="block">Username</label>
                     <input type="text" name="username" id="username"
