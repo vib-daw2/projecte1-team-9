@@ -34,6 +34,8 @@ Route::post('/signup', [SignupController::class, 'signup']);
 Route::post('/logout', [LogoutController::class, 'logout']);
 
 Route::get('/blog/new', [NewBlogController::class, 'render']);
+Route::post('/blog/new', [NewBlogController::class, 'uploadBlog']);
+
 Route::get('/blog/{id}', [BlogController::class, 'render']);
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']);
 

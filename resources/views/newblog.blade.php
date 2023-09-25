@@ -1,6 +1,7 @@
 @extends('layout')
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 pt-12">
-    <form class="max-w-3xl mt-4 w-full mx-auto flex flex-col justify-start items-center gap-3">
+    <form class="max-w-3xl mt-4 w-full mx-auto flex flex-col justify-start items-center gap-3" method="POST">
+        @csrf
         <div class="w-full flex justify-between flex-wrap items-center">
             <div class="text-left text-3xl font-medium">New Post</div>
             <div class="flex flex-row gap-2">
@@ -27,6 +28,7 @@
                     Publish
                 </button>
                 <button
+                    type="submit"
                     class="w-28 py-2 rounded-md bg-red-600 hover:bg-red-600/90 text-white font-medium flex justify-center items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -45,7 +47,7 @@
             class="w-full text-5xl px-2 outline-none font-medium focus:border-0 py-2" />
         <input type="text" name="subtitle" id="subtitle"
             class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle">
-        <textarea class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="content" id="content"
+        <textarea class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
             rows="20" placeholder="Content"></textarea>
     </form>
 </div>
