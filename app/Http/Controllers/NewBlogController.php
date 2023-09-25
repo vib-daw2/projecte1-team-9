@@ -21,6 +21,7 @@ class NewBlogController extends Controller
                 'title' => 'required|min:3|max:255',
                 'subtitle' => 'required|min:3|max:255',
                 'body' => 'required|min:3',
+                'status' => 'required|in:draft,published'
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
@@ -30,7 +31,7 @@ class NewBlogController extends Controller
         $blog->title = $validated['title'];
         $blog->subtitle = $validated['subtitle'];
         $blog->body = $validated['body'];
-        $blog->status = 'published';
+        $blog->status = $validated['status'];
         $blog->user_id = Auth::id();
         $blog->save();
 
