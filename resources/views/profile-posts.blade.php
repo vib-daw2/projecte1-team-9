@@ -6,7 +6,7 @@
             <x-profilestats />
             <div class="max-w-3xl mt-4 w-full mx-auto flex flex-col justify-start items-center gap-3">
                 @for ($i = 0; $i < 5; $i++)
-                    <x-postlist :username="sprintf('User %d', $i)" :title="sprintf('Post %d', $i)" :id="$i" />
+                    <x-postlist :username="sprintf('User %d', $i)" :title="sprintf('Post %d consectetur adipisicing elit. Iure, error.', $i)" :id="$i" />
                 @endfor
             </div>
         </div>
