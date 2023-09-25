@@ -18,21 +18,25 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         if (!$blog) {
             abort(404);
-        } elseif ($request->user()->cannot('view', $blog)) {
-            abort(403);
+        }
+
+        try {
+            $this->authorize('view', $blog);
+        } catch (\Throwable $th) {
+            abort(404);
         }
 
         $liked = $blog->liked();
 
         $likesAndDislikes = $blog->getLikesAndDislikes();
 
-        return view('blog',
-            ['blog' => $blog, // Title, subtitle, body, created_at, username (author), draft/published
-                'id' => $id,
-                'liked' => $liked, // True liked, False disliked, null not interacted
-                'likes' => $likesAndDislikes->likes,
-                'dislikes' => $likesAndDislikes->dislikes,
-            ]);
+        return view('blog', [
+            'blog' => $blog,
+            'id' => $id,
+            'liked' => $liked,
+            'likes' => $likesAndDislikes->likes,
+            'dislikes' => $likesAndDislikes->dislikes,
+        ]);
     }
 
 }

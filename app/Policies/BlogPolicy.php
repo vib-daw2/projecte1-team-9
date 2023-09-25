@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Blog;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class BlogPolicy
 {
@@ -15,16 +16,18 @@ class BlogPolicy
         //
     }
 
-    public function view(User $user, Blog $blog): bool
+    public function view(?User $user, Blog $blog): Response
     {
+        // If published, show to everyone
         if ($blog->status === 'published') {
-            return true;
+            return Response::allow();
         }
 
-        if ($user->id === $blog->user_id || $user->role === 'admin') {
-            return true;
+        // Handle if the user is the owner of the blog or admin
+        if ($user && ($user->id === $blog->user_id || $user->role === 'admin')) {
+            return Response::allow();
         }
 
-        return false;
+        return Response::denyAsNotFound();
     }
 }
