@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -11,22 +12,19 @@ class MyProfileController extends Controller
     {
         $user_id = Auth::id();
 
-        $posts_count = DB::table('blogs')->where('user_id', $user_id)->where('status', 'published')->count();
-        $up_since = DB::table('users')->where('id', $user_id)->value('created_at');
-
-        $likes = DB::table('likes')
-            ->where('blog_id', DB::table('blogs')
-                ->where('user_id', $user_id)->value('id'))
-            ->where('liked', true)->count(); // Calculate the number of likes for the user's posts
+        $posts_count = User::getPostsCount($user_id);
+        $up_since = User::getUpSince($user_id);
+        $likes = User::getTotalRecivedLikes($user_id);
 
         $user = DB::table('users')->where('id', $user_id)->first();
 
-        return view('MyProfile', [
-            'posts_count' => $posts_count,
-            'up_since' => $up_since,
-            'likes' => $likes,
-            'email' => $user->email,
-            'username' => $user->username,
-        ]);
+        return view('ProfileView',
+            ['id' => $user_id,
+                'posts_count' => $posts_count,
+                'up_since' => $up_since,
+                'likes' => $likes,
+                'username' => $user->username,
+                'email' => $user->email,
+            ]);
     }
 }

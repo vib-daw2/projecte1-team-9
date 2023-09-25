@@ -28,7 +28,7 @@ class BlogController extends Controller
         $dislikes = $likesAndDislikes->dislikes;
 
         return view('blog',
-            ['blog' => $blog, // Title, subtitle, body, created_at, username (author)
+            ['blog' => $blog, // Title, subtitle, body, created_at, username (author), draft/published
                 'id' => $id,
                 'liked' => $blog->liked, // True liked, False disliked, null not interacted
                 'likes' => $likes,
