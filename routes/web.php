@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewBlogController;
@@ -44,3 +45,4 @@ Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
 
 Route::get('/user/{id}', [ProfileController::class, 'render']);
+Route::get('/admin/users', [UserAdminController::class, 'render']);
