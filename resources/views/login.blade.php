@@ -6,13 +6,18 @@
             @csrf
             <div class="w-full">
                 <label class="block">Username</label>
-                <input type="text" name="username" id="username" class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
+                <input type="text" name="username" id="username" class="px-2 py-1 rounded-lg ring-1 ring-black w-full">
             </div>
             <div class="w-full">
                 <label class="block">Password</label>
                 <input type="password" name="password" id="password"
                     class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
             </div>
+            @error('username')
+            <div>
+                <div class="text-red-500 text-sm mt-1">{{$message}}</div>
+            </div>
+            @enderror
             <div class="flex justify-between items-center">
                 <div>
                     <input type="checkbox" name="remember" id="remember">
