@@ -16,7 +16,7 @@ class BlogPolicy
         //
     }
 
-    public function view(?User $user, Blog $blog): Response
+    public function view(User $user, Blog $blog): Response
     {
         // If published, show to everyone
         if ($blog->status === 'published') {
@@ -29,5 +29,14 @@ class BlogPolicy
         }
 
         return Response::denyAsNotFound();
+    }
+
+    public function create(User $user): Response
+    {
+        if ($user) {
+            return Response::allow();
+        }
+
+        return Response::deny('You must be logged in to create a blog');
     }
 }

@@ -16,6 +16,13 @@ class NewBlogController extends Controller
 
     public function uploadBlog(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
+        $blog = new Blog();
+        try {
+            $this->authorize('create', $blog);
+        } catch (\Throwable $th) {
+            abort(403);
+        }
+
         try {
             $validated = $this->validate(request(), [
                 'title' => 'required|min:3|max:255',
@@ -27,14 +34,13 @@ class NewBlogController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        $blog = new Blog();
         $blog->title = $validated['title'];
         $blog->subtitle = $validated['subtitle'];
         $blog->body = $validated['body'];
         $blog->status = $validated['status'];
         $blog->user_id = Auth::id();
         $blog->save();
-        
+
         $insertedId = $blog->id;
 
         return redirect('/blog/' . $insertedId);
