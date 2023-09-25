@@ -1,11 +1,27 @@
 @extends('layout')
+<script>
+
+    function saveAsDraft(e){
+        e.preventDefault();
+        document.getElementById('status').value = 'draft';
+        document.forms[0].submit();
+    }
+
+    function publish(e){
+        e.preventDefault();
+        document.getElementById('status').value = 'published';
+        document.forms[0].submit();
+    }
+</script>
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 pt-12">
     <form class="max-w-3xl mt-4 w-full mx-auto flex flex-col justify-start items-center gap-3" method="POST">
         @csrf
         <div class="w-full flex justify-between flex-wrap items-center">
             <div class="text-left text-3xl font-medium">New Post</div>
+            <input type="hidden" name="status" id="status" value="draft">
             <div class="flex flex-row gap-2">
                 <button
+                    onclick="saveAsDraft(event)"
                     class="w-28 py-2 rounded-md bg-white hover:bg-gray-100 ring-1 ring-black text-black font-medium flex justify-center items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -17,6 +33,7 @@
                     Save
                 </button>
                 <button
+                    onclick="publish(event)"
                     class="w-28 py-2 rounded-md bg-gray-900 hover:bg-gray-900/90 text-white font-medium flex justify-center items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -27,8 +44,8 @@
                     </svg>
                     Publish
                 </button>
-                <button
-                    type="submit"
+                <a
+                    href="/"
                     class="w-28 py-2 rounded-md bg-red-600 hover:bg-red-600/90 text-white font-medium flex justify-center items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -40,7 +57,7 @@
                         <line x1="14" x2="14" y1="11" y2="17" />
                     </svg>
                     Delete
-                </button>
+                </a>
             </div>
         </div>
         <input type="text" name="title" id="title" placeholder="Title"
