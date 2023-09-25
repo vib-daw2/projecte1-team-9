@@ -13,7 +13,7 @@ use stdClass;
 
 class BlogController extends Controller
 {
-    public function render(Request $request, string $id): View|\Illuminate\Foundation\Application|Factory|Application
+    public function render(string $id): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $blog = Blog::find($id);
         if (!$blog) {
