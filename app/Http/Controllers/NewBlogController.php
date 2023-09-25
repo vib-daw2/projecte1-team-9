@@ -11,6 +11,11 @@ class NewBlogController extends Controller
 {
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        try {
+            $this->authorize('create', Blog::class);
+        } catch (\Throwable $th) {
+            abort(403);
+        }
         return view('newblog');
     }
 
