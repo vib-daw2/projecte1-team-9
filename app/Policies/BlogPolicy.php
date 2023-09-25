@@ -16,6 +16,11 @@ class BlogPolicy
         //
     }
 
+    /**
+     * @param User $user
+     * @param Blog $blog
+     * @return Response
+     */
     public function view(User $user, Blog $blog): Response
     {
         // If published, show to everyone
@@ -31,6 +36,10 @@ class BlogPolicy
         return Response::denyAsNotFound();
     }
 
+    /**
+     * @param User|null $user
+     * @return Response
+     */
     public function create(?User $user): Response
     {
         if ($user) {
@@ -38,5 +47,19 @@ class BlogPolicy
         }
 
         return Response::deny('You must be logged in to create a blog');
+    }
+
+    /**
+     * @param User|null $user
+     * @param Blog $blog
+     * @return Response
+     */
+    public function update(?User $user, Blog $blog): Response
+    {
+        if ($user && ($user->id === $blog->user_id)) {
+            return Response::allow();
+        }
+
+        return Response::deny('You must be logged in to update a blog');
     }
 }

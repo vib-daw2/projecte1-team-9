@@ -19,7 +19,7 @@ class NewBlogController extends Controller
         return view('newblog');
     }
 
-    public function uploadBlog(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function create(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $blog = new Blog();
         try {
