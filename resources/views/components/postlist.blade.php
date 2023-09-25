@@ -13,7 +13,7 @@
                 <circle cx="12" cy="8" r="5" />
                 <path d="M20 21a8 8 0 1 0-16 0" />
             </svg>
-            <a class="font-light">{{ $username }}</a>
+            <a href={{sprintf("/user/%d", $id)}} class="font-light">{{ $username }}</a>
         </div>
         <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, facilis cupiditate! Obcaecati</div>
     </div>

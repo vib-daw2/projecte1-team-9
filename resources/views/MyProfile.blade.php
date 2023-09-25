@@ -11,6 +11,11 @@
                         class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
                 </div>
                 <div class="w-full">
+                    <label class="block">Email</label>
+                    <input type="email" name="email" id="email"
+                        class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
+                </div>
+                <div class="w-full">
                     <label class="block">Password</label>
                     <input type="password" name="password1" id="password1"
                         class="px-2 py-1 ring-black rounded-lg ring-1 w-full">

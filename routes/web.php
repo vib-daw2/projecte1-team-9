@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewBlogController;
@@ -35,6 +36,9 @@ Route::post('/logout', [LogoutController::class, 'logout']);
 Route::get('/blog/new', [NewBlogController::class, 'render']);
 Route::get('/blog/{id}', [BlogController::class, 'render']);
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']);
+
 Route::get('/me', [MyProfileController::class, 'render']);
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
+
+Route::get('/user/{id}', [ProfileController::class, 'render']);
