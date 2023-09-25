@@ -16,8 +16,9 @@
                     <x-blog-like :liked="false" :likes="5" />
                 </div>
                 <div class="leading-1 text-lg font-light text-justify mt-4">
-            
-            {{ $blog->body }}
+            @foreach(explode("\n", $blog->body) as $paragraph)
+                <p class="py-2">{{ $paragraph }}</p>
+            @endforeach
         </div>
 
     </div>
