@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewBlogController;
@@ -28,6 +29,8 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/signup', [SignupController::class, 'render']);
 Route::post('/signup', [SignupController::class, 'signup']);
+
+Route::post('/logout', [LogoutController::class, 'logout']);
 
 Route::get('/blog/new', [NewBlogController::class, 'render']);
 Route::get('/blog/{id}', [BlogController::class, 'render']);
