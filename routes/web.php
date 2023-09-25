@@ -38,7 +38,9 @@ Route::get('/blog/new', [NewBlogController::class, 'render']);
 Route::post('/blog/new', [NewBlogController::class, 'create']);
 
 Route::get('/blog/{id}', [BlogController::class, 'render']);
+
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']);
+Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']);
 
 Route::get('/me', [MyProfileController::class, 'render']);
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
