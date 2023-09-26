@@ -21,7 +21,7 @@
             {{ $blog->subtitle }}
         </div>
         <div class="flex flex-wrap items-center gap-2 justify-between w-full text-gray-600 py-2 border-b">
-            <x-user-display username="{{ $blog->username }}" />
+            <x-user-display :username="$blog->username" :id="$blog->userId" />
                 <x-date-display timestamp="{{ $blog->created_at }}" />
                     <x-blog-like :liked="false" :likes="5" />
                 </div>

@@ -12,7 +12,8 @@ class UserDisplay extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $username
+        public string $username,
+        public string $id
     )
     {
         //
