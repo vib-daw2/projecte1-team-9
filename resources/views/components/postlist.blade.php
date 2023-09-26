@@ -15,7 +15,9 @@
             </svg>
             <a href={{sprintf("/user/%d", $id)}} class="font-light">{{ $username }}</a>
         </div>
-        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, facilis cupiditate! Obcaecati</div>
+        <div>
+            {{$subtitle}}
+        </div>
     </div>
 
 </div>

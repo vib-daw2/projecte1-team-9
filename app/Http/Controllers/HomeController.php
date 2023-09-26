@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use function Psy\debug;
 
 class HomeController extends Controller
 {
     //
-    public function render(Request $request){
-        $categories = ["Cat 0", "Cat 1", "Cat 2"];
-        $selected = $request->input("category");
+    public function render(Request $request)
+    {
+        $page = $request->query('page');
+        if (!$page) {
+            $page = 1;
+        }
+
+        $blogs = DB::table('blogs')
+            ->select('blogs.*', 'users.username')
+            ->join('users', 'users.id', '=', 'blogs.user_id')
+            ->where('blogs.status', '=', 'published')
+            ->orderBy('views', 'desc')
+            ->limit($page * 10)
+            ->get();
+
         return view('home', [
-            "categories" => $categories,
-            "selected" => $selected
+            "blogs" => $blogs,
         ]);
     }
 }
