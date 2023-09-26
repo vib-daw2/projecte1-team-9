@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
+use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profiles\MyProfileController;
@@ -42,6 +43,8 @@ Route::get('/blog/{id}', [BlogController::class, 'render']);
 
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']);
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']);
+
+Route::post('/blog/{id}/like', [LikeController::class, 'like']);
 
 Route::get('/me', [MyProfileController::class, 'render']);
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
