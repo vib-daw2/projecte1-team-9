@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Blog;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +16,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        for ($i = 0; $i < 10; $i++) {
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+            $username = Str::random(10);
+
+            DB::table('users')->insert([
+                'username' => $username,
+                'email' => $username . '@gmail.com',
+                'password' => Hash::make('password'),
+            ]);
+
+            $id = DB::table('users')->where('username', $username)->first()->id;
+
+            for ($j = 0; $j < 10; $j++) {
+                $blog = new Blog();
+                $blog->title = Str::random(10);
+                $blog->subtitle = Str::random(10);
+                $blog->body = Str::random(100);
+                $blog->user_id = $id;
+                $blog->status = 'published';
+                $blog->save();
+            }
+
+        }
+
     }
 }
