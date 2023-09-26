@@ -20,7 +20,7 @@ class EditUserController extends Controller
     {
         $user = User::find($id);
         try{
-            $this->authorize('update', $user);
+            $this->authorize('updateAny', $user);
         } catch (Throwable $th) {
             abort(403, $th->getMessage());
         }
@@ -35,7 +35,7 @@ class EditUserController extends Controller
         $user = User::find($id);
 
         try {
-            $this->authorize('update', $user);
+            $this->authorize('updateAny', $user);
         } catch (Throwable $th) {
             abort(403, $th->getMessage());
         }

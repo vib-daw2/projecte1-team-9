@@ -40,11 +40,30 @@ class UserPolicy
         }
     }
 
-    public function update(User $user, User $target): Response
+    /**
+     * @param User $user
+     * @param User $target
+     * @return Response
+     */
+    public function updateAny(User $user, User $target): Response
     {
         if (($target->role === 'user' || $target->role === 'moderator') && $user->role === 'admin') {
             return Response::allow();
         } else if ($target->id === $user->id) {
+            return Response::allow();
+        } else {
+            return Response::deny('You do not have permission to edit this user.');
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param User $target
+     * @return Response
+     */
+    public function update(User $user, User $target): Response
+    {
+        if ($target->id === $user->id) {
             return Response::allow();
         } else {
             return Response::deny('You do not have permission to edit this user.');
