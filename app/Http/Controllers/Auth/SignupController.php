@@ -40,6 +40,6 @@ class SignupController extends Controller
         $user->password = Hash::make($validated['password1']);
         $user->save();
 
-        return redirect('auth/login');
+        return redirect('/login');
     }
 }
