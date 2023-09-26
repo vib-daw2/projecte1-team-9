@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->join('users', 'users.id', '=', 'blogs.user_id')
             ->where('blogs.status', '=', 'published')
             ->orderBy('views', 'desc')
-            ->limit($page * 10)
+            ->limit(10)->offset(($page - 1) * 10)
             ->get();
 
         return view('home', [
