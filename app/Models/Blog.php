@@ -39,13 +39,13 @@ class Blog extends Model
     public function liked(): bool|null
     {
         $liked = DB::table('likes')
-            ->select('type')
             ->where('blog_id', $this->id)
             ->where('user_id', auth()->id())
-            ->first();
-        if ($liked->type === 'like') {
+            ->first()->type ?? null;
+
+        if ($liked === 'like') {
             return true;
-        } else if ($liked->type === 'dislike') {
+        } else if ($liked === 'dislike') {
             return false;
         } else {
             return null;
