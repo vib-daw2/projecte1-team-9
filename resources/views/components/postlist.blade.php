@@ -4,7 +4,7 @@
         <div class="w-full flex justify-between items-center">
             <a href={{ sprintf('/blog/%d', $id) }}
                 class="block font-semibold hover:underline text-2xl">{{ $title }}</a>
-            <x-blog-like :liked="true" :likes="5" />
+            <x-blog-like :liked="$liked" :likes="5" :id="$id" />
         </div>
         <div class="flex items-center hover:underline cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

@@ -7,7 +7,7 @@
                         :id="$blog->id"
                         :subtitle="$blog->subtitle"
                         :ownerid="$blog->owner_id"
-                        :liked="$blog->liked"
+                        :liked="$blog->liked ?? ''"
             />
         @endforeach
     </div>

@@ -10,7 +10,9 @@
                             :title="$blog->title"
                             :id="$blog->id"
                             :subtitle="$blog->subtitle"
-                            :ownerid="$blog->owner_id"/>
+                            :ownerid="$blog->owner_id"
+                            :liked="$blog->liked ?? ''"
+                            />
                 @endforeach
             </div>
             <div class="mx-auto mt-4">

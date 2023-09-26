@@ -12,8 +12,9 @@ class BlogLike extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public bool $liked,
-        public int $likes
+        public string $liked,
+        public int $likes,
+        public string $id
     )
     {
         //
