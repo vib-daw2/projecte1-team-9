@@ -10,5 +10,8 @@
             />
         @endforeach
     </div>
-    <x-pagination :total="count($blogs)" :current="request()->query('page', 1)" />
+    {{-- <x-pagination :total="count($blogs)" :current="request()->query('page', 1)" /> --}}
+        <div class="mx-auto mt-4">
+        {{ $blogs->onEachSide(2)->links('vendor.pagination.tailwind')}}
+        </div>
 </div>
