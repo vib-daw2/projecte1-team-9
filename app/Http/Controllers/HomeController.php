@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -15,7 +16,7 @@ class HomeController extends Controller
             ->where('blogs.status', '=', 'published')
             ->leftJoin('likes', function ($join) use ($request) {
                 $join->on('likes.blog_id', '=', 'blogs.id')
-                    ->where('likes.user_id', '=', $request->session()->get('user')->id);
+                    ->where('likes.user_id', '=', Auth::id());
             })
             ->orderBy('views', 'desc')
             ->paginate(10);
