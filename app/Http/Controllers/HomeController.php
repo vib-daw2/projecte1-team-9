@@ -18,7 +18,7 @@ class HomeController extends Controller
         }
 
         $blogs = DB::table('blogs')
-            ->select('blogs.*', 'users.username')
+            ->select('blogs.*', 'users.username', 'users.id as owner_id')
             ->join('users', 'users.id', '=', 'blogs.user_id')
             ->where('blogs.status', '=', 'published')
             ->orderBy('views', 'desc')
