@@ -3,7 +3,7 @@
     function like(e, liked) {
         e.preventDefault();
         const form = e.target.closest('form');
-        
+
         if (liked === 'like') {
             form.action.value = 'remove';
         } else {
@@ -15,7 +15,7 @@
     function dislike(e, liked) {
         e.preventDefault();
         const form = event.target.closest('form');
-        
+
         if (liked === 'dislike') {
             form.action.value = 'remove';
         } else {
@@ -27,6 +27,7 @@
 <form class="flex items-center gap-2" id="like-form-{{$id}}" method="POST" action="/blog/{{$id}}/like">
     @csrf
     <input type="hidden" name="action" value="">
+    {{ $likes }}
     @if ($liked === 'like')
     <button
         type="button"
@@ -83,5 +84,5 @@
         </svg>
     </button>
     @endif
-    {{ $likes }}
+    {{ $dislikes }}
 </form>
