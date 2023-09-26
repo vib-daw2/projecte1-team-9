@@ -25,4 +25,23 @@ class UserAdminController extends Controller
 
         return view('admin/users', ['users' => $users]);
     }
+
+    /**
+     * @param string $id
+     * @return Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
+     */
+    public function deleteUser(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
+    {
+        try {
+            $this->authorize('delete', User::class);
+        } catch (Throwable $th) {
+            abort(403, $th->getMessage());
+        }
+
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/admin/users');
+
+    }
 }

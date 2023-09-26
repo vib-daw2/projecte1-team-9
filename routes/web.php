@@ -47,4 +47,6 @@ Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
 
 Route::get('/user/{id}', [ProfileController::class, 'render']);
+
 Route::get('/admin/users', [UserAdminController::class, 'render']);
+Route::delete('/admin/users/{id}', [UserAdminController::class, 'deleteUser']);
