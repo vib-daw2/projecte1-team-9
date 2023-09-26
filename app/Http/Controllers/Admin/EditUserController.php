@@ -17,7 +17,6 @@ class EditUserController extends Controller
 {
     public function render(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
-        // TODO The admin user edit view
         $user = User::find($id);
         try{
             $this->authorize('update', $user);
@@ -51,7 +50,7 @@ class EditUserController extends Controller
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
-        
+
         //Check if the password is the current user password
         if (!Hash::check($validated['password'], $user->password)) {
             return redirect()->back()->withErrors(['password' => 'Invalid password'])->withInput();
