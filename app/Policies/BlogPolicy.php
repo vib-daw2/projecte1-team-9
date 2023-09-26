@@ -33,7 +33,7 @@ class BlogPolicy
             return Response::allow();
         }
 
-        return Response::denyAsNotFound();
+        return Response::deny('You must be logged in to view this blog');
     }
 
     /**

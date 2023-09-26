@@ -21,7 +21,7 @@ class BlogController extends Controller
             $this->authorize('view', $blog);
         } catch (\Throwable $th) {
             if ($blog->status !== 'published') {
-                abort(404);
+                abort(403);
             }
         }
 
