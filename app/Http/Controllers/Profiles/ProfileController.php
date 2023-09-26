@@ -18,28 +18,13 @@ class ProfileController extends Controller
         }
         $profile_stats = $user->getProfileStats();
 
-        $page = $request->query('page');
-        if (!$page) {
-            $page = 1;
-        }
-
-        $page_size = $request->query('page_size');
-        if (!$page_size) {
-            $page_size = 10;
-        }
-
         $blogs = DB::table('blogs')
             ->select('blogs.*', 'users.username', 'users.id as owner_id')
             ->join('users', 'users.id', '=', 'blogs.user_id')
             ->where('blogs.user_id', '=', $id)
             ->where('blogs.status', '=', 'published')
             ->orderBy('views', 'desc')
-            ->limit(10)->offset(($page - 1) * 10)
-            ->get();
-
-        $pagination = new \stdClass();
-        $pagination->size = $page_size;
-        $pagination->total_pages = ceil(Blog::where('status', '=', 'published')->count() / $pagination->size);
+            ->paginate(10);
 
         return view('profiles/profile',
             ['id' => $id,
@@ -49,7 +34,6 @@ class ProfileController extends Controller
             'username' => $user->username,
             'email' => $user->email,
             'blogs' => $blogs,
-            'pagination' => $pagination,
             ]);
 
     }
