@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class UserController extends Controller
@@ -21,7 +22,10 @@ class UserController extends Controller
             abort(403, $th->getMessage());
         }
 
-        $users = User::all();
+        $users = DB::table('users')
+            ->select('users.*')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('admin/users', ['users' => $users]);
     }
