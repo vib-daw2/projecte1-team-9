@@ -2,9 +2,11 @@
 
 namespace App\View\Components;
 
+use App\Models\Like;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Validation\ValidationException;
 
 class BlogLike extends Component
 {

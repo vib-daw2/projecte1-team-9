@@ -5,27 +5,28 @@
         const form = e.target.closest('form');
         
         if (liked === 'like') {
-            form.liked.value = '';
+            form.action.value = 'remove';
         } else {
-            form.liked.value = 'like';
+            form.action.value = 'like';
         }
         form.submit();
     }
 
-    function dislike(e) {
+    function dislike(e, liked) {
         e.preventDefault();
         const form = event.target.closest('form');
         
         if (liked === 'dislike') {
-            form.liked.value = '';
+            form.action.value = 'remove';
         } else {
-            form.liked.value = 'dislike';
+            form.action.value = 'dislike';
         }
         form.submit();
     }
 </script>
-<form class="flex items-center gap-2" id="like-form-{{$id}}">
-    <input type="hidden" name="liked" value="" id>
+<form class="flex items-center gap-2" id="like-form-{{$id}}" method="POST" action="/blog/{{$id}}/like">
+    @csrf
+    <input type="hidden" name="action" value="">
     @if ($liked === 'like')
     <button
         type="button"
@@ -44,7 +45,7 @@
         </svg>
     </button>
     @else
-    <button onclick="like(event, $liked)">
+    <button onclick="like(event, {{$liked}})">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up" width="24"
             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
             stroke-linecap="round" stroke-linejoin="round">
@@ -57,7 +58,7 @@
     @endif
 
     @if ($liked === 'dislike')
-    <button onclick="dislike(event, $liked)">
+    <button onclick="dislike(event, {{$liked}})">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-down-filled" width="24"
             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
             stroke-linecap="round" stroke-linejoin="round">
@@ -71,7 +72,7 @@
         </svg>
     </button>
     @else
-    <button onclick="dislike(event, $liked)">
+    <button onclick="dislike(event, {{$liked}})">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-down" width="24"
             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
             stroke-linecap="round" stroke-linejoin="round">

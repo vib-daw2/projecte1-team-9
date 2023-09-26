@@ -9,6 +9,7 @@ use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
+use App\Http\Controllers\BlogLikeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profiles\MyProfileController;
 use App\Http\Controllers\Profiles\ProfileController;
