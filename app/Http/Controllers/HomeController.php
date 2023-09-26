@@ -26,10 +26,13 @@ class HomeController extends Controller
                 ->select('blogs.*', 'users.username', 'users.id as owner_id', 'likes.type as liked')
                 ->join('users', 'users.id', '=', 'blogs.user_id')
                 ->where('blogs.status', '=', 'published')
+                ->leftJoin('likes', function ($join) {
+                    $join->on('likes.blog_id', '=', 'blogs.id')
+                        ->where('likes.user_id', '=', 0);
+                })
                 ->orderBy('views', 'desc')
                 ->paginate(10);
         }
-
 
         return view('home', [
             "blogs" => $blogs
