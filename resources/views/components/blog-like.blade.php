@@ -3,7 +3,7 @@
     function like(e, liked) {
         e.preventDefault();
         const form = e.target.closest('form');
-        
+
         if (liked === 'like') {
             form.liked.value = '';
         } else {
@@ -15,7 +15,7 @@
     function dislike(e) {
         e.preventDefault();
         const form = event.target.closest('form');
-        
+
         if (liked === 'dislike') {
             form.liked.value = '';
         } else {
@@ -26,6 +26,7 @@
 </script>
 <form class="flex items-center gap-2" id="like-form-{{$id}}">
     <input type="hidden" name="liked" value="" id>
+    {{$dislikes}}
     @if ($liked === 'like')
     <button
         type="button"

@@ -14,6 +14,7 @@ class BlogLike extends Component
     public function __construct(
         public ?string $liked,
         public int     $likes,
+        public int     $dislikes,
         public string  $id
     )
     {
