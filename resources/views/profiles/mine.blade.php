@@ -1,6 +1,6 @@
 @extends('layout')
-<div class="w-full min-h-screen flex justify-start flex-col items-center pt-20">
-    <div class="max-w-5xl mt-4 w-full mx-auto h-fit flex flex-col justify-start items-start gap-3">
+<div class="w-full min-h-screen flex justify-start flex-col items-center py-8">
+    <div class="max-w-5xl w-full mx-auto h-fit flex flex-col justify-start items-start gap-3">
         <x-profiletabs selected="profile" />
         <div class="flex flex-col w-full h-fit justify-center items-center mt-4 gap-4">
             <x-profilestats />

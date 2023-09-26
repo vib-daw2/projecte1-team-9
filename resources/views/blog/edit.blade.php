@@ -13,8 +13,8 @@
         document.forms[0].submit();
     }
 </script>
-<div class="w-full min-h-screen flex justify-start flex-col items-center px-12 pt-12">
-    <form class="max-w-3xl mt-4 w-full mx-auto flex flex-col justify-start items-center gap-3">
+<div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
+    <form class="max-w-3xl w-full mx-auto flex flex-col justify-start items-center gap-3">
         @csrf
         <div class="w-full flex justify-between flex-wrap items-center">
             <div class="text-left text-3xl font-medium">Edit Post</div>

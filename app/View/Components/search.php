@@ -6,15 +6,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class UserDisplay extends Component
+class search extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public string $username,
-        public string $id
-    )
+    public function __construct()
     {
         //
     }
@@ -24,6 +21,6 @@ class UserDisplay extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.user-display');
+        return view('components.search');
     }
 }

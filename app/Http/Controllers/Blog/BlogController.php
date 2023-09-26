@@ -28,6 +28,7 @@ class BlogController extends Controller
         $liked = $blog->liked(); // Check if the user liked the blog
         $likesAndDislikes = $blog->getLikesAndDislikes(); // Get the likes and dislikes
         $blog->username = $blog->user->username;
+        $blog->userId = $blog->user->id;
 
         return view('blog/blog', [
             'blog' => $blog,

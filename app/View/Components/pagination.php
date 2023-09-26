@@ -6,14 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class UserDisplay extends Component
+class pagination extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $username,
-        public string $id
+        public int $total,
+        public int $current,
     )
     {
         //
@@ -24,6 +24,6 @@ class UserDisplay extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.user-display');
+        return view('components.pagination');
     }
 }
