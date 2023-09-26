@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Blog extends Model
@@ -59,8 +60,7 @@ class Blog extends Model
          * Function to validate the blog
          * @return string[]
          */
-        public
-        static function validate(): array
+        public static function validate(): array
         {
             return [
                 'title' => 'required|min:3|max:255',
