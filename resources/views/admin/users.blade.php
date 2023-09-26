@@ -40,21 +40,12 @@
                 </div>
             </a>
             <div class="flex flex-col justify-center items-center gap-2">
-                <button
-                    class="py-2 relative group px-2 rounded-md text-black w-fit h-fit bg-white hover:bg-gray-100 border border-black hover:border-l-0 hover:rounded-l-none flex justify-between items-center gap-2">
+                <a
+                    href="/admin/users/{{$user->id}}/edit"
+                    class="py-2 block relative group px-2 rounded-md text-black w-fit h-fit bg-white hover:bg-gray-100 border border-black hover:border-l-0 hover:rounded-l-none flex justify-between items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
-                    <div class="group-hover:block hidden absolute right-10 w-24 py-2 bg-gray-100 rounded-l-md border border-black border-r-0">Edit</div>
-                </button>
-                <button
-                    class="py-2 relative group px-2 rounded-md text-white w-fit h-fit bg-gray-900 hover:rounded-l-none hover:bg-gray-900/90 flex justify-between items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-circle-slash">
-                        <line x1="9" x2="15" y1="15" y2="9" />
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="group-hover:block hidden absolute right-10 w-24 py-2 bg-gray-900/90 text-white rounded-l-md ">Block</div>
-                </button>
+                    <div class="group-hover:block hidden absolute right-10 w-24 py-2 text-center bg-gray-100 rounded-l-md border border-black border-r-0">Edit</div>
+                </a>
                 <form action="/admin/users/{{$user->id}}/delete" method="POST">
                     @csrf
                     <button

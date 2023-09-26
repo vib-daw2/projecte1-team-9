@@ -57,6 +57,7 @@ Route::post('/me/password', [ChangePasswordController::class, 'changePassword'])
 Route::get('/user/{id}', [ProfileController::class, 'render']);
 
 Route::get('/admin/users', [UserController::class, 'render']);
+Route::get('/admin/users/{id}', [EditUserController::class, 'render']);
 Route::post('/admin/users/{id}/delete', [UserController::class, 'delete']);
 
 Route::get('/admin/users/{id}/edit', [EditUserController::class, 'render']);
