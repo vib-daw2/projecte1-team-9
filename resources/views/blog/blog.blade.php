@@ -7,7 +7,7 @@
             @if ($blog->status == "draft")
                 <div class="rounded-md bg-gray-900 text-white px-2 py-1 w-fit font-medium text-sm">DRAFT</div>
             @endif
-            @if (auth()->user()->id == $blog->userId)
+            @if (auth()->user() && auth()->user()->id == $blog->userId)
             <a
             href="/blog/{{ $blog->id }}/edit"
             class="w-28 py-2 rounded-md bg-white hover:bg-gray-100 text-black font-medium flex justify-center items-center gap-2 ring-1 ring-black">
