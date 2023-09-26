@@ -50,7 +50,9 @@ Route::post('/blog/{id}/like', [LikeController::class, 'like']);
 Route::get('/me', [MyProfileController::class, 'render']);
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
+
 Route::get('/me/password', [ChangePasswordController::class, 'render']);
+Route::post('/me/password', [ChangePasswordController::class, 'changePassword']);
 
 Route::get('/user/{id}', [ProfileController::class, 'render']);
 
