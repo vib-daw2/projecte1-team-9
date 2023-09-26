@@ -7,6 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -20,7 +21,7 @@ class LoginController extends Controller
         return view('auth/login');
     }
 
-    public function login(): RedirectResponse
+    public function login(Request $request): RedirectResponse
     {
         try {
             $validated = request()->validate([
@@ -32,6 +33,9 @@ class LoginController extends Controller
         }
 
         if (Auth::attempt($validated)) {
+            if ($request->input('redirect')) {
+                return redirect('/'.$request->input('redirect'));
+            }
             return redirect('/');
         }
 
