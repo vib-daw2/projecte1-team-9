@@ -48,6 +48,14 @@ class ProfileController extends Controller
                 ->orderBy('views', 'desc')
                 ->paginate(10);
         }
+        foreach ($blogs as $blog) {
+            $query = DB::table('likes')
+                ->select(DB::raw('SUM(CASE WHEN type = "like" THEN 1 ELSE 0 END) as likes'), DB::raw('SUM(CASE WHEN type = "dislike" THEN 1 ELSE 0 END) as dislikes'))
+                ->where('blog_id', $blog->id)
+                ->first();
+            $blog->likes = $query->likes;
+            $blog->dislikes = $query->dislikes;
+        }
 
         return view('profiles/profile',
             ['id' => $id,
