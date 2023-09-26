@@ -1,6 +1,6 @@
 <nav
-    class="fixed md:inset-0 bottom-0 left-0 w-full h-20 md:h-screen md:w-24 bg-white shadow-lg flex md:flex-col md:justify-start justify-between items-center md:pt-8 gap-4">
-    <div class="text-6xl font-black py-4 border-b text-center flex justify-center items-center">
+    class="fixed md:inset-0 bottom-0 left-0 w-full h-20 md:h-screen md:w-24 bg-white shadow-lg flex md:flex-col md:justify-start justify-between items-center gap-4">
+    <div class="text-6xl font-black py-8 border-b text-center flex justify-center items-center">
         <img src="../../../logo.svg" alt="Blogify" class="w-1/2">
     </div>
     <x-navbutton href="/" title="Blogs">
