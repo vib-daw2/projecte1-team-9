@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LikeController extends Controller
 {
@@ -34,14 +35,20 @@ class LikeController extends Controller
 
         $action = $request->input('action');
 
-        if ($action == 'like') {
-            Like::findOrCreate($blog->id, Auth::id(), 'like');
-        } else if ($action == 'dislike') {
-            Like::findOrCreate($blog->id, Auth::id(), 'dislike');
-        } else if ($action == 'remove') {
-            Like::where('blog_id', $blog->id)
-                ->where('user_id', auth()->user()->id)
-                ->delete();
+        if ($action == 'remove'){
+            DB::table('likes')->where([
+                'blog_id' => $blog->id,
+                'user_id' => Auth::id()
+            ])->delete();
+        } else {
+            DB::table('likes')->updateOrInsert([
+                'blog_id' => $blog->id,
+                'user_id' => Auth::id()
+            ], [
+                'blog_id' => $blog->id,
+                'user_id' => Auth::id(),
+                'type' => $action
+            ]);
         }
 
         return response()->json([], 200);
