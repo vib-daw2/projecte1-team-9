@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\Admin\EditUserController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
@@ -48,5 +49,8 @@ Route::get('/me/likes', [ProfilePostsController::class, 'render']);
 
 Route::get('/user/{id}', [ProfileController::class, 'render']);
 
-Route::get('/admin/users', [UserAdminController::class, 'render']);
-Route::delete('/admin/users/{id}', [UserAdminController::class, 'deleteUser']);
+Route::get('/admin/users', [UserController::class, 'render']);
+Route::post('/admin/users/{id}/delete', [UserController::class, 'delete']);
+
+Route::get('/admin/users/{id}/edit', [EditUserController::class, 'render']);
+Route::post('/admin/users/{id}/edit', [EditUserController::class, 'edit']);

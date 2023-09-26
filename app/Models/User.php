@@ -61,4 +61,16 @@ class User extends Authenticatable
     {
         return DB::table('users')->where('id', $user_id)->value('created_at');
     }
+
+    /**
+     * Function to validate the user
+     * @return string[]
+     */
+    public static function validate(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ];
+    }
 }

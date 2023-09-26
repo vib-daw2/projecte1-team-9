@@ -39,4 +39,17 @@ class UserPolicy
             return Response::deny('You do not have permission to delete this user.');
         }
     }
+
+    public function update(User $user, User $target): Response
+    {
+        if ($target->role === 'user' && ($user->role === 'moderator' || $user->role === 'admin')) {
+            return Response::allow();
+        } else if ($target->role === 'moderator' && $user->role === 'admin') {
+            return Response::allow();
+        } else if ($target->id === $user->id) {
+            return Response::allow();
+        } else {
+            return Response::deny('You do not have permission to edit this user.');
+        }
+    }
 }
