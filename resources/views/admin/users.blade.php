@@ -74,4 +74,7 @@
             </div>
         </div>
     @endforeach
+    <div class="mx-auto mt-4">
+        {{ $users->onEachSide(2)->links('vendor.pagination.tailwind')}}
+        </div>
 </div>
