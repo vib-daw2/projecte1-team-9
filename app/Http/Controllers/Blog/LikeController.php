@@ -20,9 +20,9 @@ class LikeController extends Controller
      * Method to like or dislike a blog post
      * @param Request $request
      * @param string $id
-     * @return JsonResponse
+     * @return string
      */
-    public function like(Request $request, string $id): JsonResponse
+    public function like(Request $request, string $id): string
     {
         $blog = Blog::findOrFail($id);
         if ($blog->status != 'published') {
@@ -51,6 +51,6 @@ class LikeController extends Controller
             ]);
         }
 
-        return response()->json([], 200);
+        return redirect()->back();
     }
 }

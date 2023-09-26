@@ -11,6 +11,8 @@
                         :subtitle="$blog->subtitle"
                         :ownerid="$blog->owner_id"
                         :liked="$blog->liked ?? ''"
+                        :likes="$blog->likes ?? 0"
+                        :dislikes="$blog->dislikes ?? 0"
             />
             @endforeach
         </div>

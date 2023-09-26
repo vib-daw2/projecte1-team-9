@@ -17,7 +17,9 @@ class Postlist extends Component
         public string $id,
         public string $subtitle,
         public string $ownerid,
-        public string $liked
+        public string $liked,
+        public string $likes,
+        public string $dislikes,
     ) {
     }
 
