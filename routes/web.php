@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profiles\MyProfileController;
 use App\Http\Controllers\Profiles\ProfileController;
 use App\Http\Controllers\Profiles\ProfilePostsController;
+use App\Http\Controllers\Profiles\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,7 @@ Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']);
 Route::get('/me', [MyProfileController::class, 'render']);
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
+Route::get('/me/password', [ChangePasswordController::class, 'render']);
 
 Route::get('/user/{id}', [ProfileController::class, 'render']);
 
