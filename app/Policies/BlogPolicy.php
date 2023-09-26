@@ -62,4 +62,13 @@ class BlogPolicy
 
         return Response::deny('You must be logged in to update a blog');
     }
+
+    public function like(?User $user, Blog $blog): Response
+    {
+        if ($user) {
+            return Response::allow();
+        }
+
+        return Response::deny();
+    }
 }
