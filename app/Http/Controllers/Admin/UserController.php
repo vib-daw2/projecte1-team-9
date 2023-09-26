@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Throwable;
 
-class UserAdminController extends Controller
+class UserController extends Controller
 {
     public function render(): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
@@ -30,7 +30,7 @@ class UserAdminController extends Controller
      * @param string $id
      * @return Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
      */
-    public function deleteUser(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
+    public function delete(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
         try {
             $this->authorize('delete', User::class);
