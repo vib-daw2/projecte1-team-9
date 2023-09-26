@@ -36,20 +36,14 @@ class Blog extends Model
      * Function to know if the user liked or disliked the blog
      * @return bool|null
      */
-    public function liked(): bool|null
+    public function liked(): string|null
     {
         $liked = DB::table('likes')
             ->where('blog_id', $this->id)
             ->where('user_id', auth()->id())
             ->first()->type ?? null;
 
-        if ($liked === 'like') {
-            return true;
-        } else if ($liked === 'dislike') {
-            return false;
-        } else {
-            return null;
-        }
+        return $liked ? $liked : null;
     }
 
         public function getLikesAndDislikes(): object
