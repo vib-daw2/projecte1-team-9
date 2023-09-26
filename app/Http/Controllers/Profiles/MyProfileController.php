@@ -11,19 +11,15 @@ class MyProfileController extends Controller
 {
     public function render()
     {
-        $user_id = Auth::id();
+        $user = Auth::user();
 
-        $posts_count = User::getPostsCount($user_id);
-        $up_since = User::getUpSince($user_id);
-        $likes = User::getTotalRecivedLikes($user_id);
-
-        $user = DB::table('users')->where('id', $user_id)->first();
+        $profile_stats = $user->getProfileStats();
 
         return view('profiles/mine',
-            ['id' => $user_id,
-                'posts_count' => $posts_count,
-                'up_since' => $up_since,
-                'likes' => $likes,
+            ['id' => $user->id,
+                'posts_count' => $profile_stats->posts_count,
+                'up_since' => $profile_stats->up_since,
+                'likes' => $profile_stats->likes,
                 'username' => $user->username,
                 'email' => $user->email,
             ]);

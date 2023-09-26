@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use stdClass;
 
 class User extends Authenticatable
 {
@@ -44,22 +45,24 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public static function getTotalRecivedLikes($user_id): int
+    public function getProfileStats(): stdClass
     {
-        return DB::table('likes')
+        $totalReceivedLikes = DB::table('likes')
             ->where('blog_id', DB::table('blogs')
-                ->where('user_id', $user_id)->value('id'))
+                ->where('user_id', $this->id)->value('id'))
             ->where('liked', true)->count();
-    }
 
-    public static function getPostsCount($user_id): int
-    {
-        return  DB::table('blogs')->where('user_id', $user_id)->where('status', 'published')->count();
-    }
+        $postsCount = DB::table('blogs')
+            ->where('user_id', $this->id)
+            ->where('status', 'published')->count();
 
-    public static function getUpSince($user_id): string
-    {
-        return DB::table('users')->where('id', $user_id)->value('created_at');
+        $upSince = DB::table('users')->where('id', $this->id)->value('created_at');
+
+        $return = new stdClass();
+        $return->likes = $totalReceivedLikes;
+        $return->posts_count = $postsCount;
+        $return->up_since = $upSince;
+        return $return;
     }
 
     /**
