@@ -25,7 +25,12 @@ class BlogController extends Controller
             }
         }
 
-        $liked = $blog->liked(); // Check if the user liked the blog
+        if (auth()->check()) {
+            $liked = $blog->liked(); // Get if the user liked or disliked the blog
+        } else {
+            $liked = null;
+        }
+
         $likesAndDislikes = $blog->getLikesAndDislikes(); // Get the likes and dislikes
         $blog->username = $blog->user->username;
         $blog->userId = $blog->user->id;
@@ -33,7 +38,7 @@ class BlogController extends Controller
         return view('blog/blog', [
             'blog' => $blog,
             'id' => $id,
-            'liked' => $liked, // If the user has liked the blog or not
+            'liked' => $liked, // If the user has liked the blog or not (null if not logged in, True if liked, False if disliked)
             'likes' => $likesAndDislikes->likes,
             'dislikes' => $likesAndDislikes->dislikes,
         ]);
