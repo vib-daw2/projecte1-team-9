@@ -50,7 +50,7 @@ class User extends Authenticatable
         $totalReceivedLikes = DB::table('likes')
             ->where('blog_id', DB::table('blogs')
                 ->where('user_id', $this->id)->value('id'))
-            ->where('liked', true)->count();
+            ->where('type', 'like')->count();
 
         $postsCount = DB::table('blogs')
             ->where('user_id', $this->id)
