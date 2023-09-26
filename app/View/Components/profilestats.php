@@ -14,11 +14,10 @@ class profilestats extends Component
      */
     public function __construct(
         public string $username,
-        public int $postsCount,
+        public int $posts,
         public int $likes
     )
     {
-        //  
     }
 
     /**
