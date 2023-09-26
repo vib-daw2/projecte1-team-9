@@ -48,6 +48,8 @@ Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']);
 Route::post('/blog/{id}/like', [LikeController::class, 'like']);
 
 Route::get('/me', [MyProfileController::class, 'render']);
+Route::post('/me', [MyProfileController::class, 'edit']);
+
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
 
