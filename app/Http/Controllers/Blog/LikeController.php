@@ -24,6 +24,9 @@ class LikeController extends Controller
     public function like(Request $request, string $id): JsonResponse
     {
         $blog = Blog::findOrFail($id);
+        if ($blog->status != 'published') {
+            abort(403);
+        }
 
         $this->validate($request, [
             'action' => 'required|in:like,dislike,remove'
@@ -32,9 +35,9 @@ class LikeController extends Controller
         $action = $request->input('action');
 
         if ($action == 'like') {
-            Like::findOrCreate($blog->id, Auth::id(), true);
+            Like::findOrCreate($blog->id, Auth::id(), 'like');
         } else if ($action == 'dislike') {
-            Like::findOrCreate($blog->id, Auth::id(), false);
+            Like::findOrCreate($blog->id, Auth::id(), 'dislike');
         } else if ($action == 'remove') {
             Like::where('blog_id', $blog->id)
                 ->where('user_id', auth()->user()->id)
