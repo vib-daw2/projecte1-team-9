@@ -50,6 +50,7 @@ Route::post('/blog/{id}/like', [LikeController::class, 'like']);
 
 Route::get('/me', [MyProfileController::class, 'render']);
 Route::post('/me', [MyProfileController::class, 'edit']);
+Route::post('/me/picture', [MyProfileController::class, 'changePicture']);
 
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
 Route::get('/me/likes', [ProfilePostsController::class, 'render']);
