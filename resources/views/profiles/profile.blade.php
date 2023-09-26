@@ -12,5 +12,8 @@
                         :ownerid="$blog->owner_id"/>
             @endforeach
         </div>
+        <div class="mx-auto mt-4">
+            {{ $blogs->onEachSide(2)->links('vendor.pagination.tailwind')}}
+        </div>
     </div>
 </div>
