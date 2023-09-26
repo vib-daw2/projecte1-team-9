@@ -14,32 +14,17 @@ use stdClass;
 
 class ProfilePostsController extends Controller
 {
-    public function render(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
+    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $user = Auth::user();
         $profile_stats = $user->getProfileStats();
-
-        $page = $request->query('page');
-        if (!$page) {
-            $page = 1;
-        }
-
-        $page_size = $request->query('page_size');
-        if (!$page_size) {
-            $page_size = 10;
-        }
 
         $blogs = DB::table('blogs')
             ->select('blogs.*', 'users.username', 'users.id as owner_id')
             ->join('users', 'users.id', '=', 'blogs.user_id')
             ->where('blogs.user_id', '=', $user->id)
             ->orderBy('views', 'desc')
-            ->limit(10)->offset(($page - 1) * 10)
-            ->get();
-
-        $pagination = new stdClass();
-        $pagination->size = $page_size;
-        $pagination->total_pages = Blog::where('user_id', '=', $user->id)->count() / $pagination->size;
+            ->paginate(10);
 
         return view('profiles/profile-posts',
             ['id' => $user->id,
@@ -49,7 +34,6 @@ class ProfilePostsController extends Controller
                 'username' => $user->username,
                 'email' => $user->email,
                 'blogs' => $blogs,
-                'pagination' => $pagination,
             ]);
 
     }

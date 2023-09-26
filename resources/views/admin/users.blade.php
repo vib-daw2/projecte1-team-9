@@ -28,15 +28,15 @@
             Search
         </button>
     </div>
-    @for ($i = 0; $i < 25; $i++)
+    @foreach ($users as $user)
         <div class="flex flex-row w-full h-36 bg-white border-b gap-3 justify-between items-center">
-            <a href="/user/{{$i}}" class="w-full flex justify-start items-center gap-8 group">
+            <a href="/user/{{$user->id}}" class="w-full flex justify-start items-center gap-8 group">
                 <div class="rounded-full bg-gray-900 text-white flex justify-center items-center w-20 h-20">
                     AA
                 </div>
                 <div>
-                    <div class="text-xl font-bold group-hover:underline">User Name</div>
-                    <div class="text-sm group-hover:underline">User Email</div>
+                    <div class="text-xl font-bold group-hover:underline">{{$user->username}}</div>
+                    <div class="text-sm group-hover:underline">{{$user->email}}</div>
                 </div>
             </a>
             <div class="flex flex-col justify-center items-center gap-2">
@@ -55,20 +55,23 @@
                     </svg>
                     <div class="group-hover:block hidden absolute right-10 w-24 py-2 bg-gray-900/90 text-white rounded-l-md ">Block</div>
                 </button>
-                <button
-                    class="py-2 px-2 group relative rounded-md text-white w-fit h-fit bg-red-500 hover:bg-red-500/90 hover:rounded-l-none flex justify-between items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-trash-2">
-                        <path d="M3 6h18" />
-                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                        <line x1="10" x2="10" y1="11" y2="17" />
-                        <line x1="14" x2="14" y1="11" y2="17" />
-                    </svg>
-                    <div class="group-hover:block hidden absolute right-10 w-24 py-2 bg-red-500/90 rounded-l-md">Delete</div>
-                </button>
+                <form action="/admin/users/{{$user->id}}/delete" method="POST">
+                    @csrf
+                    <button
+                        class="py-2 px-2 group relative rounded-md text-white w-fit h-fit bg-red-500 hover:bg-red-500/90 hover:rounded-l-none flex justify-between items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" class="lucide lucide-trash-2">
+                            <path d="M3 6h18" />
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                            <line x1="10" x2="10" y1="11" y2="17" />
+                            <line x1="14" x2="14" y1="11" y2="17" />
+                        </svg>
+                        <div class="group-hover:block hidden absolute right-10 w-24 py-2 bg-red-500/90 rounded-l-md">Delete</div>
+                    </button>
+                </form>
             </div>
         </div>
-    @endfor
+    @endforeach
 </div>

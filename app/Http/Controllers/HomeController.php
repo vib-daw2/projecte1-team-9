@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    //
     public function render(Request $request)
     {
         $blogs = DB::table('blogs')

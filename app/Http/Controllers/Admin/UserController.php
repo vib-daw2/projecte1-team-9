@@ -33,7 +33,7 @@ class UserController extends Controller
     public function delete(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
         try {
-            $this->authorize('delete', User::class);
+            $this->authorize('delete', User::find($id));
         } catch (Throwable $th) {
             abort(403, $th->getMessage());
         }
