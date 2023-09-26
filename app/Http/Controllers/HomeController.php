@@ -17,6 +17,11 @@ class HomeController extends Controller
             $page = 1;
         }
 
+        $page_size = $request->query('page_size');
+        if (!$page_size) {
+            $page_size = 10;
+        }
+
         $blogs = DB::table('blogs')
             ->select('blogs.*', 'users.username', 'users.id as owner_id')
             ->join('users', 'users.id', '=', 'blogs.user_id')
@@ -25,8 +30,13 @@ class HomeController extends Controller
             ->limit(10)->offset(($page - 1) * 10)
             ->get();
 
+        $pagination = new \stdClass();
+        $pagination->size = $page_size;
+        $pagination->total_pages = ceil(Blog::where('status', '=', 'published')->count() / $pagination->size);
+
         return view('home', [
             "blogs" => $blogs,
+            "pagination" => $pagination,
         ]);
     }
 }
