@@ -30,12 +30,12 @@ class ChangePasswordController extends Controller
     public function changePassword(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
         $data = request()->validate([
-            'current_password' => 'required',
+            'old_password' => 'required',
             'password1' => 'required|min:8|max:255',
             'password2' => 'required|same:password1'
         ]);
 
-        if(!Hash::check($data['current_password'], auth()->user()->password)){
+        if(!Hash::check($data['old_password'], auth()->user()->password)){
             return back()->withErrors([
                 'current_password' => 'The current password is incorrect'
             ]);
