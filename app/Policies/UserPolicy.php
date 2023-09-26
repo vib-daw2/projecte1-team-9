@@ -42,9 +42,7 @@ class UserPolicy
 
     public function update(User $user, User $target): Response
     {
-        if ($target->role === 'user' && ($user->role === 'moderator' || $user->role === 'admin')) {
-            return Response::allow();
-        } else if ($target->role === 'moderator' && $user->role === 'admin') {
+        if (($target->role === 'user' || $target->role === 'moderator') && $user->role === 'admin') {
             return Response::allow();
         } else if ($target->id === $user->id) {
             return Response::allow();

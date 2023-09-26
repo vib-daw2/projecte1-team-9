@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Throwable;
@@ -17,7 +18,6 @@ class EditUserController extends Controller
 {
     public function render(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
-        // TODO The admin user edit view
         $user = User::find($id);
         try{
             $this->authorize('update', $user);
@@ -33,8 +33,6 @@ class EditUserController extends Controller
     public function edit(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
         $user = User::find($id);
-        $original_username = $user->username;
-        $original_email = $user->email;
 
         try {
             $this->authorize('update', $user);
@@ -45,27 +43,29 @@ class EditUserController extends Controller
         try {
             $validated = $this->validate(request(), [
                 'username' => 'required|min:3|max:255',
-                'email' => 'required|email',
+                'email' => 'required|email|max:255',
                 'password' => 'required|min:8|max:255'
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
-        
+
         //Check if the password is the current user password
-        if (!Hash::check($validated['password'], $user->password)) {
+        if (!Hash::check($validated['password'], Auth::user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Invalid password'])->withInput();
+        }
+
+        // Check if the username is already taken
+        if (User::where('username', $validated['username'])->where('id', '!=', $user->id)->count() > 0) {
+            return redirect()->back()->withErrors(['username' => 'Username already taken'])->withInput();
+        }
+        // Check if the email is already taken
+        else if (User::where('email', $validated['email'])->where('id', '!=', $user->id)->count() > 0) {
+            return redirect()->back()->withErrors(['email' => 'Email already taken'])->withInput();
         }
 
         $user->username = $validated['username'];
         $user->email = $validated['email'];
-
-        // Check if the username or email are used in the database except the current user
-        if (User::where('username', $user->username)->where('username', '!=', $original_username)->exists()) {
-            return redirect()->back()->withErrors(['username' => 'Username already exists'])->withInput();
-        } elseif (User::where('email', $user->email)->where('email', '!=', $original_email)->exists()) {
-            return redirect()->back()->withErrors(['email' => 'Email already exists'])->withInput();
-        }
 
         $user->save();
 

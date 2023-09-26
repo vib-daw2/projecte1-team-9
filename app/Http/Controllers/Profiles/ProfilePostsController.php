@@ -20,9 +20,13 @@ class ProfilePostsController extends Controller
         $profile_stats = $user->getProfileStats();
 
         $blogs = DB::table('blogs')
-            ->select('blogs.*', 'users.username', 'users.id as owner_id')
+            ->select('blogs.*', 'users.username', 'users.id as owner_id', 'likes.type as liked')
             ->join('users', 'users.id', '=', 'blogs.user_id')
-            ->where('blogs.user_id', '=', $user->id)
+            ->where('blogs.status', '=', 'published')
+            ->leftJoin('likes', function ($join) use ($user) {
+                $join->on('likes.blog_id', '=', 'blogs.id')
+                    ->where('likes.user_id', '=', $user->id);
+            })
             ->orderBy('views', 'desc')
             ->paginate(10);
 
