@@ -1,6 +1,6 @@
 @extends('layout')
-<div class="w-full min-h-screen flex justify-start flex-col items-center px-12 pt-12">
-    <div class="max-w-3xl mt-4 w-full mx-auto flex flex-col justify-start items-start gap-3">
+<div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
+    <div class="max-w-3xl w-full mx-auto flex flex-col justify-start items-start gap-3">
         <div class="w-full flex justify-between items-start py-2">
         <div class="text-5xl">{{ $blog->title }}</div>
         @if ($blog->status == "draft")
