@@ -28,6 +28,7 @@
         <div class="flex flex-wrap items-center gap-2 justify-between w-full text-gray-600 py-2 border-b">
             <x-user-display :username="$blog->username" :id="$blog->userId"/>
             <x-date-display timestamp="{{ $blog->created_at->format('d-m-Y H:i') }}"/>
+            <x-views-display :views="$blog->views"/>
             <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$blog->id"/>
         </div>
         <div class="leading-1 text-lg font-light text-justify mt-4">

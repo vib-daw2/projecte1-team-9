@@ -31,6 +31,9 @@ class BlogController extends Controller
             $liked = null;
         }
 
+        $blog->increment('views'); // Increment the views
+        $blog->save();
+
         $likesAndDislikes = $blog->getLikesAndDislikes(); // Get the likes and dislikes
         $blog->username = $blog->user->username;
         $blog->userId = $blog->user->id;
