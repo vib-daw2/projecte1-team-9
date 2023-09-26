@@ -43,8 +43,8 @@ class EditUserController extends Controller
 
         try {
             $validated = $this->validate(request(), [
-                'username' => 'required|min:3|max:255',
-                'email' => 'required|email',
+                'username' => 'required|min:3|max:255|unique:users,username,' . $user->id,
+                'email' => 'required|email|max:255|unique:users,email,' . $user->id,
                 'password' => 'required|min:8|max:255'
             ]);
         } catch (ValidationException $e) {
@@ -58,13 +58,6 @@ class EditUserController extends Controller
 
         $user->username = $validated['username'];
         $user->email = $validated['email'];
-
-        // Check if the username or email are used in the database except the current user
-        if (User::where('username', $user->username)->where('username', '!=', $original_username)->exists()) {
-            return redirect()->back()->withErrors(['username' => 'Username already exists'])->withInput();
-        } elseif (User::where('email', $user->email)->where('email', '!=', $original_email)->exists()) {
-            return redirect()->back()->withErrors(['email' => 'Email already exists'])->withInput();
-        }
 
         $user->save();
 
