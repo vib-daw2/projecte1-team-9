@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# Check if .env file exists
+if [ ! -f "./.env" ]; then
+    echo "No .env file found. Copying .env.example to .env"
+    cp .env.example .env
+fi
+
 # Remove the old DB_PASSWORD and DB_USERNAME
 sed -i '' '/DB_PASSWORD/d' "./.env"
 sed -i '' '/DB_USERNAME/d' "./.env"
