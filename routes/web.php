@@ -10,11 +10,11 @@ use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Profiles\ChangePasswordController;
-use App\Http\Controllers\Profiles\MyLikesController;
-use App\Http\Controllers\Profiles\MyProfileController;
-use App\Http\Controllers\Profiles\ProfileController;
-use App\Http\Controllers\Profiles\ProfilePostsController;
+use App\Http\Controllers\Profile\ChangePasswordController;
+use App\Http\Controllers\Profile\MyLikesController;
+use App\Http\Controllers\Profile\MyProfileController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Profile\ProfilePostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
