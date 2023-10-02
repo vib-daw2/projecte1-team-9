@@ -19,8 +19,7 @@ class ChangeProfilePictureController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        $imageName = time().'.'.$validated['profile_picture']->extension();
-
+        $imageName = time().'.'. $user->username . '.' . $validated['profile_picture']->extension();
         $validated['profile_picture']->move(public_path('images'), $imageName);
 
         $user->profile_picture = $imageName;
