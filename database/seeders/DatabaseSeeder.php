@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 $blog->body = $body;
                 $blog->user_id = $id;
                 $blog->status = 'published';
-                $blog->views = rand(0, 1000);
+                $blog->views = rand(0, 10000000);
                 $blog->save();
             }
         }
