@@ -1,6 +1,6 @@
 <div class="w-16 h-32 bg-white rounded-l-md shadow-lg border flex flex-col">
     <div
-        class="w-16 h-16 group flex justify-center hover:bg-gray-200 items-center border-b border-b-black rounded-tl-md">
+        class="w-16 h-16 group flex justify-center hover:bg-gray-200 items-center border-b border-b-black rounded-tl-md cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-github">
@@ -10,7 +10,7 @@
         </svg>
     </div>
     <div
-        class="w-16 h-16 hover:bg-gray-200 flex justify-center items-center rounded-bl-md group">
+        class="w-16 h-16 hover:bg-gray-200 flex justify-center items-center rounded-bl-md group cursor-pointer">
 
         <svg class="" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 24 24" width="28">
             <path
@@ -26,7 +26,7 @@
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 fill="#EA4335" />
             <path d="M1 1h22v22H1z" fill="none" />
-            
+
         </svg>
     </div>
 </div>
