@@ -27,8 +27,10 @@ class ProfilePostsController extends Controller
                 $join->on('likes.blog_id', '=', 'blogs.id')
                     ->where('likes.user_id', '=', $user->id);
             })
+            ->where('blogs.user_id', '=', $user->id)
             ->orderBy('views', 'desc')
             ->paginate(10);
+
         foreach ($blogs as $blog) {
             $query = DB::table('likes')
                 ->select(DB::raw('SUM(CASE WHEN type = "like" THEN 1 ELSE 0 END) as likes'), DB::raw('SUM(CASE WHEN type = "dislike" THEN 1 ELSE 0 END) as dislikes'))
