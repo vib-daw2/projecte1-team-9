@@ -5,17 +5,16 @@ namespace App\View\Components;
 use App\Models\User;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
-class profilestats extends Component
+class Profilestats extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $username,
-        public int $posts,
-        public int $likes
+        public string $username
     )
     {
     }
@@ -25,6 +24,6 @@ class profilestats extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.profilestats');
+        return Blade::render('components.profilestats', ['likes' => 5]);
     }
 }
