@@ -8,8 +8,8 @@ use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\LikeController;
+use App\Http\Controllers\Blog\MyLikesController;
 use App\Http\Controllers\Blog\NewBlogController;
-use App\Http\Controllers\BlogLikeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profiles\MyProfileController;
 use App\Http\Controllers\Profiles\ProfileController;
@@ -52,7 +52,8 @@ Route::get('/me', [MyProfileController::class, 'render']);
 Route::post('/me', [MyProfileController::class, 'edit']);
 
 Route::get('/me/posts', [ProfilePostsController::class, 'render']);
-Route::get('/me/likes', [ProfilePostsController::class, 'render']);
+
+Route::get('/me/likes', [MyLikesController::class, 'render']);
 
 Route::get('/me/password', [ChangePasswordController::class, 'render']);
 Route::post('/me/password', [ChangePasswordController::class, 'changePassword']);
