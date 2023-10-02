@@ -13,7 +13,7 @@
         <div class="py-1 w-1/3 text-center"><b>{{$stats->likes}}</b> Likes</div>
         <div class="py-1 w-1/3 text-center"><b>{{$stats->posts_count}}</b> Posts</div>
         @php
-         $up_since = getDate(strtotime($stats->up_since));   
+        $up_since = getDate(strtotime($stats->up_since));
         @endphp
         <div class="py-1 w-1/3 text-center">Up since: <b>{{$up_since['month']}} {{$up_since['year']}}</b></div>
     </div>

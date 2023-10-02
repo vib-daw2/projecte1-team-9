@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
-class Profilestats extends Component
+class ProfileStats extends Component
 {
     /**
      * Create a new component instance.
@@ -24,6 +24,6 @@ class Profilestats extends Component
      */
     public function render(): View|Closure|string
     {
-        return Blade::render('components.profilestats', ['likes' => 5]);
+        return View('components.profilestats');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\View\Components\Profilestats;
+use App\View\Components\ProfileStats;
 use Illuminate\Support\ServiceProvider;
 use View;
 
@@ -22,6 +22,6 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(
-            'components.Profilestats', Profilestats::class);
+            'components.Profilestats', ProfileStats::class);
     }
 }
