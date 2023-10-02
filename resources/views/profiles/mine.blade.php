@@ -3,7 +3,7 @@
     <div class="max-w-5xl w-full mx-auto h-fit flex flex-col justify-start items-start gap-3">
         <x-profiletabs selected="profile" />
         <div class="flex flex-col w-full h-fit justify-center items-center mt-4 gap-4">
-            <x-profilestats :username="$username" :posts="4" :likes="$likes" />
+            <x-profilestats :username="$username" />
             <div class="flex flex-row w-full h-fit">
                 <div class="w-1/4 h-full flex flex-col gap-3 pr-4">
                     <div class="w-full bg-gray-900 text-white rounded-md py-2 px-2 font-medium">Account</div>
