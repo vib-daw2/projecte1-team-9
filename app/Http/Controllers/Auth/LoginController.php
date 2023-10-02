@@ -34,10 +34,10 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        if ($validated['remember']) {
-            $remember = true;
-        } else {
+        if (!isset($validated['remember'])) {
             $remember = false;
+        } else {
+            $remember = $validated['remember'];
         }
 
         if (Auth::attempt($validated, $remember)) {
