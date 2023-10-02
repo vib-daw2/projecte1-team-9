@@ -13,6 +13,7 @@ use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
 use App\Http\Controllers\Profile\ChangeProfilePictureController;
+use App\Http\Controllers\Profile\FollowController;
 use App\Http\Controllers\Profile\MyLikesController;
 use App\Http\Controllers\Profile\MyProfileController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -55,14 +56,14 @@ Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
 Route::get('/auth/github', function () {
     return Socialite::driver('github')->redirect();
 });
- 
+
 Route::get('/auth/github/callback', function () {
     try {
         $githubUser = Socialite::driver('github')->user();
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
     }
- 
+
     $user = User::updateOrCreate([
         'email' => $githubUser->email,
     ], [
@@ -70,9 +71,9 @@ Route::get('/auth/github/callback', function () {
         'email' => $githubUser->email,
         'password' => bcrypt(Str::random(24)),
     ]);
- 
+
     Auth::login($user);
- 
+
     return redirect('/');
 });
 
@@ -83,10 +84,10 @@ Route::get('/auth/google', function () {
 Route::get('/auth/google/callback', function () {
     try {
         $googleUser = Socialite::driver('google')->user();
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         return redirect('/login')->with('error', 'Failed to authenticate with Google');
     }
- 
+
     $user = User::updateOrCreate([
         'email' => $googleUser->email,
     ], [
@@ -94,9 +95,9 @@ Route::get('/auth/google/callback', function () {
         'email' => $googleUser->email,
         'password' => bcrypt(Str::random(24)),
     ]);
- 
+
     Auth::login($user);
- 
+
     return redirect('/');
 });
 
@@ -123,6 +124,7 @@ Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
 Route::get('/me', [MyProfileController::class, 'render']); // My profile view / Edit profile view
 Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
 Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
+Route::post('/user/{id}/follow', [FollowController::class, 'follow']); // Follow/unfollow a user action
 
 
 /*

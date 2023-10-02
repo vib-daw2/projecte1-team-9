@@ -69,4 +69,18 @@ class UserPolicy
             return Response::deny('You do not have permission to edit this user.');
         }
     }
+
+    /**
+     * @param User $user
+     * @param User $target
+     * @return Response
+     */
+    public function follow(User $user, User $target): Response
+    {
+        if ($target->id === $user->id) {
+            return Response::deny('You cannot follow yourself.');
+        }
+
+        return Response::allow();
+    }
 }
