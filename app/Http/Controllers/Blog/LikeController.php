@@ -37,26 +37,29 @@ class LikeController extends Controller
         }
 
         $this->validate($request, [
-            'action' => 'required|in:like,dislike,remove'
+            'action' => 'required|in:like,dislike'
         ]);
 
         $action = $request->input('action');
 
-        if ($action == 'remove'){
-            DB::table('likes')->where([
-                'blog_id' => $blog->id,
-                'user_id' => Auth::id()
-            ])->delete();
+        // Get if the user had interacted with the blog before
+        $like = Like::where('blog_id', $blog->id)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (!$like) {
+            $like = new Like();
+            $like->blog_id = $blog->id;
+            $like->user_id = Auth::id();
+            $like->type = $action;
         } else {
-            DB::table('likes')->updateOrInsert([
-                'blog_id' => $blog->id,
-                'user_id' => Auth::id()
-            ], [
-                'blog_id' => $blog->id,
-                'user_id' => Auth::id(),
-                'type' => $action
-            ]);
+            if ($like->type == $action) {
+                Like::destroy($like->id);
+            } else {
+                $like->type = $action;
+            }
         }
+        $like->save();
 
         return redirect()->back();
     }
