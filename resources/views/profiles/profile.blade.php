@@ -10,10 +10,10 @@
                     <span>Followers/Following</span>
                 </div>
                 <div class="py-1 w-1/3 text-center">
-                    @if ($following)
                     <form method="POST" action="/follow/{{$id}}"
                           class="flex flex-row gap-2 items-center justify-center hover:underline">
                         @csrf
+                        @if ($following)
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                              class="lucide lucide-user-check-2">
@@ -24,11 +24,7 @@
                         <button type="submit">
                             Following
                         </button>
-                    </form>
-                    @else
-                    <form method="POST" action="/follow/{{$id}}"
-                          class="flex flex-row gap-2 items-center justify-center hover:underline">
-                        @csrf
+                        @else
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                              class="lucide lucide-user-plus-2">
@@ -40,8 +36,8 @@
                         <button type="submit">
                             Follow
                         </button>
+                        @endif
                     </form>
-                    @endif
                 </div>
             </div>
         </div>
