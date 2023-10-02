@@ -16,7 +16,9 @@ use App\Http\Controllers\Profile\MyLikesController;
 use App\Http\Controllers\Profile\MyProfileController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Profile\ProfilePostsController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,35 @@ Route::post('/login', [LoginController::class, 'login']); // Login action
 Route::get('/signup', [SignupController::class, 'render']); // Signup view
 Route::post('/signup', [SignupController::class, 'signup']); // Signup action
 Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
+
+/*
+ * AUTHENTICATION WITH GITHUB
+ *
+ * All the routes that are related to the authentication with github
+ * */
+Route::get('/auth/github/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+ 
+Route::get('/auth/github/callback', function () {
+    try {
+        $githubUser = Socialite::driver('github')->user();
+    } catch (\Exception $e) {
+        return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
+    }
+ 
+    $user = User::updateOrCreate([
+        'email' => $githubUser->email,
+    ], [
+        'username' => $githubUser->nickname,
+        'email' => $githubUser->email,
+        'password' => bcrypt(Str::random(24)),
+    ]);
+ 
+    Auth::login($user);
+ 
+    return redirect('/');
+});
 
 
 /*
