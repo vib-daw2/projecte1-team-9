@@ -23,14 +23,14 @@
                 @enderror
                 <div class="flex justify-between items-center">
                     <div>
-                        <input type="checkbox" name="remember" id="remember">
-                        <label for="remember" class="select-none">Remember me</label>
+                        <input type="checkbox" name="remember" id="remember" class="cursor-pointer">
+                        <label for="remember" class="select-none cursor-pointer">Remember me</label>
                     </div>
                     <a class="text-red-500 underline underline-offset-4 hover:text-red-600" href="#">Forgot my
                         password</a>
                 </div>
                 <input type="submit" value="Log In"
-                    class="w-full bg-gray-900 hover:bg-gray-900/90 font-medium text-white py-2 rounded-lg">
+                    class="w-full bg-gray-900 hover:bg-gray-900/90 font-medium text-white py-2 rounded-lg cursor-pointer">
             </form>
             <div class="w-full h-4 mt-4 flex justify-center items-center">
                 <div class="w-5/12">
