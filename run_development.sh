@@ -26,7 +26,7 @@ docker run \
     -p 3306:3306 \
     -d mysql:latest
 
-sleep 10 # Wait for the database to be ready
+sleep 3 # Wait for the database to be ready
 
 npm install && \
 composer install && \
