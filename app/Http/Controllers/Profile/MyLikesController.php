@@ -1,20 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Profiles;
+namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use stdClass;
 
-class ProfilePostsController extends Controller
+class MyLikesController extends Controller
 {
-    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
+    public function render()
     {
         $user = Auth::user();
         $profile_stats = $user->getProfileStats();
@@ -23,11 +17,12 @@ class ProfilePostsController extends Controller
             ->select('blogs.*', 'users.username', 'users.id as owner_id', 'likes.type as liked')
             ->join('users', 'users.id', '=', 'blogs.user_id')
             ->where('blogs.status', '=', 'published')
-            ->leftJoin('likes', function ($join) use ($user) {
+            ->leftJoin('likes', function ($join) use ($user) { // Get if the user has liked or not the blog
                 $join->on('likes.blog_id', '=', 'blogs.id')
                     ->where('likes.user_id', '=', $user->id);
             })
-            ->where('blogs.user_id', '=', $user->id)
+            ->where('likes.type', '=', 'like')
+            ->where('likes.user_id', '=', $user->id)
             ->orderBy('views', 'desc')
             ->paginate(10);
 
@@ -40,7 +35,7 @@ class ProfilePostsController extends Controller
             $blog->dislikes = $query->dislikes;
         }
 
-        return view('profiles/profile-posts',
+        return view('profiles/my-likes',
             ['id' => $user->id,
                 'posts_count' => $profile_stats->posts_count,
                 'up_since' => $profile_stats->up_since,
@@ -49,6 +44,5 @@ class ProfilePostsController extends Controller
                 'email' => $user->email,
                 'blogs' => $blogs,
             ]);
-
     }
 }

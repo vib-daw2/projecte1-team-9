@@ -10,11 +10,12 @@ use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Profiles\ChangePasswordController;
-use App\Http\Controllers\Profiles\MyLikesController;
-use App\Http\Controllers\Profiles\MyProfileController;
-use App\Http\Controllers\Profiles\ProfileController;
-use App\Http\Controllers\Profiles\ProfilePostsController;
+use App\Http\Controllers\Profile\ChangePasswordController;
+use App\Http\Controllers\Profile\ChangeProfilePictureController;
+use App\Http\Controllers\Profile\MyLikesController;
+use App\Http\Controllers\Profile\MyProfileController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Profile\ProfilePostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,41 +29,63 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'render']);
+Route::get('/', [HomeController::class, 'render']); // Home view
 
-Route::get('/login', [LoginController::class, 'render']);
-Route::post('/login', [LoginController::class, 'login']);
 
-Route::get('/signup', [SignupController::class, 'render']);
-Route::post('/signup', [SignupController::class, 'signup']);
+/*
+ * AUTHENTICATION
+ *
+ * All the routes that are related to the authentication
+ * Login, signup, logout
+ * */
+Route::get('/login', [LoginController::class, 'render']); // Login view
+Route::post('/login', [LoginController::class, 'login']); // Login action
+Route::get('/signup', [SignupController::class, 'render']); // Signup view
+Route::post('/signup', [SignupController::class, 'signup']); // Signup action
+Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
 
-Route::post('/logout', [LogoutController::class, 'logout']);
 
-Route::get('/blog/new', [NewBlogController::class, 'render']);
-Route::post('/blog/new', [NewBlogController::class, 'create']);
+/*
+ * BLOGS
+ *
+ * All the routes that are related to the blogs
+ * */
+Route::get('/blog/new', [NewBlogController::class, 'render']); // New blog view
+Route::post('/blog/new', [NewBlogController::class, 'create']); // New blog action
+Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
+Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']); // Edit blog view
+Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']); // Edit blog action
+Route::post('/blog/{id}/like', [LikeController::class, 'like']); // Like/dislike blog action
 
-Route::get('/blog/{id}', [BlogController::class, 'render']);
+/*
+ * PROFILES
+ *
+ * All the routes that are related to the profiles
+ * */
+Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
+Route::get('/me', [MyProfileController::class, 'render']); // My profile view / Edit profile view
+Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
+Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
 
-Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']);
-Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']);
 
-Route::post('/blog/{id}/like', [LikeController::class, 'like']);
+/*
+ * EDIT PROFILE
+ *
+ * All the routes that are related to the profile editing
+ * Change password, edit profile, delete profile
+ * */
+Route::post('/me', [MyProfileController::class, 'edit']); // Edit profile
+Route::get('/me/password', [ChangePasswordController::class, 'render']); // Change password view
+Route::post('/me/password', [ChangePasswordController::class, 'changePassword']); // Change password action
+Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'change']); // Change profile picture action
 
-Route::get('/me', [MyProfileController::class, 'render']);
-Route::post('/me', [MyProfileController::class, 'edit']);
 
-Route::get('/me/posts', [ProfilePostsController::class, 'render']);
-
-Route::get('/me/likes', [MyLikesController::class, 'render']);
-
-Route::get('/me/password', [ChangePasswordController::class, 'render']);
-Route::post('/me/password', [ChangePasswordController::class, 'changePassword']);
-
-Route::get('/user/{id}', [ProfileController::class, 'render']);
-
-Route::get('/admin/users', [UserController::class, 'render']);
-Route::get('/admin/users/{id}', [EditUserController::class, 'render']);
-Route::post('/admin/users/{id}/delete', [UserController::class, 'delete']);
-
-Route::get('/admin/users/{id}/edit', [EditUserController::class, 'render']);
-Route::post('/admin/users/{id}/edit', [EditUserController::class, 'edit']);
+/*
+ * ADMIN PANEL
+ *
+ * All the routes that are related to the admin panel
+ * */
+Route::get('/admin/users', [UserController::class, 'render']); // List all users
+Route::post('/admin/users/{id}/delete', [UserController::class, 'delete']); // Delete a user action
+Route::get('/admin/users/{id}/edit', [EditUserController::class, 'render']); // Edit a user view
+Route::post('/admin/users/{id}/edit', [EditUserController::class, 'edit']); // Edit a user action

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Profiles;
+namespace App\Http\Controllers\Profile;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

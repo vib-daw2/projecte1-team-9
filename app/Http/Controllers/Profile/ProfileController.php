@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Profiles;
+namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
