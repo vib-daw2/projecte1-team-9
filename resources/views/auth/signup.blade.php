@@ -1,6 +1,8 @@
 @extends('layout')
 <div class="w-full flex justify-center items-center min-h-screen bg-gray-50 overflow-hidden">
-    <div class="rounded-lg border h-fit shadow-lg w-full max-w-md p-8 bg-white">
+    <div class="w-full flex justify-center items-start drop-shadow-lg">
+        <x-external-auth />
+        <div class="rounded-lg border h-fit w-full max-w-md p-8 bg-white rounded-tl-none">
         <div class="text-2xl font-medium">Sign Up</div>
         <form class="w-full mt-8 flex flex-col gap-4 " method="POST">
             @csrf
@@ -51,5 +53,6 @@
         <a href="/login"
             class="w-full mt-4 block bg-white hover:bg-gray-50 font-medium text-black ring-1 ring-black py-2 rounded-lg text-center">Log
             in</a>
+    </div>
     </div>
 </div>

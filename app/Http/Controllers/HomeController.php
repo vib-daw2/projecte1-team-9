@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function render()
+    public function render(Request $request)
     {
         if (Auth::check()) {
             $blogs = DB::table('blogs')
@@ -42,8 +42,17 @@ class HomeController extends Controller
             $blog->dislikes = $query->dislikes;
         }
 
+        $title = $request->session()->get('title');
+        $success = $request->session()->get('success');
+        $message = $request->session()->get('message');
+
         return view('home', [
-            "blogs" => $blogs
+            "blogs" => $blogs,
+            "toast" => [
+                "title" => $title,
+                "success" => $success,
+                "message" => $message
+            ]
         ]);
     }
 }

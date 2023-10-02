@@ -44,6 +44,7 @@ class EditUserController extends Controller
             $validated = $this->validate(request(), [
                 'username' => 'required|min:3|max:255',
                 'email' => 'required|email|max:255',
+                'role' => 'required|in:admin,user,moderator',
                 'password' => 'required|min:8|max:255'
             ]);
         } catch (ValidationException $e) {
@@ -66,6 +67,7 @@ class EditUserController extends Controller
 
         $user->username = $validated['username'];
         $user->email = $validated['email'];
+        $user->role = $validated['role'];
 
         $user->save();
 

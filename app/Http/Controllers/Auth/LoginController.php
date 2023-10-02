@@ -35,9 +35,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($validated)) {
             if ($request->input('redirect')) {
-                return redirect('/'.$request->input('redirect'));
+                return redirect('/'.$request->input('redirect'), 302)->with(['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
             }
-            return redirect('/');
+            return redirect('/')->with(['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
         }
 
         return redirect()->back()->withErrors(['username' => 'Invalid username or password'])->withInput();
