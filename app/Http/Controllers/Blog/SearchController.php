@@ -12,7 +12,7 @@ class SearchController extends Controller
     {
         $query = request()->query('s');
 
-        $blogs = Blog::search($query)->paginate(10);
+        $blogs = Blog::search($query)->paginate(10)->withQueryString();
 
         foreach ($blogs as $blog) {
             $query = $blog->getLikesAndDislikes();
