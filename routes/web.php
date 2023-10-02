@@ -50,9 +50,9 @@ Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
  *
  * All the routes that are related to the blogs
  * */
-Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/new', [NewBlogController::class, 'render']); // New blog view
 Route::post('/blog/new', [NewBlogController::class, 'create']); // New blog action
+Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']); // Edit blog action
 Route::post('/blog/{id}/like', [LikeController::class, 'like']); // Like/dislike blog action
