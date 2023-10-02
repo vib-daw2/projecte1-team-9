@@ -8,12 +8,13 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
+    public function render(): View|Application|Factory|Redirector|RedirectResponse
     {
         if (auth()->check()) {
             return redirect('/');
@@ -38,7 +39,6 @@ class LoginController extends Controller
             }
             return redirect('/');
         }
-
 
         return redirect()->back()->withErrors(['username' => 'Invalid username or password'])->withInput();
     }
