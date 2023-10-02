@@ -17,7 +17,7 @@ class MyProfileController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            redirect('/login', ['redirect' => 'me']);
+            redirect('/login');
         }
 
         $profile_stats = $user->getProfileStats();
