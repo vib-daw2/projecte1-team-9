@@ -21,6 +21,7 @@ class MyLikesController extends Controller
                 $join->on('likes.blog_id', '=', 'blogs.id')
                     ->where('likes.user_id', '=', $user->id);
             })
+            ->where('likes.type', '=', 'like')
             ->where('likes.user_id', '=', $user->id)
             ->orderBy('views', 'desc')
             ->paginate(10);
