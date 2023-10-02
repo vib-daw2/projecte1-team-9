@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
 use App\Http\Controllers\Profile\ChangeProfilePictureController;
 use App\Http\Controllers\Profile\FollowController;
+use App\Http\Controllers\Profile\FollowingController;
 use App\Http\Controllers\Profile\MyLikesController;
 use App\Http\Controllers\Profile\MyProfileController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -79,6 +80,7 @@ Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
 Route::get('/me', [MyProfileController::class, 'render']); // My profile view / Edit profile view
 Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
 Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
+Route::get('/me/following', [FollowingController::class, 'following']); // View users that I follow
 Route::post('/user/{id}/follow', [FollowController::class, 'follow']); // Follow/unfollow a user action
 
 
