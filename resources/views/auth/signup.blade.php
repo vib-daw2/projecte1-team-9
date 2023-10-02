@@ -39,7 +39,7 @@
                 @enderror
             </div>
             <input type="submit" value="Sign Up"
-                class="w-full bg-gray-900 hover:bg-gray-900/90 font-medium text-white py-2 rounded-lg">
+                class="w-full bg-gray-900 hover:bg-gray-900/90 font-medium text-white py-2 rounded-lg cursor-pointer">
         </form>
         <div class="w-full h-4 mt-4 flex justify-center items-center">
             <div class="w-5/12">

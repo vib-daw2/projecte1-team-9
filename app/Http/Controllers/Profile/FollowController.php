@@ -21,7 +21,7 @@ class FollowController extends Controller
         $user = User::find($id);
 
         try {
-            $this->authorize('like', $user);
+            $this->authorize('follow', $user);
         } catch (Exception $e) {
             abort(403);
         }
@@ -35,7 +35,7 @@ class FollowController extends Controller
         } else {
             Follow::create([
                 'follower_id' => Auth::id(),
-                'followee_id' => $user->id,
+                'followee_id' => $user->id
             ]);
         }
 

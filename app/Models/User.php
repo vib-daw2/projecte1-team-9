@@ -58,10 +58,20 @@ class User extends Authenticatable
 
         $upSince = DB::table('users')->where('id', $this->id)->value('created_at');
 
+        $follows = DB::table('follows')
+            ->where('follower_id', $this->id)
+            ->count();
+
+        $followers = DB::table('follows')
+            ->where('followee_id', $this->id)
+            ->count();
+
         $return = new stdClass();
         $return->likes = $totalReceivedLikes;
         $return->posts_count = $postsCount;
         $return->up_since = $upSince;
+        $return->follows = $follows;
+        $return->followers = $followers;
         return $return;
     }
 

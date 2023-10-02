@@ -81,7 +81,7 @@ Route::get('/me', [MyProfileController::class, 'render']); // My profile view / 
 Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
 Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
 Route::get('/me/following', [FollowingController::class, 'following']); // View users that I follow
-Route::post('/user/{id}/follow', [FollowController::class, 'follow']); // Follow/unfollow a user action
+Route::post('/follow/{id}', [FollowController::class, 'follow']); // Follow/unfollow a user action
 
 
 /*
