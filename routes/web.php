@@ -11,6 +11,7 @@ use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
+use App\Http\Controllers\Profile\ChangeProfilePictureController;
 use App\Http\Controllers\Profile\MyLikesController;
 use App\Http\Controllers\Profile\MyProfileController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'render']); // Home view
+
 
 /*
  * AUTHENTICATION
@@ -55,7 +57,6 @@ Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']); // Edit bl
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']); // Edit blog action
 Route::post('/blog/{id}/like', [LikeController::class, 'like']); // Like/dislike blog action
 
-
 /*
  * PROFILES
  *
@@ -66,6 +67,7 @@ Route::get('/me', [MyProfileController::class, 'render']); // My profile view / 
 Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
 Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
 
+
 /*
  * EDIT PROFILE
  *
@@ -75,6 +77,7 @@ Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my p
 Route::post('/me', [MyProfileController::class, 'edit']); // Edit profile
 Route::get('/me/password', [ChangePasswordController::class, 'render']); // Change password view
 Route::post('/me/password', [ChangePasswordController::class, 'changePassword']); // Change password action
+Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'change']); // Change profile picture action
 
 
 /*
