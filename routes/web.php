@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\EditUserController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\External\GithubController;
+use App\Http\Controllers\Auth\External\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
@@ -48,58 +50,11 @@ Route::get('/signup', [SignupController::class, 'render']); // Signup view
 Route::post('/signup', [SignupController::class, 'signup']); // Signup action
 Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
 
-/*
- * AUTHENTICATION WITH GITHUB
- *
- * All the routes that are related to the authentication with github
- * */
-Route::get('/auth/github', function () {
-    return Socialite::driver('github')->redirect();
-});
-
-Route::get('/auth/github/callback', function () {
-    try {
-        $githubUser = Socialite::driver('github')->user();
-    } catch (Exception $e) {
-        return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
-    }
-
-    $user = User::updateOrCreate([
-        'email' => $githubUser->email,
-    ], [
-        'username' => $githubUser->nickname,
-        'email' => $githubUser->email,
-        'password' => bcrypt(Str::random(24)),
-    ]);
-
-    Auth::login($user);
-
-    return redirect('/');
-});
-
-Route::get('/auth/google', function () {
-    return Socialite::driver('google')->redirect();
-});
-
-Route::get('/auth/google/callback', function () {
-    try {
-        $googleUser = Socialite::driver('google')->user();
-    } catch (Exception $e) {
-        return redirect('/login')->with('error', 'Failed to authenticate with Google');
-    }
-
-    $user = User::updateOrCreate([
-        'email' => $googleUser->email,
-    ], [
-        'username' => $googleUser->name,
-        'email' => $googleUser->email,
-        'password' => bcrypt(Str::random(24)),
-    ]);
-
-    Auth::login($user);
-
-    return redirect('/');
-});
+// Socialite external auth providers
+Route::get('/auth/github', [GithubController::class, 'provider']);
+Route::get('/auth/github/callback', [GithubController::class, 'callback']);
+Route::get('/auth/google', [GoogleController::class, 'provider']);
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
 
 /*
