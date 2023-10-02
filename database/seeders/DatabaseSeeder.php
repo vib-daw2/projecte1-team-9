@@ -31,14 +31,24 @@ class DatabaseSeeder extends Seeder
 
             for ($j = 0; $j < 10; $j++) {
                 $blog = new Blog();
-                $blog->title = Str::random(10);
-                $blog->subtitle = Str::random(10);
 
-                $paragraphs = rand(1, 10);
+                $title_words = rand(4, 12);
+                $blog->title = '';
+                for ($k = 0; $k < $title_words; $k++) {
+                    $blog->title .= Str::random(rand(3, 13)) . ' ';
+                }
+
+                $subtitle_words = rand(4, 20);
+                $blog->subtitle = '';
+                for ($k = 0; $k < $subtitle_words; $k++) {
+                    $blog->subtitle .= Str::random(rand(3, 13)) . ' ';
+                }
+
+                $paragraphs = rand(5, 15);
                 $body = '';
                 for ($k = 0; $k < $paragraphs; $k++) {
-                    for ($l = 0; $l < rand(20, 50); $l++) {
-                        $body .= Str::random(rand(3, 10)) . ' ';
+                    for ($l = 0; $l < rand(40, 100); $l++) {
+                        $body .= Str::random(rand(3, 13)) . ' ';
                     }
                     $body .= "\n\n";
                 }
