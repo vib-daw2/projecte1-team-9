@@ -27,13 +27,20 @@ class LoginController extends Controller
         try {
             $validated = request()->validate([
                 'username' => 'required',
-                'password' => 'required'
+                'password' => 'required',
+                'remember' => 'nullable|boolean',
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        if (Auth::attempt($validated)) {
+        if ($validated['remember']) {
+            $remember = true;
+        } else {
+            $remember = false;
+        }
+
+        if (Auth::attempt($validated, $remember)) {
             if ($request->input('redirect')) {
                 return redirect('/'.$request->input('redirect'), 302)->with(['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
             }
