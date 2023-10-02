@@ -51,7 +51,7 @@ Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
  *
  * All the routes that are related to the authentication with github
  * */
-Route::get('/auth/github/redirect', function () {
+Route::get('/auth/github', function () {
     return Socialite::driver('github')->redirect();
 });
  
@@ -67,6 +67,30 @@ Route::get('/auth/github/callback', function () {
     ], [
         'username' => $githubUser->nickname,
         'email' => $githubUser->email,
+        'password' => bcrypt(Str::random(24)),
+    ]);
+ 
+    Auth::login($user);
+ 
+    return redirect('/');
+});
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/google/callback', function () {
+    try {
+        $googleUser = Socialite::driver('google')->user();
+    } catch (\Exception $e) {
+        return redirect('/login')->with('error', 'Failed to authenticate with Google');
+    }
+ 
+    $user = User::updateOrCreate([
+        'email' => $googleUser->email,
+    ], [
+        'username' => $googleUser->name,
+        'email' => $googleUser->email,
         'password' => bcrypt(Str::random(24)),
     ]);
  

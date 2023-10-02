@@ -1,5 +1,5 @@
 <div class="w-16 h-32 bg-white rounded-l-md shadow-lg border flex flex-col">
-    <a href="/auth/github/redirect"
+    <a href="/auth/github"
         class="w-16 h-16 group flex justify-center hover:bg-gray-200 items-center border-b border-b-black rounded-tl-md">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -9,7 +9,7 @@
             <path d="M9 18c-4.51 2-5-2-7-2" />
         </svg>
     </a>
-    <div
+    <a href="/auth/google"
         class="w-16 h-16 hover:bg-gray-200 flex justify-center items-center rounded-bl-md group">
 
         <svg class="" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 24 24" width="28">
@@ -28,5 +28,5 @@
             <path d="M1 1h22v22H1z" fill="none" />
             
         </svg>
-    </div>
+    </a>
 </div>
