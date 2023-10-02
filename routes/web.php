@@ -31,7 +31,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', [HomeController::class, 'render']); // Home view
+Route::get('/', function(){ return View('landing');}); // Home view
 
 
 /*
@@ -105,6 +105,7 @@ Route::get('/auth/google/callback', function () {
  *
  * All the routes that are related to the blogs
  * */
+Route::get('/blog', [HomeController::class, 'render']); // Home view
 Route::get('/blog/new', [NewBlogController::class, 'render']); // New blog view
 Route::post('/blog/new', [NewBlogController::class, 'create']); // New blog action
 Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view

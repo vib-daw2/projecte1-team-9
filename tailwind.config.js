@@ -29,6 +29,9 @@ export default {
         toastout: 'toastout 0.5s forwards ease-in-out'
       }
     },
+    fontSize: {
+      xxl: ['1.75rem', '2.5rem'],
+    }
   },
   plugins: [],
 }
