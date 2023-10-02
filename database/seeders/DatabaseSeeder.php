@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 'username' => $username,
                 'email' => $username . '@gmail.com',
                 'password' => Hash::make('password'),
+                'created_at' => now(),
             ]);
 
             $id = DB::table('users')->where('username', $username)->first()->id;
