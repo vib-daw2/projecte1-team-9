@@ -1,6 +1,6 @@
 <div class="w-16 h-32 bg-white rounded-l-md shadow-lg border flex flex-col">
-    <div
-        class="w-16 h-16 group flex justify-center hover:bg-gray-200 items-center border-b border-b-black rounded-tl-md cursor-pointer">
+    <a href="/auth/github"
+        class="w-16 h-16 group flex justify-center hover:bg-gray-200 items-center border-b border-b-black rounded-tl-md">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-github">
@@ -8,10 +8,9 @@
                 d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
             <path d="M9 18c-4.51 2-5-2-7-2" />
         </svg>
-    </div>
-    <div
-        class="w-16 h-16 hover:bg-gray-200 flex justify-center items-center rounded-bl-md group cursor-pointer">
-
+    </a>
+    <a href="/auth/google"
+        class="w-16 h-16 hover:bg-gray-200 flex justify-center items-center rounded-bl-md group">
         <svg class="" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 24 24" width="28">
             <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -28,5 +27,5 @@
             <path d="M1 1h22v22H1z" fill="none" />
 
         </svg>
-    </div>
+    </a>
 </div>
