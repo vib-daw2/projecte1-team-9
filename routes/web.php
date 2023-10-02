@@ -9,6 +9,7 @@ use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
+use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
 use App\Http\Controllers\Profile\ChangeProfilePictureController;
@@ -52,6 +53,7 @@ Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
  * */
 Route::get('/blog/new', [NewBlogController::class, 'render']); // New blog view
 Route::post('/blog/new', [NewBlogController::class, 'create']); // New blog action
+Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']); // Edit blog action
