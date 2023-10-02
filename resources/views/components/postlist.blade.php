@@ -3,7 +3,9 @@
     <div class="h-full w-full flex flex-col justify-start gap-1 items-start py-2 ml-4">
         <div class="w-full flex justify-between items-center">
             <a href={{ sprintf('/blog/%d', $id) }}
-                class="block font-semibold hover:underline text-2xl">{{ $title }}</a>
+                class="block font-semibold hover:underline text-2xl">
+            {{ substr($title, 0, 50) }}{{ strlen($title) > 50 ? "..." : "" }}
+            </a>
             <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$id" />
         </div>
         <div class="flex items-center hover:underline cursor-pointer">
