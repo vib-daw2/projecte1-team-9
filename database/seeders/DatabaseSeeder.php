@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
                 $paragraphs = rand(1, 10);
                 $body = '';
                 for ($k = 0; $k < $paragraphs; $k++) {
-                    for ($l = 0; $l < rand(20,50); $l++) {
+                    for ($l = 0; $l < rand(20, 50); $l++) {
                         $body .= Str::random(rand(3, 10)) . ' ';
                     }
                     $body .= "\n\n";
@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
 
                 $blog->body = $body;
                 $blog->user_id = $id;
-                $blog->status = 'published';
+                $status = rand(0, 1);
+                $blog->status = $status == 0 ? 'draft' : 'published';
                 $blog->views = rand(0, 10000000);
                 $blog->save();
             }

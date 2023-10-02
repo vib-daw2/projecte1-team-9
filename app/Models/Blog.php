@@ -70,4 +70,14 @@ class Blog extends Model
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ];
         }
+
+        /**
+         * Determine whether the blog should be indexed.
+         *
+         * @return bool
+         */
+        public function shouldBeSearchable(): bool
+        {
+            return $this->status === 'published';
+        }
     }
