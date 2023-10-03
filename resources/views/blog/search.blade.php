@@ -45,7 +45,7 @@
         <div id="userlist"
         class="max-w-5xl mt-4 w-full mx-auto hidden flex-col justify-start items-center gap-3">
             @foreach ($users as $user)
-                    <div class="flex flex-row justify-between items-center w-full gap-8 bg-white shadow-lg rounded-lg p-4">
+                    <div class="flex flex-row justify-between items-center w-full gap-8 border-b border-b-black p-4">
                         {{-- <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full"> --}}
                         <div class="flex flex-row items-center gap-3 max-w-xs w-full">
                             <div class="w-16 h-16 rounded-full flex justify-center items-center bg-gray-900">
