@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth\External;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -25,16 +26,25 @@ class GithubController extends Controller
             return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
         }
 
-        $user = User::updateOrCreate([
-            'email' => $githubUser->email,
-        ], [
-            'username' => $githubUser->nickname,
-            'email' => $githubUser->email,
-            'password' => Hash::make(Str::random(24)),
-        ]);
+        $existingUser = User::where('auth_provider_id', $githubUser->getId())->first();
+        if ($existingUser) {
+            Auth::login($existingUser);
+            return redirect('/blog');
+        }
 
-        Auth::login($user);
+        try {
+            $user = new User();
+            $user->username = $githubUser->getNickname();
+            $user->email = $githubUser->getEmail();
+            $user->password = Hash::make(Str::random(24));
+            $user->auth_provider = 'github';
+            $user->auth_provider_id = $githubUser->getId();
+            $user->save();
+            Auth::login($user);
+        } catch (UniqueConstraintViolationException $e) {
+            return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
+        }
 
-        return redirect('/');
+        return redirect('/blog');
     }
 }
