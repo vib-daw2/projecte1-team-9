@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -15,6 +16,9 @@ class SearchController extends Controller
         $blogs = Blog::search($query)
             ->paginate(10)->withQueryString();
 
+        $users = User::search($query)
+            ->paginate(10)->withQueryString();
+
         foreach ($blogs as $blog) {
             $query = $blog->getLikesAndDislikes();
             $blog->likes = $query->likes;
@@ -22,6 +26,11 @@ class SearchController extends Controller
             $blog->username = $blog->user->username;
         }
 
-        return view('blog/search', ['blogs' => $blogs]);
+        foreach ($users as $user) {
+            $user->followers = $user->followers()->count();
+            $user->follows = $user->followees()->count();
+        }
+
+        return view('blog/search', ['blogs' => $blogs, 'users' => $users]);
     }
 }
