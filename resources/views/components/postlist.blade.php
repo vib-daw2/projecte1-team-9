@@ -18,7 +18,7 @@
             <a href={{sprintf("/user/%d", $ownerid)}} class="font-light">{{ $username }}</a>
         </div>
         <div>
-            {{$subtitle}}
+            {{ substr($subtitle, 0, 100) }}{{ strlen($subtitle) > 100 ? "..." : "" }}
         </div>
     </div>
 

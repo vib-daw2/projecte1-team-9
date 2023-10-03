@@ -1,0 +1,29 @@
+version: '3'
+services:
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        restart: always
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_DATABASE=$DB_DATABASE
+            - MYSQL_USER=$DB_USERNAME
+            - MYSQL_PASSWORD=$DB_PASSWORD
+        ports:
+            - 3306:3306
+    meilisearch:
+        image: getmeili/meilisearch:latest
+        container_name: meilisearch
+        restart: always
+        environment:
+            - MEILI_MASTER_KEY=$MEILISEARCH_KEY
+        ports:
+            - 7700:7700
+    redis:
+        image: redis:latest
+        container_name: redis
+        restart: always
+        ports:
+            - 6379:6379
+        environment:
+            - REDIS_PASSWORD=$REDIS_PASSWORD
