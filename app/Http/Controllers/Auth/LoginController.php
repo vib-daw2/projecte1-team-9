@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function render(): View|Application|Factory|Redirector|RedirectResponse
     {
         if (auth()->check()) {
-            return redirect('/');
+            return redirect('/blog');
         }
         return view('auth/login');
     }
@@ -44,7 +44,7 @@ class LoginController extends Controller
             if ($request->input('redirect')) {
                 return redirect('/'.$request->input('redirect'), 302)->with(['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
             }
-            return redirect('/')->with(['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
+            return redirect('/blog')->with(['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
         }
 
         return redirect()->back()->withErrors(['username' => 'Invalid username or password'])->withInput();

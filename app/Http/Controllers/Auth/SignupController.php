@@ -16,7 +16,7 @@ class SignupController extends Controller
     public function render(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         if (auth()->check()) {
-            return redirect('/');
+            return redirect('/blog');
         }
         return view('auth/signup');
     }

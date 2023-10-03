@@ -1,6 +1,6 @@
 <svg width="500" height="487" viewBox="0 0 500 487" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_1_2)">
-<rect width="500" height="487" fill="white"/>
+<rect width="500" height="487" fill="none"/>
 <rect x="176.214" y="36.4492" width="184.201" height="91.2908" fill="black"/>
 <rect x="176.214" y="219.031" width="184.201" height="86.9436" fill="black"/>
 <rect x="176.214" y="394.367" width="184.201" height="91.2908" fill="black"/>
@@ -8,9 +8,9 @@
 <ellipse cx="360.726" cy="350.694" rx="139.274" ry="134.763" fill="black"/>
 <ellipse cx="357.419" cy="173.385" rx="49.4197" ry="45.6454" fill="white"/>
 <ellipse cx="357.419" cy="351.62" rx="49.4197" ry="45.6454" fill="white"/>
-<rect x="90.8524" y="127.74" width="269.562" height="91.2908" fill="white"/>
-<rect x="90.8524" y="305.974" width="269.562" height="91.2908" fill="white"/>
-<rect x="125.109" y="18.1347" width="184.201" height="91.2908" fill="white"/>
+<rect x="90.8524" y="127.74" width="269.562" height="91.2908" fill="none"/>
+<rect x="90.8524" y="305.974" width="269.562" height="91.2908" fill="none"/>
+<rect x="125.109" y="18.1347" width="184.201" height="91.2908" fill="transparent"/>
 <rect x="125.109" y="200.716" width="184.201" height="86.9436" fill="white"/>
 <rect x="125.109" y="376.052" width="184.201" height="91.2908" fill="white"/>
 <ellipse cx="309.31" cy="152.897" rx="139.274" ry="134.763" fill="white"/>
