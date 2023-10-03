@@ -1,7 +1,7 @@
 <nav
-    class="fixed md:inset-0 bottom-0 left-0 w-full h-20 md:h-screen md:w-24 bg-white shadow-lg flex md:flex-col md:justify-start justify-between items-center gap-4">
+    class="fixed lg:inset-0 bottom-0 left-0 w-full h-20 lg:h-screen lg:w-24 bg-white shadow-lg flex lg:flex-col lg:justify-start justify-between items-center gap-4">
     <a href="/" class="text-6xl cursor-pointer font-black py-8 border-b text-center flex justify-center items-center">
-        <img src="../../../logo.svg" alt="Blogify" class="w-1/2">
+        <img src="../../../logo.svg" alt="Blogify" class="lg:w-1/2 w-1/3">
     </a>
     <x-navbutton href="/blog" title="Blogs">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -23,7 +23,8 @@
                 <line x1="15" x2="3" y1="12" y2="12" />
             </svg>
         </x-navbutton>
-    @endguest
+        @endguest
+        <x-navbutton href="/search" title="Search"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></x-navbutton>
     @auth
         <x-navbutton href="/me" title="Profile">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
