@@ -70,6 +70,7 @@ Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
 
+
 /*
  * BLOGS INTERACTION
  *
@@ -77,6 +78,8 @@ Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware(
  * */
 Route::post('/blog/{id}/like', [LikeController::class, 'like'])->middleware('auth'); // Like/dislike blog action
 Route::post('/blog/{id}/comment', [CommentController::class, 'comment'])->middleware('auth'); // Comment blog action
+Route::post('/blog/{id}/comment/delete', [CommentController::class, 'delete'])->middleware('auth'); // Delete comment action
+
 
 /*
  * PROFILES

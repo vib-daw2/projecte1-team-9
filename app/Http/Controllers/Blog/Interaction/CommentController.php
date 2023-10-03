@@ -40,4 +40,18 @@ class CommentController extends Controller
 
         return redirect()->back();
     }
+
+    public function delete(string $id): string
+    {
+        $comment = Comment::find($id);
+        try {
+            $this->authorize('delete', $comment);
+        } catch (\Throwable $th) {
+            abort(403);
+        }
+
+        Comment::destroy($comment->id);
+
+        return redirect()->back();
+    }
 }
