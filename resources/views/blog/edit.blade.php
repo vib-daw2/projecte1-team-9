@@ -14,9 +14,10 @@
     }
 </script>
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
-    <form class="max-w-3xl w-full mx-auto flex flex-col justify-start items-center gap-3">
+    <form class="max-w-3xl w-full mx-auto flex flex-col justify-start items-center gap-3" method="POST">
         @csrf
         <div class="w-full flex justify-between flex-wrap items-center">
+            <input type="hidden" name="status" id="status" value="{{$blog->status}}">
             <div class="text-left text-3xl font-medium">Edit Post</div>
             <div class="flex flex-row gap-2">
                 <button
@@ -60,9 +61,20 @@
         </div>
         <textarea style="resize:none" maxlength="255" name="title" id="title" placeholder="Title" rows="2"
             class="w-full text-5xl px-2 outline-none font-medium focus:border-0 py-2">{{$blog->title}}</textarea>
+            @error('title')
+            <div class="text-red-600 text-sm">{{$message}}</div>
+            @enderror
         <textarea style="resize:none" type="text" name="subtitle" id="subtitle"
             class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle" maxlength="100" rows="1">{{$blog->subtitle}}</textarea>
-        <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
-            rows="20" placeholder="Content">{{$blog->body}}</textarea>
+            @error('subtitle')
+            <div class="text-red-600 text-sm">{{$message}}</div>
+            @enderror
+            @error('body')
+            <div class="text-red-600 text-sm">{{$message}}</div>
+            @enderror   
+        {{-- <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
+            rows="20" placeholder="Content">{{$blog->body}}</textarea> --}}
+            <input id="body" type="hidden" name="body" value="{{$blog->body}}">
+            <trix-editor class="w-full" input="body"></trix-editor>
     </form>
 </div>
