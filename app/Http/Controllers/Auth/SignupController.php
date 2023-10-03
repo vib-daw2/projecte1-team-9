@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 
 class SignupController extends Controller
 {
-    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
+    public function render(): View|\Illuminate\Foundation\Application|Factory|Application|RedirectResponse
     {
         if (auth()->check()) {
             return redirect('/blog');
