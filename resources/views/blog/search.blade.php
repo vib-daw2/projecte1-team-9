@@ -2,9 +2,9 @@
 <div class="w-full min-h-screen bg-white flex justify-center flex-row items-start px-12 py-8">
     <div class="w-full max-w-5xl flex flex-col justify-center items-center">
         <form class="w-full flex justify-center items-center gap-3 relative">
-            <svg class="absolute top-2 left-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            <svg class="absolute top-2 left-1 lucide lucide-search" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" class="lucide lucide-search">
+                stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />
             </svg>
@@ -49,12 +49,7 @@
                         {{-- <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full"> --}}
                         <div class="flex flex-row items-center gap-3 max-w-xs w-full">
                             <div class="w-16 h-16 rounded-full flex justify-center items-center bg-gray-900">
-                                @if($user->profile_picture)
-                                <img src="{{asset("storage/".$user->profile_picture)}}" alt="{{strtoupper($user->username[0])}}" class="object-fit rounded-full w-full h-full">
-                                @else
-                                {{ strtoupper($user->username)[0] }}
-                                @endif
-                            </div>
+                                {{ strtoupper($user->username)[0] }}</div>
                             <a href="/user/{{$user->id}}" class="text-lg block font-medium">{{ $user->username }}</a>
                         </div>
                         <div class="flex justify-start gap-6 items-center flex-wrap w-full max-w-md">
@@ -104,25 +99,25 @@
             document.getElementById("posts").checked = true
             document.getElementById("users").checked = false
             showPosts()
-        
+
             function showPosts() {
                 const postContainer = document.getElementById("postlist")
                 const userContainer = document.getElementById("userlist")
-        
+
                 postContainer.classList.remove("hidden")
                 postContainer.classList.add("flex")
-        
+
                 userContainer.classList.remove("flex")
                 userContainer.classList.add("hidden")
             }
-        
+
             function showUsers() {
                 const postContainer = document.getElementById("postlist")
                 const userContainer = document.getElementById("userlist")
-        
+
                 postContainer.classList.remove("flex")
                 postContainer.classList.add("hidden")
-        
+
                 userContainer.classList.remove("hidden")
                 userContainer.classList.add("flex")
             }

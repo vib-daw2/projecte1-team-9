@@ -35,7 +35,7 @@ class GoogleController extends Controller
 
         try {
             $user = new User();
-            $user->username = $googleUser->getName();
+            $user->username = str_replace(' ', '', $googleUser->getName());
             $user->email = $googleUser->getEmail();
             $user->password = Hash::make(Str::random(24));
             $user->auth_provider = 'google';
