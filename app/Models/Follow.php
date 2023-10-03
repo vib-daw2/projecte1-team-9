@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Follow extends Model
 {
@@ -16,12 +17,12 @@ class Follow extends Model
         'followee_id',
     ];
 
-    public function follower(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function follower(): BelongsTo
     {
         return $this->belongsTo(User::class, 'follower_id');
     }
 
-    public function followee(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function followee(): BelongsTo
     {
         return $this->belongsTo(User::class, 'followee_id');
     }
