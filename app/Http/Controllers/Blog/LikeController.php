@@ -5,15 +5,8 @@ namespace App\Http\Controllers\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Like;
-use Exception;
-use http\Env\Response;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class LikeController extends Controller
 {
@@ -27,12 +20,6 @@ class LikeController extends Controller
     {
         $blog = Blog::find($id);
         if ($blog->status != 'published') {
-            abort(403);
-        }
-
-        try {
-            $this->authorize('like', $blog);
-        } catch (Exception $e) {
             abort(403);
         }
 

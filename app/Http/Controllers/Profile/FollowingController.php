@@ -9,10 +9,6 @@ class FollowingController extends Controller
 {
     public function render()
     {
-        if (!auth()->check()) {
-            return redirect('/login');
-        }
-
         $users = Follow::where('follower_id', auth()->id())
             ->join('users', 'users.id', '=', 'follows.followee_id')
             ->select('users.*')

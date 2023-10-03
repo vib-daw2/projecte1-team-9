@@ -64,13 +64,13 @@ Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
  * All the routes that are related to the blogs
  * */
 Route::get('/blog', [HomeController::class, 'render']); // Home view
-Route::get('/blog/new', [NewBlogController::class, 'render']); // New blog view
-Route::post('/blog/new', [NewBlogController::class, 'create']); // New blog action
+Route::get('/blog/new', [NewBlogController::class, 'render'])->middleware('auth'); // New blog view
+Route::post('/blog/new', [NewBlogController::class, 'create'])->middleware('auth'); // New blog action
 Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
-Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']); // Edit blog view
-Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']); // Edit blog action
-Route::post('/blog/{id}/like', [LikeController::class, 'like']); // Like/dislike blog action
+Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
+Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
+Route::post('/blog/{id}/like', [LikeController::class, 'like'])->middleware('auth'); // Like/dislike blog action
 
 /*
  * PROFILES
@@ -78,11 +78,11 @@ Route::post('/blog/{id}/like', [LikeController::class, 'like']); // Like/dislike
  * All the routes that are related to the profiles
  * */
 Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
-Route::get('/me', [MyProfileController::class, 'render']); // My profile view / Edit profile view
-Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
-Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
-Route::get('/me/following', [FollowingController::class, 'following']); // View users that I follow
-Route::post('/follow/{id}', [FollowController::class, 'follow']); // Follow/unfollow a user action
+Route::get('/me', [MyProfileController::class, 'render'])->middleware('auth'); // My profile view / Edit profile view
+Route::get('/me/likes', [MyLikesController::class, 'render'])->middleware('auth'); // View blogs that I liked
+Route::get('/me/posts', [ProfilePostsController::class, 'render'])->middleware('auth'); // View my posts
+Route::get('/me/following', [FollowingController::class, 'following'])->middleware('auth'); // View users that I follow
+Route::post('/follow/{id}', [FollowController::class, 'follow'])->middleware('auth'); // Follow/unfollow a user action
 
 
 /*
@@ -91,10 +91,10 @@ Route::post('/follow/{id}', [FollowController::class, 'follow']); // Follow/unfo
  * All the routes that are related to the profile editing
  * Change password, edit profile, delete profile
  * */
-Route::post('/me', [MyProfileController::class, 'edit']); // Edit profile
-Route::get('/me/password', [ChangePasswordController::class, 'render']); // Change password view
-Route::post('/me/password', [ChangePasswordController::class, 'changePassword']); // Change password action
-Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'change']); // Change profile picture action
+Route::post('/me', [MyProfileController::class, 'edit'])->middleware('auth'); // Edit profile action
+Route::get('/me/password', [ChangePasswordController::class, 'render'])->middleware('auth'); // Change password view
+Route::post('/me/password', [ChangePasswordController::class, 'changePassword'])->middleware('auth'); // Change password action
+Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'change'])->middleware('auth'); // Change profile picture action
 
 
 /*
