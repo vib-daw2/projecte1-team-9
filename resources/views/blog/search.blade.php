@@ -1,5 +1,5 @@
 @extends('layout')
-<div class="w-full min-h-screen bg-gray-50 flex justify-center flex-row items-start px-12 py-8">
+<div class="w-full min-h-screen bg-white flex justify-center flex-row items-start px-12 py-8">
     <div class="w-full max-w-5xl flex flex-col justify-center items-center">
         <form class="w-full flex justify-center items-center gap-3 relative">
             <svg class="absolute top-2 left-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -9,7 +9,7 @@
                 <path d="m21 21-4.3-4.3" />
             </svg>
             <input value="{{ request('s') }}" placeholder="Search..." type="search" name="s" id="s"
-            class="w-full bg-gray-50 outline-none border-b border-b-black pl-8 py-2">
+            class="w-full bg-white outline-none border-b border-b-black pl-8 py-2">
             <button class="bg-gray-900 w-32 py-2 rounded-md text-white">Search</button>
         </form>
         @if(request('s'))
@@ -49,7 +49,12 @@
                         {{-- <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full"> --}}
                         <div class="flex flex-row items-center gap-3 max-w-xs w-full">
                             <div class="w-16 h-16 rounded-full flex justify-center items-center bg-gray-900">
-                                {{ strtoupper($user->username)[0] }}</div>
+                                @if($user->profile_picture)
+                                <img src="{{asset("storage/".$user->profile_picture)}}" alt="{{strtoupper($user->username[0])}}" class="object-fit rounded-full w-full h-full">
+                                @else
+                                {{ strtoupper($user->username)[0] }}
+                                @endif
+                            </div>
                             <a href="/user/{{$user->id}}" class="text-lg block font-medium">{{ $user->username }}</a>
                         </div>
                         <div class="flex justify-start gap-6 items-center flex-wrap w-full max-w-md">

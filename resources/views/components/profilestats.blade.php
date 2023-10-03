@@ -10,9 +10,15 @@
 @endphp
 
 <div class="w-full h-full pb-4 border-b border-b-black">
+    @if(isset($user->profile_picture))
+    <div class="w-36 h-36 bg-black rounded-full text-white mx-auto flex justify-center items-center">
+        <img src="{{asset("storage/".$user->profile_picture)}}" alt="{{strtoupper($username[0])}}" class="object-fit rounded-full w-full h-full">
+    </div>
+    @else
     <div class="w-36 h-36 mx-auto bg-black flex justify-center items-center text-white text-4xl rounded-full">
         {{strtoupper($username[0])}}
     </div>
+    @endif
     <div class="font-medium mt-4 text-center text-lg">@ {{$username}}</div>
     <div class="mt-4 font-base text-lg px-4 flex flex-row gap-2 w-full justify-between">
         <div class="py-1 w-1/3 text-center"><b>{{$stats->likes}}</b> Likes</div>

@@ -25,6 +25,7 @@ class MyProfileController extends Controller
                 'likes' => $profile_stats->likes,
                 'username' => $user->username,
                 'email' => $user->email,
+                'profile_picture' => $user->profile_picture,
             ]);
     }
 
@@ -42,7 +43,8 @@ class MyProfileController extends Controller
             $validated = $this->validate(request(), [
                 'username' => 'required|min:3|max:255',
                 'email' => 'required|email|max:255',
-                'password1' => 'required|min:8|max:255'
+                'password1' => 'required|min:8|max:255',
+                'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
@@ -62,6 +64,13 @@ class MyProfileController extends Controller
             return redirect()->back()->withErrors(['email' => 'Email already taken'])->withInput();
         }
 
+        if (isset($validated['profile_picture'])){
+            $imageName = time().'.'. $user->username . '.' . $validated['profile_picture']->extension();
+            $validated['profile_picture']->move(storage_path('app/public'), $imageName);
+            $user->profile_picture = $imageName;
+        } else {
+            $user->profile_picture = null;
+        }
         $user->username = $validated['username'];
         $user->email = $validated['email'];
 
