@@ -67,7 +67,7 @@ class Blog extends Model
             'subtitle' => 'required|min:3|max:255',
             'body' => 'required|min:3',
             'status' => 'required|in:draft,published',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }
 
