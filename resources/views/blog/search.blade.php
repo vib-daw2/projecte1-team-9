@@ -49,7 +49,12 @@
                         {{-- <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full"> --}}
                         <div class="flex flex-row items-center gap-3 max-w-xs w-full">
                             <div class="w-16 h-16 rounded-full flex justify-center items-center bg-gray-900">
-                                {{ strtoupper($user->username)[0] }}</div>
+                                @if(isset($user->profile_picture))
+                                <img src="{{asset("storage/".$user->profile_picture)}}" alt="{{strtoupper($user->username[0])}}" class="object-fit rounded-full w-full h-full m-auto">
+                                @else
+                                {{ strtoupper($user->username)[0] }}
+                                @endif
+                            </div>
                             <a href="/user/{{$user->id}}" class="text-lg block font-medium">{{ $user->username }}</a>
                         </div>
                         <div class="flex justify-start gap-6 items-center flex-wrap w-full max-w-md">
