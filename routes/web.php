@@ -90,7 +90,7 @@ Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
 Route::get('/me', [MyProfileController::class, 'render'])->middleware('auth'); // My profile view / Edit profile view
 Route::get('/me/likes', [MyLikesController::class, 'render'])->middleware('auth'); // View blogs that I liked
 Route::get('/me/posts', [ProfilePostsController::class, 'render'])->middleware('auth'); // View my posts
-Route::get('/me/following', [FollowingController::class, 'following'])->middleware('auth'); // View users that I follow
+Route::get('/me/following', [FollowingController::class, 'render'])->middleware('auth'); // View users that I follow
 Route::post('/follow/{id}', [FollowController::class, 'follow'])->middleware('auth'); // Follow/unfollow a user action
 
 
