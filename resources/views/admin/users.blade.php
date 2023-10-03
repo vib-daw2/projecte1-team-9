@@ -1,5 +1,5 @@
 @extends('layout')
-<div class="w-full max-w-3xl mx-auto px-12 flex flex-col py-12 gap-4">
+<div class="w-full max-w-5xl mx-auto px-12 flex flex-col py-12 gap-4">
     <div class="flex justify-between">
         <div class="text-4xl font-bold">Users</div>
         <button

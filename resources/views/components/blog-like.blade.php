@@ -23,7 +23,7 @@
         form.submit();
     }
 </script>
-<form class="flex items-center gap-2 mb-0" id="like-form-{{$id}}" method="POST" action="/blog/{{$id}}/like">
+<form class="flex md:flex-row flex-col items-center gap-2 mb-0" id="like-form-{{$id}}" method="POST" action="/blog/{{$id}}/like">
     @csrf
     <input type="hidden" name="action" value="">
     {{ $likes }}

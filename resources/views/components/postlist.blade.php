@@ -1,9 +1,9 @@
-<div class="flex justify-between w-full h-44 border-b border-b-black items-center px-2">
-    <img src="http://placekitten.com/200/200" class="w-32 h-32" />
+<div class="flex justify-between w-full min-w-fit h-44 border-b border-b-black items-center px-2 overflow-y-hidden">
+    <img src="http://placekitten.com/200/200" class="w-32 h-32 md:block hidden" />
     <div class="h-full w-full flex flex-col justify-start gap-1 items-start py-2 ml-4">
         <div class="w-full flex justify-between items-center">
             <a href={{ sprintf('/blog/%d', $id) }}
-                class="block font-semibold hover:underline text-2xl">
+                class="block font-semibold hover:underline md:text-2xl sm:text-xl text-lg">
             {{ substr($title, 0, 50) }}{{ strlen($title) > 50 ? "..." : "" }}
             </a>
             <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$id" />
@@ -17,7 +17,7 @@
             </svg>
             <a href={{sprintf("/user/%d", $ownerid)}} class="font-light">{{ $username }}</a>
         </div>
-        <div>
+        <div class="lg:block hidden">
             {{ substr($subtitle, 0, 100) }}{{ strlen($subtitle) > 100 ? "..." : "" }}
         </div>
     </div>

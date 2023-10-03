@@ -14,7 +14,7 @@
     }
 </script>
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
-    <form class="max-w-3xl w-full mx-auto flex flex-col justify-start items-center gap-3" method="POST"  enctype="multipart/form-data">
+    <form class="max-w-5xl w-full mx-auto flex flex-col justify-start items-center gap-3" method="POST"  enctype="multipart/form-data">
         @csrf
         <div class="w-full flex justify-between flex-wrap items-center">
             <div class="text-left text-3xl font-medium">New Post</div>

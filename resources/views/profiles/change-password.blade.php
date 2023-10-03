@@ -4,7 +4,7 @@
         <x-profiletabs selected="profile"/>
         <div class="flex flex-col w-full h-fit justify-center items-center mt-4 gap-4">
             <x-profilestats :username="'admin'" />
-            <form class="flex flex-col gap-3 w-2/3 pt-6 max-w-3xl" method="POST">
+            <form class="flex flex-col gap-3 w-2/3 pt-6 max-w-5xl" method="POST">
                 @csrf
                 <div class="w-full">
                     <label class="block">Old Password</label>

@@ -1,6 +1,6 @@
 @extends('layout')
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
-    <div class="max-w-3xl w-full mx-auto flex flex-col justify-start items-start gap-3">
+    <div class="max-w-5xl w-full mx-auto flex flex-col justify-start items-start gap-3">
         <div class="w-full flex justify-between items-start py-2">
             <div class="text-5xl">{{ $blog->title }}</div>
             <div class="flex flex-col gap-2 items-end">
@@ -22,7 +22,7 @@
                 @endif
             </div>
         </div>
-        <div class="font-light text-lg py-2 max-w-3xl border-b w-full">
+        <div class="font-light text-lg py-2 max-w-5xl border-b w-full">
             {{ $blog->subtitle }}
         </div>
         <div class="flex flex-wrap items-center gap-2 justify-between w-full text-gray-600 py-2 border-b">
