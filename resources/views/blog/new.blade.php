@@ -67,8 +67,7 @@
         @enderror
         <textarea style="resize:none" type="text" name="subtitle" id="subtitle"
                   class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle" maxlength="100"
-                  rows="1">
-        {{old("subtitle")}}</textarea>
+                  rows="1">{{old("subtitle")}}</textarea>
         @error('subtitle')
         <div class="text-red-500">{{$message}}</div>
         @enderror
