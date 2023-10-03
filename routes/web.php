@@ -72,7 +72,7 @@ Route::get('/auth/github/callback', function () {
  
     Auth::login($user);
  
-    return redirect('/');
+    return redirect('/blog');
 });
 
 Route::get('/auth/google', function () {
@@ -96,7 +96,7 @@ Route::get('/auth/google/callback', function () {
  
     Auth::login($user);
  
-    return redirect('/');
+    return redirect('/blog');
 });
 
 

@@ -27,11 +27,11 @@ export default {
         noinput: 'input 0.5s ease-in-out reverse forwards',
         toastin: 'toastin 6.5s forwards ease-in-out',
         toastout: 'toastout 0.5s forwards ease-in-out'
+      },
+      fontSize: {
+        xxl: ['1.75rem', '2.5rem'],
       }
     },
-    fontSize: {
-      xxl: ['1.75rem', '2.5rem'],
-    }
   },
   plugins: [],
 }
