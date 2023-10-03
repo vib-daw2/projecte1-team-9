@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\EditUserController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\External\GithubController;
+use App\Http\Controllers\Auth\External\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
@@ -9,9 +11,12 @@ use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
+use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
 use App\Http\Controllers\Profile\ChangeProfilePictureController;
+use App\Http\Controllers\Profile\FollowController;
+use App\Http\Controllers\Profile\FollowingController;
 use App\Http\Controllers\Profile\MyLikesController;
 use App\Http\Controllers\Profile\MyProfileController;
 use App\Http\Controllers\Profile\ProfileController;
@@ -46,58 +51,11 @@ Route::get('/signup', [SignupController::class, 'render']); // Signup view
 Route::post('/signup', [SignupController::class, 'signup']); // Signup action
 Route::post('/logout', [LogoutController::class, 'logout']); // Logout action
 
-/*
- * AUTHENTICATION WITH GITHUB
- *
- * All the routes that are related to the authentication with github
- * */
-Route::get('/auth/github', function () {
-    return Socialite::driver('github')->redirect();
-});
- 
-Route::get('/auth/github/callback', function () {
-    try {
-        $githubUser = Socialite::driver('github')->user();
-    } catch (\Exception $e) {
-        return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
-    }
- 
-    $user = User::updateOrCreate([
-        'email' => $githubUser->email,
-    ], [
-        'username' => $githubUser->nickname,
-        'email' => $githubUser->email,
-        'password' => bcrypt(Str::random(24)),
-    ]);
- 
-    Auth::login($user);
- 
-    return redirect('/blog');
-});
-
-Route::get('/auth/google', function () {
-    return Socialite::driver('google')->redirect();
-});
-
-Route::get('/auth/google/callback', function () {
-    try {
-        $googleUser = Socialite::driver('google')->user();
-    } catch (\Exception $e) {
-        return redirect('/login')->with('error', 'Failed to authenticate with Google');
-    }
- 
-    $user = User::updateOrCreate([
-        'email' => $googleUser->email,
-    ], [
-        'username' => $googleUser->name,
-        'email' => $googleUser->email,
-        'password' => bcrypt(Str::random(24)),
-    ]);
- 
-    Auth::login($user);
- 
-    return redirect('/blog');
-});
+// Socialite external auth providers
+Route::get('/auth/github', [GithubController::class, 'provider']);
+Route::get('/auth/github/callback', [GithubController::class, 'callback']);
+Route::get('/auth/google', [GoogleController::class, 'provider']);
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
 
 /*
@@ -108,6 +66,7 @@ Route::get('/auth/google/callback', function () {
 Route::get('/blog', [HomeController::class, 'render']); // Home view
 Route::get('/blog/new', [NewBlogController::class, 'render']); // New blog view
 Route::post('/blog/new', [NewBlogController::class, 'create']); // New blog action
+Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render']); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit']); // Edit blog action
@@ -122,6 +81,8 @@ Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
 Route::get('/me', [MyProfileController::class, 'render']); // My profile view / Edit profile view
 Route::get('/me/likes', [MyLikesController::class, 'render']); // View blogs that I liked
 Route::get('/me/posts', [ProfilePostsController::class, 'render']); // View my posts
+Route::get('/me/following', [FollowingController::class, 'following']); // View users that I follow
+Route::post('/follow/{id}', [FollowController::class, 'follow']); // Follow/unfollow a user action
 
 
 /*

@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Blog;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use function Symfony\Component\String\b;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,12 +31,33 @@ class DatabaseSeeder extends Seeder
 
             for ($j = 0; $j < 10; $j++) {
                 $blog = new Blog();
-                $blog->title = Str::random(10);
-                $blog->subtitle = Str::random(10);
-                $blog->body = Str::random(100);
+
+                $title_words = rand(4, 12);
+                $blog->title = '';
+                for ($k = 0; $k < $title_words; $k++) {
+                    $blog->title .= Str::random(rand(3, 13)) . ' ';
+                }
+
+                $subtitle_words = rand(4, 20);
+                $blog->subtitle = '';
+                for ($k = 0; $k < $subtitle_words; $k++) {
+                    $blog->subtitle .= Str::random(rand(3, 13)) . ' ';
+                }
+
+                $paragraphs = rand(5, 15);
+                $body = '';
+                for ($k = 0; $k < $paragraphs; $k++) {
+                    for ($l = 0; $l < rand(40, 100); $l++) {
+                        $body .= Str::random(rand(3, 13)) . ' ';
+                    }
+                    $body .= "\n\n";
+                }
+
+                $blog->body = $body;
                 $blog->user_id = $id;
-                $blog->status = 'published';
-                $blog->views = rand(0, 1000);
+                $status = rand(0, 1);
+                $blog->status = $status == 0 ? 'draft' : 'published';
+                $blog->views = rand(0, 10000000);
                 $blog->save();
             }
         }

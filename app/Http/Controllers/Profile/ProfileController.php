@@ -22,7 +22,6 @@ class ProfileController extends Controller
         }
         $profile_stats = $user->getProfileStats();
 
-
         if (Auth::check()) {
             $blogs = DB::table('blogs')
                 ->select('blogs.*', 'users.username', 'users.id as owner_id', 'likes.type as liked')
@@ -35,6 +34,12 @@ class ProfileController extends Controller
                 })
                 ->orderBy('views', 'desc')
                 ->paginate(10);
+
+            $following = DB::table('follows')
+                ->select('follows.*')
+                ->where('follows.follower_id', '=', Auth::id())
+                ->where('follows.followee_id', '=', $id)
+                ->first();
         } else {
             $blogs = DB::table('blogs')
                 ->select('blogs.*', 'users.username', 'users.id as owner_id', 'likes.type as liked')
@@ -47,6 +52,8 @@ class ProfileController extends Controller
                 })
                 ->orderBy('views', 'desc')
                 ->paginate(10);
+
+            $following = false;
         }
         foreach ($blogs as $blog) {
             $query = DB::table('likes')
@@ -65,6 +72,9 @@ class ProfileController extends Controller
                 'username' => $user->username,
                 'email' => $user->email,
                 'blogs' => $blogs,
+                'following' => $following,
+                'follows' => $profile_stats->follows, // People that the user follows
+                'followers' => $profile_stats->followers, // People that follow the user
             ]);
 
     }
