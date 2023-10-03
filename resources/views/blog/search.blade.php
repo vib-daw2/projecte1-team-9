@@ -1,42 +1,104 @@
 @extends('layout')
 <div class="w-full min-h-screen bg-gray-50 flex justify-center flex-row items-start px-12 py-8">
-    <div class="w-3/5 flex flex-col justify-center items-center">
-        <div class="max-w-3xl w-full mx-auto flex flex-col justify-start items-center gap-3">
-            @foreach ($blogs as $blog)
-            <x-postlist :username="$blog->username"
-                        :title="$blog->title"
-                        :id="$blog->id"
-                        :subtitle="$blog->subtitle"
-                        :ownerid="$blog->user_id"
-                        :liked="''"
-                        :likes="0"
-                        :dislikes="0"
-            />
-            @endforeach
+    <div class="w-full max-w-5xl flex flex-col justify-center items-center">
+        <form class="w-full flex justify-center items-center gap-3 relative">
+            <svg class="absolute top-2 left-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="lucide lucide-search">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input value="{{ request('s') }}" placeholder="Search..." type="search" name="s" id="s"
+            class="w-full bg-gray-50 outline-none border-b border-b-black pl-8 py-2">
+            <button class="bg-gray-900 w-32 py-2 rounded-md text-white">Search</button>
+        </form>
+        @if(request('s'))
+        <div class="w-full rounded-md flex justify-center items-center">
+            <input data-ui="posts" type="radio" name="show" id="posts" class="hidden peer/posts">
+            <input data-ui="users" type="radio" name="show" id="users" class="hidden peer/users">
+            <label for="posts" onclick="showPosts()"
+            class="w-1/2 text-center py-1 peer-checked/posts:bg-gray-900 hover:bg-gray-200 rounded-l-md checked:text-white peer-checked/posts:text-white font-medium">
+                    <span>{{count($blogs)}}</span>
+                Posts
+            </label>
+            <label for="users" onclick="showUsers()"
+            class="w-1/2 text-center py-1 hover:bg-gray-200 peer-checked/users:bg-gray-900 peer-checked/users:text-white cursor-pointer font-medium rounded-r-md">
+                <span>{{count($users)}}</span>
+                Users
+            </label>
         </div>
-        <div class="mx-auto mt-4">
-            {{ $blogs->onEachSide(2)->links('vendor.pagination.tailwind')}}
-        </div>
-    </div>
-    <div>
-        @foreach ($users as $user)
-        <div class="w-64 p-4">
-            <div class="flex flex-row justify-between items-center">
-                <div class="flex flex-col w-1/3 justify-center items-center">
-                    <!--TODO Aqui debajo va el circulito con la foto de perfil-->
-                    <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full">
-                    <span class="text-sm text-gray-500">{{ $user->username }}</span>
-                </div>
-                <div class="flex flex-col w-2/3 justify-center items-center">
-                    <span class="text-sm text-gray-500">Followers {{ $user->followers }}</span>
-                    <span class="text-sm text-gray-500">Following {{ $user->follows }}</span>
-
-                </div>
+        <div class="w-full flex flex-col justify-start items-center" id="postlist">
+            @if($blogs->count() == 0)
+                <div class="max-w-5xl w-full flex justify-center mt-4 mx-auto font-semibold text-2xl">No blogs found matching this criteria</div>
+            @endif
+            <div
+            class="max-w-5xl mt-4 w-full mx-auto data-[ui=posts]:checked:flex data-[ui=users]:checked:hidden flex-col justify-start items-center gap-3">
+                @foreach ($blogs as $blog)
+                    <x-postlist :username="$blog->username" :title="$blog->title" :id="$blog->id" :subtitle="$blog->subtitle"
+                        :ownerid="$blog->user_id" :liked="''" :likes="0" :dislikes="0" />
+                @endforeach
             </div>
-            <div class="flex flex-row justify-center items-center mt-4">
-            </div>
+            {{-- <div class="mx-auto mt-4">
+                {{ $blogs->onEachSide(2)->links('vendor.pagination.tailwind') }}
+            </div> --}}
         </div>
-        @endforeach
+        <div id="userlist"
+        class="max-w-5xl mt-4 w-full mx-auto hidden flex-col justify-start items-center gap-3">
+            @foreach ($users as $user)
+                    <div class="flex flex-row justify-between items-center w-full gap-8 bg-white shadow-lg rounded-lg p-4">
+                        {{-- <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full"> --}}
+                        <div class="flex flex-row items-center gap-3 max-w-xs w-full">
+                            <div class="w-16 h-16 rounded-full flex justify-center items-center bg-gray-900">
+                                {{ strtoupper($user->username)[0] }}</div>
+                            <a href="/user/{{$user->id}}" class="text-lg block font-medium">{{ $user->username }}</a>
+                        </div>
+                        <div class="flex justify-start gap-6 items-center flex-wrap w-full max-w-md">
+                        <div class="text-left">{{ $user->followers }} Followers</div>
+                        <div class="text-left">{{ $user->follows }} Following</div>
+                        {{-- <div class="text-left">{{$user->posts}} Posts</div> --}}
+                        </div>
+                        @auth
+                        @if(Auth::id() != $user->id)
+                        <button class="w-36 font-medium flex justify-center items-center px-2 gap-2 py-2 bg-gray-900 hover:bg-gray-900/90 text-white rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus-2"><path d="M14 19a6 6 0 0 0-12 0"/><circle cx="8" cy="9" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                            Follow
+                        </button>
+                        @else
+                        <div class="w-36"></div>
+                        @endif
+                        @endauth
+                </div>
+                @endforeach
+        </div>
+        @endif
     </div>
 </div>
+</div>
 
+        <script>
+            document.getElementById("posts").checked = true
+            document.getElementById("users").checked = false
+            showPosts()
+        
+            function showPosts() {
+                const postContainer = document.getElementById("postlist")
+                const userContainer = document.getElementById("userlist")
+        
+                postContainer.classList.remove("hidden")
+                postContainer.classList.add("flex")
+        
+                userContainer.classList.remove("flex")
+                userContainer.classList.add("hidden")
+            }
+        
+            function showUsers() {
+                const postContainer = document.getElementById("postlist")
+                const userContainer = document.getElementById("userlist")
+        
+                postContainer.classList.remove("flex")
+                postContainer.classList.add("hidden")
+        
+                userContainer.classList.remove("hidden")
+                userContainer.classList.add("flex")
+            }
+        </script>

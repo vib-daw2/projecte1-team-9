@@ -14,10 +14,10 @@ class SearchController extends Controller
         $query = request()->query('s');
 
         $blogs = Blog::search($query)
-            ->paginate(10)->withQueryString();
+            ->paginate(25)->withQueryString();
 
         $users = User::search($query)
-            ->paginate(10)->withQueryString();
+            ->paginate(25)->withQueryString();
 
         foreach ($blogs as $blog) {
             $query = $blog->getLikesAndDislikes();
