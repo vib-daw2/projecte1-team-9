@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
-use App\Http\Controllers\Blog\LikeController;
+use App\Http\Controllers\Blog\Interaction\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\HomeController;
@@ -21,9 +21,7 @@ use App\Http\Controllers\Profile\MyLikesController;
 use App\Http\Controllers\Profile\MyProfileController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Profile\ProfilePostsController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
