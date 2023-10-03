@@ -61,10 +61,23 @@
             </div>
         </div>
         <textarea style="resize:none" maxlength="255" name="title" id="title" placeholder="Title" rows="2"
-            class="w-full text-5xl px-2 outline-none font-medium focus:border-0 py-2"></textarea>
+            class="w-full text-5xl px-2 outline-none font-medium focus:border-0 py-2">{{old("title")}}</textarea>
+            @error('title')
+             <div class="text-red-500">{{$message}}</div>   
+            @enderror
         <textarea style="resize:none" type="text" name="subtitle" id="subtitle"
-            class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle" maxlength="100" rows="1"></textarea>
-        <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
-            rows="20" placeholder="Content"></textarea>
+            class="w-full text-lg px-2 py-2 font-base focus:outline-none" placeholder="Subtitle" maxlength="100" rows="1">
+        {{old("subtitle")}}</textarea>
+            @error('subtitle')
+            <div class="text-red-500">{{$message}}</div>   
+           @enderror
+            {{-- <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
+            rows="20" placeholder="Content"></textarea> --}}
+            @error('body')
+             <div class="text-red-500">{{$message}}</div>   
+            @enderror
+            <input id="body" type="hidden" name="body" value="{{old("body")}}">
+            <trix-editor class="w-full [&>*>a]:text-blue-600 [&>*>a]:underline [&>*>a]:underline-offset-2 [&>h1]:font-semibold [&>h1]:text-2xl [&>h1]:mt-4 [&>h1]:mb-2 [&>h1]:w-full [&>h1]:border-b" input="body"></trix-editor>
+
     </form>
 </div>
