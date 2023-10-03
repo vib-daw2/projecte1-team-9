@@ -39,9 +39,9 @@ class NewBlogController extends Controller
         $blog->body = $validated['body'];
         $blog->status = $validated['status'];
         $blog->user_id = Auth::id();
-        if (isset($validated['picture'])) {
-            $imageName = time().'.'. $blog->title . Auth::id() . '.' . $validated['picture']->extension();
-            $validated['picture']->move(public_path('images'), $imageName);
+        if (isset($validated['image'])) {
+            $imageName = time().'.'. $blog->title . Auth::id() . '.' . $validated['image']->extension();
+            $validated['image']->move(public_path('images'), $imageName);
             $blog->picture = $imageName;
         }
         $blog->save();

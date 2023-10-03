@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,12 +21,11 @@ class DatabaseSeeder extends Seeder
 
             $username = Str::random(10);
 
-            DB::table('users')->insert([
-                'username' => $username,
-                'email' => $username . '@gmail.com',
-                'password' => Hash::make('password'),
-                'created_at' => now(),
-            ]);
+            $user = new User();
+            $user->username = $username;
+            $user->email = $username . '@gmail.com';
+            $user->password = Hash::make('password');
+            $user->save();
 
             $id = DB::table('users')->where('username', $username)->first()->id;
 
