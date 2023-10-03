@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\EditBlogController;
+use App\Http\Controllers\Blog\Interaction\CommentController;
 use App\Http\Controllers\Blog\Interaction\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
 use App\Http\Controllers\Blog\SearchController;
@@ -68,7 +69,14 @@ Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
+
+/*
+ * BLOGS INTERACTION
+ *
+ * All the routes that are related to the blogs interaction
+ * */
 Route::post('/blog/{id}/like', [LikeController::class, 'like'])->middleware('auth'); // Like/dislike blog action
+Route::post('/blog/{id}/comment', [CommentController::class, 'comment'])->middleware('auth'); // Comment blog action
 
 /*
  * PROFILES
