@@ -137,6 +137,10 @@ return [
             //     'filterableAttributes'=> ['id', 'name', 'email'],
             // ],
         ],
+        'queue' => [
+            'connection' => 'redis',
+            'queue' => env('MEILISEARCH_QUEUE', 'default'),
+        ],
     ],
 
 ];
