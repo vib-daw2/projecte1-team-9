@@ -75,6 +75,6 @@
         {{-- <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent" name="body" id="content"
             rows="20" placeholder="Content">{{$blog->body}}</textarea> --}}
             <input id="body" type="hidden" name="body" value="{{$blog->body}}">
-            <trix-editor class="w-full [&>ul>li]:list-disc [&>ul>li]:list-disc [&>ul>li]:ml-4 [&>blockquote]:border-l-4 [&>blockquote]:ml-4 [&>blockquote]:px-4 [&>blockquote]:border-l-gray-900 [&>blockquote]:bg-gray-100 [&>*>a]:text-blue-600 [&>*>a]:underline [&>*>a]:underline-offset-2 [&>h1]:font-semibold [&>h1]:text-2xl [&>h1]:mt-4 [&>h1]:mb-2 [&>h1]:w-full [&>h1]:border-b" input="body"></trix-editor>
+            <trix-editor class="w-full" input="body"></trix-editor>
     </form>
 </div>
