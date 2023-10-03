@@ -38,19 +38,6 @@ class BlogPolicy
 
     /**
      * @param User|null $user
-     * @return Response
-     */
-    public function create(?User $user): Response
-    {
-        if ($user) {
-            return Response::allow();
-        }
-
-        return Response::deny('You must be logged in to create a blog');
-    }
-
-    /**
-     * @param User|null $user
      * @param Blog $blog
      * @return Response
      */
@@ -61,14 +48,5 @@ class BlogPolicy
         }
 
         return Response::deny('You must be logged in to update a blog');
-    }
-
-    public function like(?User $user, Blog $blog): Response
-    {
-        if ($user) {
-            return Response::allow();
-        }
-
-        return Response::deny();
     }
 }
