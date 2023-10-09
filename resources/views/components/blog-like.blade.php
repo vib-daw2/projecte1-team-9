@@ -31,6 +31,7 @@
     <button
         type="button"
         onclick="like(event, {{$liked}})"
+        @guest disabled @endguest
     >
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up-filled" width="24"
             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -45,7 +46,7 @@
         </svg>
     </button>
     @else
-    <button onclick="like(event, {{$liked}})">
+    <button onclick="like(event, {{$liked}})" @guest disabled @endguest>
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up" width="24"
             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
             stroke-linecap="round" stroke-linejoin="round">
@@ -58,7 +59,7 @@
     @endif
 
     @if ($liked === 'dislike')
-    <button onclick="dislike(event, {{$liked}})">
+    <button onclick="dislike(event, {{$liked}})" @guest disabled @endguest>
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-down-filled" width="24"
             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
             stroke-linecap="round" stroke-linejoin="round">
@@ -72,7 +73,7 @@
         </svg>
     </button>
     @else
-    <button onclick="dislike(event, {{$liked}})">
+    <button onclick="dislike(event, {{$liked}})" @guest disabled @endguest>
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-down" width="24"
              height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
              stroke-linecap="round" stroke-linejoin="round">

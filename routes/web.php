@@ -44,7 +44,7 @@ Route::get('/', function(){ return View('landing');}); // Home view
  * All the routes that are related to the authentication
  * Login, signup, logout
  * */
-Route::get('/login', [LoginController::class, 'render']); // Login view
+Route::get('/login', [LoginController::class, 'render'])->name("login"); // Login view
 Route::post('/login', [LoginController::class, 'login']); // Login action
 Route::get('/signup', [SignupController::class, 'render']); // Signup view
 Route::post('/signup', [SignupController::class, 'signup']); // Signup action
