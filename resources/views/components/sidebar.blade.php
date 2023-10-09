@@ -1,5 +1,5 @@
 <nav
-    class="fixed lg:inset-0 bottom-0 left-0 w-full h-20 lg:h-screen lg:w-24 bg-white shadow-lg flex lg:flex-col lg:justify-start justify-between items-center gap-4">
+    class="fixed lg:inset-0 bottom-0 left-0 z-[100] w-full h-20 lg:h-screen lg:w-24 bg-white shadow-lg flex lg:flex-col lg:justify-start justify-between items-center gap-4">
     <a href="/" class="text-6xl cursor-pointer font-black py-8 border-b text-center flex justify-center items-center">
         <img src="../../../logo.svg" alt="Blogify" class="lg:w-1/2 w-1/3">
     </a>

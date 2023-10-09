@@ -2,26 +2,21 @@
 
 namespace App\View\Components;
 
-use App\Models\Like;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Illuminate\Validation\ValidationException;
 
-class BlogLike extends Component
+class commentSingle extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public ?string $liked,
-        public int     $likes,
-        public int     $dislikes,
-        public string  $id,
-        public bool $responsive = True
+        public string $message,
+        public string $user,
+        public bool $isResponse = false
     )
     {
-        //
     }
 
     /**
@@ -29,6 +24,6 @@ class BlogLike extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.blog-like');
+        return view('components.comment-single');
     }
 }
