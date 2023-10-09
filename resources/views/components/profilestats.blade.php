@@ -10,7 +10,7 @@ $following = DB::table('follows')
 @endphp
 
 <div class="w-full h-full pb-4 border-b border-b-black">
-    @if(isset($user->profile_picture))
+    @if(isset($user->profile_picture) & ($user->profile_picture != null))
     <div class="w-36 h-36 bg-black rounded-full text-white mx-auto flex justify-center items-center">
         <img src="{{asset("storage/".$user->profile_picture)}}" alt="{{strtoupper($username[0])}}" class="object-fit rounded-full w-full h-full">
     </div>

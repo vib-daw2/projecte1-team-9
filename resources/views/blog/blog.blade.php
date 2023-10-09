@@ -29,7 +29,8 @@
             <x-user-display :username="$blog->username" :id="$blog->userId"/>
             <x-date-display timestamp="{{ $blog->created_at->format('d-m-Y H:i') }}"/>
             <x-views-display :views="$blog->views"/>
-            <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$blog->id"/>
+            <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$blog->id" :responsive="false"/>
+            <x-comments />
         </div>
         <div id="body" class="leading-1 w-full text-lg font-light text-justify mt-4 [&>h1]:font-semibold [&>h1]:text-2xl [&>h1]:mt-4 [&>h1]:mb-2 [&>h1]:w-full [&>h1]:border-b">
             {!! $blog->body !!}
