@@ -18,7 +18,7 @@ class NewBlogController extends Controller
     {
         $blog = new Blog();
 
-        if (!Auth::validate()) {
+        if (!auth()->check()){
             abort(403);
         }
 
