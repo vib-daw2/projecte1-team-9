@@ -9,17 +9,17 @@
                 <div class="w-full">
                     <label class="block">Old Password</label>
                     <input type="password" name="oldpassword" id="oldpassword"
-                           class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
+                           class="px-2 py-1 border-b border-b-black outline-none w-full">
                 </div>
                 <div class="w-full">
                     <label class="block">New Password</label>
                     <input type="password" name="password1" id="password1"
-                           class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
+                           class="px-2 py-1 border-b border-b-black outline-none w-full">
                 </div>
                 <div class="w-full">
                     <label class="block">Repeat Password</label>
                     <input type="password" name="password2" id="password2"
-                           class="px-2 py-1 ring-black rounded-lg ring-1 w-full">
+                           class="px-2 py-1 border-b border-b-black outline-none w-full">
                 </div>
                 <div class="w-full flex justify-end">
                     <button
