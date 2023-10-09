@@ -43,7 +43,7 @@ class MyProfileController extends Controller
             $validated = $this->validate(request(), [
                 'username' => 'required|min:3|max:255',
                 'email' => 'required|email|max:255',
-                'password1' => 'required|min:8|max:255',
+                'password' => 'required|min:8|max:255',
                 'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
         } catch (ValidationException $e) {
@@ -51,7 +51,7 @@ class MyProfileController extends Controller
         }
 
         //Check if the password is the current user password
-        if (!Hash::check($validated['password1'], Auth::user()->password)) {
+        if (!Hash::check($validated['password'], Auth::user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Invalid password'])->withInput();
         }
 

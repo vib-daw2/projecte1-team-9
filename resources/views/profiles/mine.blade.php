@@ -24,7 +24,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                         </button>
                         @endif
-                    </label>
+                        </label>
                     @error('profile_picture')
                         <div class="text-sm text-red-600">{{$message}}</div>
                     @enderror
@@ -35,16 +35,25 @@
                         <input type="text" name="username" id="username" value="{{ $username }}"
                             class="px-2 py-1 border-b-black border-b outline-none w-full text-gray-700">
                     </div>
+                    @error('username')
+                     <div class="text-sm text-red-500">{{$message}}</div>   
+                    @enderror
                     <div class="w-full">
                         <label class="block">Email</label>
                         <input type="email" name="email" id="email" value="{{ $email }}"
                             class="px-2 py-1 border-b-black border-b outline-none w-full text-gray-700">
                     </div>
+                    @error('email')
+                     <div class="text-sm text-red-500">{{$message}}</div>   
+                    @enderror
                     <div class="w-full">
                         <label class="block">Password</label>
-                        <input type="password" name="password1" id="password1"
+                        <input type="password" name="password" id="password"
                             class="px-2 py-1 border-b-black border-b outline-none text-gray-700 w-full">
                     </div>
+                    @error('password')
+                     <div class="text-sm text-red-500">{{$message}}</div>   
+                    @enderror
                     <div class="w-full flex justify-end gap-3">
                         <a href="/me/password"
                             class="w-28 min-w-fit px-2 py-2 rounded-md bg-white hover:bg-gray-100 ring-1 ring-black text-black font-medium flex justify-center items-center gap-2">
