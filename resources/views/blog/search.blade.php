@@ -38,15 +38,14 @@
                         :ownerid="$blog->user_id" :liked="''" :likes="0" :dislikes="0" />
                 @endforeach
             </div>
-            {{-- <div class="mx-auto mt-4">
-                {{ $blogs->onEachSide(2)->links('vendor.pagination.tailwind') }}
-            </div> --}}
         </div>
         <div id="userlist"
         class="max-w-5xl mt-4 w-full mx-auto hidden flex-col justify-start items-center gap-3">
+        @if ($users->count() == 0)
+        <div class="max-w-5xl w-full flex justify-center mx-auto font-semibold text-2xl">No users found matching this criteria</div>
+        @endif
             @foreach ($users as $user)
                     <div class="flex flex-row justify-between items-center w-full gap-8 border-b border-b-black p-4">
-                        {{-- <img src="" alt="{{ $user->username }}" class="w-16 h-16 rounded-full"> --}}
                         <div class="flex flex-row items-center gap-3 max-w-xs w-full">
                             <div class="w-16 h-16 rounded-full flex justify-center items-center bg-gray-900">
                                 @if(isset($user->profile_picture))
@@ -60,7 +59,6 @@
                         <div class="flex justify-start gap-6 items-center flex-wrap w-full max-w-md">
                         <div class="text-left">{{ $user->followers }} Followers</div>
                         <div class="text-left">{{ $user->follows }} Following</div>
-                        {{-- <div class="text-left">{{$user->posts}} Posts</div> --}}
                         </div>
                         @auth
                         @if(Auth::id() != $user->id)
