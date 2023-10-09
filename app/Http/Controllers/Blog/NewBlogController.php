@@ -17,9 +17,8 @@ class NewBlogController extends Controller
     public function create(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $blog = new Blog();
-        try {
-            $this->authorize('create', $blog);
-        } catch (\Throwable $th) {
+
+        if (!Auth::validate()) {
             abort(403);
         }
 
