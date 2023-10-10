@@ -44,7 +44,7 @@ class GoogleController extends Controller
             $user->save();
             Auth::login($user);
         } catch (UniqueConstraintViolationException $e) {
-            return redirect('/login')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
+            return redirect('/login')->with('status', ['success' => false, 'title' => 'Failed to log in', 'message' => 'An account with this email or username already exists']);
         }
 
         return redirect('/blog')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);

@@ -29,7 +29,7 @@ class GithubController extends Controller
         $existingUser = User::where('auth_provider_id', $githubUser->getId())->first();
         if ($existingUser) {
             Auth::login($existingUser);
-            return redirect('/blog')->with(['success' => false, 'title', 'Failed to authenticate with Google']);
+            return redirect('/blog')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
         }
 
         try {
@@ -43,7 +43,7 @@ class GithubController extends Controller
             $user->save();
             Auth::login($user);
         } catch (UniqueConstraintViolationException $e) {
-            return redirect('/login')->with('status', ['success' => false, 'title' => 'Failed to authentica', 'message' => "An account with this email or username already exists"]);
+            return redirect('/login')->with('status', ['success' => false, 'title' => 'Failed to authenticate', 'message' => "An account with this email or username already exists"]);
         }
 
         return redirect('/blog')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
