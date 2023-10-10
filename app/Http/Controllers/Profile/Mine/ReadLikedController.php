@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Profile\Mine;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class MyLikesController extends Controller
+class ReadLikedController extends Controller
 {
     public function render()
     {

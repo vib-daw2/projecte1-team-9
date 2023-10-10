@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ProfileController extends Controller
+class ReadController extends Controller
 {
     public function render(Request $request, string $id): View|\Illuminate\Foundation\Application|Factory|Application
     {

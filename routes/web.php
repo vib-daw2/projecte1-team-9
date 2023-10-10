@@ -1,34 +1,30 @@
 <?php
 
-use App\Http\Controllers\Admin\User\UpdateController as UpdateUserController;
-use App\Http\Controllers\Admin\User\ReadController as ReadUserController;
 use App\Http\Controllers\Admin\User\DeleteController as DeleteUserController;
-
+use App\Http\Controllers\Admin\User\ReadController as ReadUsersController;
+use App\Http\Controllers\Admin\User\UpdateController as UpdateUserController;
 use App\Http\Controllers\Auth\External\GithubController;
 use App\Http\Controllers\Auth\External\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
-
 use App\Http\Controllers\Blog\DeleteController as DeleteBlogController;
+use App\Http\Controllers\Blog\Interaction\Comment\DeleteController as DeleteCommentController;
+use App\Http\Controllers\Blog\Interaction\Comment\NewController as NewCommentController;
+use App\Http\Controllers\Blog\Interaction\LikeController;
 use App\Http\Controllers\Blog\NewController as NewBlogController;
 use App\Http\Controllers\Blog\ReadController as ReadBlogController;
 use App\Http\Controllers\Blog\UpdateController as UpdateBlogController;
-
-use App\Http\Controllers\Blog\Interaction\Comment\DeleteController as DeleteCommentController;
-use App\Http\Controllers\Blog\Interaction\Comment\NewController as NewCommentController;
-
-use App\Http\Controllers\Blog\Interaction\LikeController;
-
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Profile\ChangePasswordController;
-use App\Http\Controllers\Profile\ChangeProfilePictureController;
-use App\Http\Controllers\Profile\FollowController;
-use App\Http\Controllers\Profile\FollowingController;
-use App\Http\Controllers\Profile\MyLikesController;
-use App\Http\Controllers\Profile\MyProfileController;
-use App\Http\Controllers\Profile\ProfileController;
-use App\Http\Controllers\Profile\ProfilePostsController;
+use App\Http\Controllers\Profile\Interaction\FollowController;
+use App\Http\Controllers\Profile\Interaction\ReadController as ReadFollowsController;
+use App\Http\Controllers\Profile\Mine\ReadController as ReadMyProfileController;
+use App\Http\Controllers\Profile\Mine\ReadLikedController;
+use App\Http\Controllers\Profile\Mine\UpdateController as UpdateMyProfileController;
+use App\Http\Controllers\Profile\Mine\UpdatePasswordController;
+use App\Http\Controllers\Profile\Mine\UpdateProfilePictureController;
+use App\Http\Controllers\Profile\Post\ReadController as ReadPostsController;
+use App\Http\Controllers\Profile\ReadController as ReadProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
@@ -97,11 +93,11 @@ Route::post('/comment/{id}/delete', [DeleteCommentController::class, 'delete'])-
  *
  * All the routes that are related to the profiles
  * */
-Route::get('/user/{id}', [ProfileController::class, 'render']); // Profile view
-Route::get('/me', [MyProfileController::class, 'render'])->middleware('auth'); // My profile view / Edit profile view
-Route::get('/me/likes', [MyLikesController::class, 'render'])->middleware('auth'); // View blogs that I liked
-Route::get('/me/posts', [ProfilePostsController::class, 'render'])->middleware('auth'); // View my posts
-Route::get('/me/following', [FollowingController::class, 'render'])->middleware('auth'); // View users that I follow
+Route::get('/user/{id}', [ReadProfileController::class, 'render']); // Profile view
+Route::get('/me', [ReadMyProfileController::class, 'render'])->middleware('auth'); // My profile view / Edit profile view
+Route::get('/me/likes', [ReadLikedController::class, 'render'])->middleware('auth'); // View blogs that I liked
+Route::get('/me/posts', [ReadPostsController::class, 'render'])->middleware('auth'); // View my posts
+Route::get('/me/following', [ReadFollowsController::class, 'render'])->middleware('auth'); // View users that I follow
 Route::post('/follow/{id}', [FollowController::class, 'follow'])->middleware('auth'); // Follow/unfollow a user action
 
 
@@ -111,10 +107,10 @@ Route::post('/follow/{id}', [FollowController::class, 'follow'])->middleware('au
  * All the routes that are related to the profile editing
  * Change password, edit profile, delete profile
  * */
-Route::post('/me', [MyProfileController::class, 'edit'])->middleware('auth'); // Edit profile action
-Route::get('/me/password', [ChangePasswordController::class, 'render'])->middleware('auth'); // Change password view
-Route::post('/me/password', [ChangePasswordController::class, 'changePassword'])->middleware('auth'); // Change password action
-Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'change'])->middleware('auth'); // Change profile picture action
+Route::post('/me', [UpdateMyProfileController::class, 'edit'])->middleware('auth'); // Edit profile action
+Route::get('/me/password', [UpdatePasswordController::class, 'render'])->middleware('auth'); // Change password view
+Route::post('/me/password', [UpdatePasswordController::class, 'changePassword'])->middleware('auth'); // Change password action
+Route::post('/me/profilepicture', [UpdateProfilePictureController::class, 'change'])->middleware('auth'); // Change profile picture action
 
 
 /*
@@ -122,7 +118,7 @@ Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'chang
  *
  * All the routes that are related to the admin panel
  * */
-Route::get('/admin/users', [ReadUserController::class, 'render']); // List all users
+Route::get('/admin/users', [ReadUsersController::class, 'render']); // List all users
 Route::post('/admin/users/{id}/delete', [DeleteUserController::class, 'delete']); // Delete a user action
 Route::get('/admin/users/{id}/edit', [UpdateUserController::class, 'render']); // Edit a user view
 Route::post('/admin/users/{id}/edit', [UpdateUserController::class, 'edit']); // Edit a user action

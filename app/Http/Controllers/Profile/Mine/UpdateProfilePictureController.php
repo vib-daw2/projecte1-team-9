@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Profile\Mine;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class ChangeProfilePictureController extends Controller
+class UpdateProfilePictureController extends Controller
 {
     public function change() {
         $user = Auth::user();

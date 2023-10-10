@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace App\Http\Controllers\Profile\Interaction;
 
 use App\Http\Controllers\Controller;
 use App\Models\Follow;
 use App\Models\User;
 
-class FollowingController extends Controller
+class ReadController extends Controller
 {
     public function render()
     {
