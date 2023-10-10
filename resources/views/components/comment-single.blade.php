@@ -1,5 +1,5 @@
 <div id="comment_{{ $comment->id }}"
-    class="comment @if ($isResponse) w-[calc(100%-4rem)] ml-[4rem] @else w-full relative mb-3 drop-shadow-lg shadow-black @endif px-2 gap-3 py-2 rounded-md flex flex-row justify-start items-start hover:bg-gray-100 bg-gray-50">
+    class="comment @if ($isResponse) w-[calc(100%-4rem)] ml-[4rem] @else w-full mb-3 drop-shadow-lg shadow-black @endif relative px-2 gap-3 py-2 rounded-md flex flex-row justify-start items-start hover:bg-gray-100 bg-gray-50">
     @if ($isResponse)
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="48" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -8,12 +8,20 @@
             <path d="M4 4v7a4 4 0 0 0 4 4h12" />
         </svg>
     @endif
-    <div class="w-14 h-14 min-w-fit p-1 bg-gray-900 text-white flex justify-center items-center uppercase rounded-full">
-        A</div>
+    @if(isset($comment->user->profile_picture) & ($comment->user->profile_picture != null))
+    <div class="w-8 h-8 bg-black rounded-full text-white flex justify-center items-center">
+        <img src="{{asset("storage/".$comment->user->profile_picture)}}" alt="{{strtoupper($comment->user->username[0])}}" class="object-fit rounded-full w-full h-full">
+    </div>
+    @else
+    <div class="w-8 h-8 bg-black flex justify-center items-center text-white rounded-full">
+        {{strtoupper($comment->user->username[0])}}
+    </div>
+    @endif
     <div class="w-fit ml-4">
-        <div class="font-semibold">@ {{ $comment->user->username }}</div>
+        <a href="/user/{{$comment->user->id}}" class="font-semibold hover:underline underline-offset-2">@ {{ $comment->user->username }}</a>
         <div class="mt-2">{{ $comment->body }}</div>
     </div>
+    @auth
     @if (!$isResponse)
         <button id="answer_{{ $comment->id }}" onclick="selectParent({{ $comment->id }}, '{{ $comment->user->username }}')"
             class="w-fit absolute bottom-1 right-1 p-1 rounded-md hover:bg-gray-200">
@@ -24,9 +32,9 @@
                 <path d="M20 18v-2a4 4 0 0 0-4-4H4" />
             </svg>
         </button>
-    @endif
+        @endif
     @if ($comment->user->id == Auth::id() || Auth::user()->role == 'admin' || Auth::user()->role == 'mod')
-        <form action="" method="POST">
+        <form action="/comment/{{$comment->id}}/delete" method="POST">
             @csrf
             <input type="hidden" name="comment_id" value="{{ $comment->id }}">
             <button class="p-1 absolute top-1 right-1 rounded-md hover:bg-gray-200">
@@ -41,7 +49,9 @@
                 </svg>
             </button>
         </form>
+    
     @endif
+    @endauth
 </div>
 
 <script>
