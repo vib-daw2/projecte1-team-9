@@ -40,6 +40,6 @@ class SignupController extends Controller
         $user->password = Hash::make($validated['password1']);
         $user->save();
 
-        return redirect('/login');
+        return redirect('/login')->with('status', ['success' => true, 'title' => 'Account created succesfully', 'message' => "Log In to continue"]);
     }
 }

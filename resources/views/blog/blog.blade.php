@@ -4,21 +4,20 @@
         <div class="w-full flex justify-between items-start py-2">
             <div class="text-5xl">{{ $blog->title }}</div>
             <div class="flex flex-col gap-2 items-end">
-                @if ($blog->status == "draft")
-                <div class="rounded-md bg-gray-900 text-white px-2 py-1 w-fit font-medium text-sm">DRAFT</div>
+                @if ($blog->status == 'draft')
+                    <div class="rounded-md bg-gray-900 text-white px-2 py-1 w-fit font-medium text-sm">DRAFT</div>
                 @endif
                 @if (auth()->user() && auth()->user()->id == $blog->userId)
-                <a
-                    href="/blog/{{ $blog->id }}/edit"
-                    class="w-28 py-2 rounded-md bg-white hover:bg-gray-100 text-black font-medium flex justify-center items-center gap-2 ring-1 ring-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="lucide lucide-pencil">
-                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-                        <path d="m15 5 4 4"/>
-                    </svg>
-                    Edit
-                </a>
+                    <a href="/blog/{{ $blog->id }}/edit"
+                        class="w-28 py-2 rounded-md bg-white hover:bg-gray-100 text-black font-medium flex justify-center items-center gap-2 ring-1 ring-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-pencil">
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                            <path d="m15 5 4 4" />
+                        </svg>
+                        Edit
+                    </a>
                 @endif
             </div>
         </div>
@@ -26,13 +25,14 @@
             {{ $blog->subtitle }}
         </div>
         <div class="flex flex-wrap items-center gap-2 justify-between w-full text-gray-600 py-2 border-b">
-            <x-user-display :username="$blog->username" :id="$blog->userId"/>
-            <x-date-display timestamp="{{ $blog->created_at->format('d-m-Y H:i') }}"/>
-            <x-views-display :views="$blog->views"/>
-            <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$blog->id" :responsive="false"/>
+            <x-user-display :username="$blog->username" :id="$blog->userId" />
+            <x-date-display timestamp="{{ $blog->created_at->format('d-m-Y H:i') }}" />
+            <x-views-display :views="$blog->views" />
+            <x-blog-like :liked="$liked ?? ''" :dislikes="$dislikes ?? 0" :likes="$likes ?? 0" :id="$blog->id" :responsive="false" />
             <x-comments :comments="$comments" />
         </div>
-        <div id="body" class="leading-1 w-full text-lg font-light text-justify mt-4 [&>h1]:font-semibold [&>h1]:text-2xl [&>h1]:mt-4 [&>h1]:mb-2 [&>h1]:w-full [&>h1]:border-b">
+        <div id="body"
+            class="leading-1 w-full text-lg font-light text-justify mt-4 [&>h1]:font-semibold [&>h1]:text-2xl [&>h1]:mt-4 [&>h1]:mb-2 [&>h1]:w-full [&>h1]:border-b">
             {!! $blog->body !!}
 
         </div>

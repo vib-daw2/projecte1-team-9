@@ -39,7 +39,7 @@ class UpdateController extends Controller
         try {
             $this->authorize('update', $blog);
         } catch (Throwable $th) {
-            return redirect('/blog/' . request('id'));
+            return redirect('/blog/' . request('id'))->with('status', ['success' => false, 'title' => 'Failed to edit blog', 'message' => 'You dont have permission to edit this blog']);
         }
 
         try {
@@ -55,6 +55,7 @@ class UpdateController extends Controller
         $blog->user_id = Auth::id();
         $blog->save();
 
-        return redirect('/blog/' . request('id'));
+        return redirect('/blog/' . request('id'))->with('status', ['success' => true, 'title' => 'Blog edited succesfully', 'message' => 'Your new blog is up!']);
+        ;
     }
 }

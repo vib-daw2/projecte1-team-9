@@ -8,7 +8,8 @@ use Illuminate\Validation\ValidationException;
 
 class UpdateProfilePictureController extends Controller
 {
-    public function change() {
+    public function change()
+    {
         $user = Auth::user();
 
         try {
@@ -19,12 +20,13 @@ class UpdateProfilePictureController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        $imageName = time().'.'. $user->username . '.' . $validated['profile_picture']->extension();
+        $imageName = time() . '.' . $user->username . '.' . $validated['profile_picture']->extension();
         $validated['profile_picture']->move(public_path('images'), $imageName);
 
         $user->profile_picture = $imageName;
         $user->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('status', ['success' => true, 'title' => 'Your profile picture has been changed', 'message' => 'You look awesome!']);
+        ;
     }
 }

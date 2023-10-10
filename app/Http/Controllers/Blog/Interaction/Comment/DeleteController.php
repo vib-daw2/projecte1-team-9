@@ -30,6 +30,7 @@ class DeleteController extends Controller
 
         Comment::destroy($comment->id);
 
-        return redirect()->back();
+        return redirect()->back()->with('status', ['success' => true, 'title' => 'Comment deleted succesfully', 'message' => '']);
+        ;
     }
 }

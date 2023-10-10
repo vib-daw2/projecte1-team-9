@@ -23,13 +23,13 @@ class GithubController extends Controller
         try {
             $githubUser = Socialite::driver('github')->user();
         } catch (Exception $e) {
-            return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
+            return redirect('/login')->with('status', ['success' => false, 'title' => 'Failed to authenticate', 'message' => "An external error has ocurred. Please try again later"]);
         }
 
         $existingUser = User::where('auth_provider_id', $githubUser->getId())->first();
         if ($existingUser) {
             Auth::login($existingUser);
-            return redirect('/blog');
+            return redirect('/blog')->with(['success' => false, 'title', 'Failed to authenticate with Google']);
         }
 
         try {
@@ -43,9 +43,9 @@ class GithubController extends Controller
             $user->save();
             Auth::login($user);
         } catch (UniqueConstraintViolationException $e) {
-            return redirect('/login')->with('error', 'Failed to authenticate with GitHub');
+            return redirect('/login')->with('status', ['success' => false, 'title' => 'Failed to authentica', 'message' => "An account with this email or username already exists"]);
         }
 
-        return redirect('/blog');
+        return redirect('/blog')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
     }
 }

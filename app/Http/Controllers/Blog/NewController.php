@@ -53,6 +53,6 @@ class NewController extends Controller
 
         $insertedId = $blog->id;
 
-        return redirect('/blog/' . $insertedId);
+        return redirect('/blog/' . $insertedId)->with('status', ['success' => true, 'title' => 'Blog created succesfully', 'message' => 'Start collecting likes!']);
     }
 }

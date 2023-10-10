@@ -19,7 +19,7 @@ class UpdateController extends Controller
     public function render(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
         $user = User::find($id);
-        try{
+        try {
             $this->authorize('updateAny', $user);
         } catch (Throwable $th) {
             abort(403, $th->getMessage());
@@ -71,6 +71,6 @@ class UpdateController extends Controller
 
         $user->save();
 
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with('status', ['success' => true, 'title' => 'User has been updated', 'message' => ""]);
     }
 }

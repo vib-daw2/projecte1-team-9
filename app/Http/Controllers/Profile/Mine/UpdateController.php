@@ -52,8 +52,8 @@ class UpdateController extends Controller
             return redirect()->back()->withErrors(['email' => 'Email already taken'])->withInput();
         }
 
-        if (isset($validated['profile_picture'])){
-            $imageName = time().'.'. $user->username . '.' . $validated['profile_picture']->extension();
+        if (isset($validated['profile_picture'])) {
+            $imageName = time() . '.' . $user->username . '.' . $validated['profile_picture']->extension();
             $validated['profile_picture']->move(storage_path('app/public'), $imageName);
             $user->profile_picture = $imageName;
         } else {
@@ -64,6 +64,7 @@ class UpdateController extends Controller
 
         $user->save();
 
-        return redirect('/me');
+        return redirect('/me')->with('status', ['success' => true, 'title' => 'Youre account has been updated', 'message' => 'Let the world see it!']);
+
     }
 }

@@ -9,6 +9,6 @@ class LogoutController extends Controller
     public function logout(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         auth()->logout();
-        return redirect('/blog');
+        return redirect('/blog')->with('status', ['success' => true, 'title' => 'Logged out', 'message' => ""]);
     }
 }

@@ -21,11 +21,11 @@ class DeleteController extends Controller
         try {
             $this->authorize('delete', $blog);
         } catch (\Throwable $th) {
-            return redirect('/blog/'.request('id'));
+            return redirect('/blog/' . request('id'))->with('status', ['success' => false, 'title' => 'Failed to delete blog', 'message' => 'You dont have permissions to delete this blog']);
         }
 
         $blog->delete();
 
-        return redirect('/blog');
+        return redirect('/blog')->with('status', ['success' => true, 'title' => 'Blog deleted succesfully', 'message' => '']);
     }
 }

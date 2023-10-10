@@ -52,6 +52,6 @@ class NewController extends Controller
         $comment->body = $request->input('body');
         $comment->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('status', ['success' => true, 'title' => 'Comment created succesfully', 'message' => 'Your comment has been published']);
     }
 }

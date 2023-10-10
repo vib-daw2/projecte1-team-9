@@ -34,13 +34,13 @@ class UpdatePasswordController extends Controller
             'password2' => 'required|same:password1'
         ]);
 
-        if(!Hash::check($data['old_password'], auth()->user()->password)){
+        if (!Hash::check($data['old_password'], auth()->user()->password)) {
             return back()->withErrors([
                 'current_password' => 'The current password is incorrect'
             ]);
         }
 
-        if($data['password1'] !== $data['password2']){
+        if ($data['password1'] !== $data['password2']) {
             return back()->withErrors([
                 'password2' => 'The passwords do not match'
             ]);
@@ -49,6 +49,7 @@ class UpdatePasswordController extends Controller
         Auth::user()->password = Hash::make($data['password1']);
         Auth::user()->save();
 
-        return redirect('/profile');
+        return redirect('/profile')->with('status', ['success' => true, 'title' => 'Your password has been changed', 'message' => 'Dont forget it again!']);
+
     }
 }

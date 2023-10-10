@@ -24,13 +24,13 @@ class GoogleController extends Controller
         try {
             $googleUser = Socialite::driver('google')->user();
         } catch (Exception $e) {
-            return redirect('/login')->with('error', 'Failed to authenticate with Google');
+            return redirect('/login')->with('status', ['success' => false, 'title' => 'Failed to authenticate', 'message' => "An external error has ocurred. Please try again later"]);
         }
 
         $existingUser = User::where('auth_provider_id', $googleUser->getId())->first();
         if ($existingUser) {
             Auth::login($existingUser);
-            return redirect('/blog');
+            return redirect('/blog')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
         }
 
         try {
@@ -44,9 +44,9 @@ class GoogleController extends Controller
             $user->save();
             Auth::login($user);
         } catch (UniqueConstraintViolationException $e) {
-            return redirect('/login')->with('error', 'Failed to authenticate with Google');
+            return redirect('/login')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
         }
 
-        return redirect('/blog');
+        return redirect('/blog')->with('status', ['success' => true, 'title' => 'Login successful', 'message' => 'Welcome back!']);
     }
 }

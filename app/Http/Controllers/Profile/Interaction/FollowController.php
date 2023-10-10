@@ -31,13 +31,15 @@ class FollowController extends Controller
 
         if ($follow) {
             $follow->delete();
+            return redirect()->back()->with('status', ['success' => true, 'title' => 'You have unfollowed ' . $user->username, 'message' => 'They will miss you!']);
         } else {
             Follow::create([
                 'follower_id' => Auth::id(),
                 'followee_id' => $user->id
             ]);
+            return redirect()->back()->with('status', ['success' => true, 'title' => 'Youre now following ' . $user->username, 'message' => 'Enjoy his content!']);
+
         }
 
-        return redirect()->back();
     }
 }
