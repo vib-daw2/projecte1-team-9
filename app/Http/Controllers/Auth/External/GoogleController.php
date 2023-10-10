@@ -40,6 +40,7 @@ class GoogleController extends Controller
             $user->password = Hash::make(Str::random(24));
             $user->auth_provider = 'google';
             $user->auth_provider_id = $googleUser->getId();
+            $user->profile_picture = $googleUser->getAvatar();
             $user->save();
             Auth::login($user);
         } catch (UniqueConstraintViolationException $e) {

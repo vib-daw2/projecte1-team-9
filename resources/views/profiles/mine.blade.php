@@ -10,8 +10,13 @@
                 <div class="w-1/4">
                     <label for="profile_picture" class="w-36 h-36 bg-black mx-auto cursor-pointer group relative flex justify-center items-center text-white text-4xl rounded-full">
                         @if(isset($profile_picture))
+                            @if(str_starts_with($profile_picture, "https"))
+                            <img id="picture" src="{{$profile_picture}}" alt="{{strtoupper($username[0])}}" class="object-fit rounded-full w-full h-full m-auto">
+
+                            @else
                             <img id="picture" src="{{asset("storage/".$profile_picture)}}" alt="{{strtoupper($username[0])}}" class="object-fit rounded-full w-full h-full m-auto">
-                        @else
+                            @endif
+                            @else
                             <div>{{strtoupper($username[0])}}</div>
                         @endif
                         {{-- <div class="group-hover:hidden">{{strtoupper($username[0])}}</div> --}}
