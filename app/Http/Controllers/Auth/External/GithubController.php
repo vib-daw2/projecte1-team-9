@@ -39,6 +39,7 @@ class GithubController extends Controller
             $user->password = Hash::make(Str::random(24));
             $user->auth_provider = 'github';
             $user->auth_provider_id = $githubUser->getId();
+            $user->profile_picture = $githubUser->getAvatar();
             $user->save();
             Auth::login($user);
         } catch (UniqueConstraintViolationException $e) {
