@@ -8,7 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
-class BlogController extends Controller
+class ReadBlogController extends Controller
 {
     public function render(string $id): View|\Illuminate\Foundation\Application|Factory|Application
     {

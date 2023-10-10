@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\External\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
-use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\ReadBlogController;
 use App\Http\Controllers\Blog\DeleteController;
 use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\Interaction\CommentController;
@@ -69,7 +69,7 @@ Route::get('/blog', [HomeController::class, 'render']); // Home view
 Route::get('/blog/new', [NewBlogController::class, 'render'])->middleware('auth'); // New blog view
 Route::post('/blog/new', [NewBlogController::class, 'create'])->middleware('auth'); // New blog action
 Route::get('/search', [SearchController::class, 'search']); // Search view
-Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
+Route::get('/blog/{id}', [ReadBlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
 Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middleware('auth'); // Delete blog action
