@@ -7,12 +7,12 @@ use App\Http\Controllers\Auth\External\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
-use App\Http\Controllers\Blog\ReadBlogController;
 use App\Http\Controllers\Blog\DeleteController;
 use App\Http\Controllers\Blog\EditBlogController;
-use App\Http\Controllers\Blog\Interaction\CommentController;
+use App\Http\Controllers\Blog\Interaction\Comment\CommentController;
 use App\Http\Controllers\Blog\Interaction\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
+use App\Http\Controllers\Blog\ReadBlogController;
 use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
@@ -83,6 +83,7 @@ Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middlewar
 Route::post('/blog/{id}/like', [LikeController::class, 'like'])->middleware('auth'); // Like/dislike blog action
 Route::post('/blog/{id}/comment', [CommentController::class, 'comment'])->middleware('auth'); // Comment blog action
 Route::post('/blog/{id}/comment/delete', [CommentController::class, 'delete'])->middleware('auth'); // Delete comment action
+Route::get('/blog/{id}/comments', [CommentController::class, 'getComments']); // Get comments action
 
 
 /*

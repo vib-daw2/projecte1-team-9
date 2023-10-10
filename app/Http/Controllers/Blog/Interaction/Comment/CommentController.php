@@ -1,22 +1,62 @@
 <?php
 
-namespace App\Http\Controllers\Blog\Interaction;
+namespace App\Http\Controllers\Blog\Interaction\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Comment;
 use App\Models\Comment_Child;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class CommentController extends Controller
 {
+    /**
+     * @param string $id
+     * @return string
+     */
+    public function getBlogComments(string $id): string
+    {
+        $blog = Blog::find($id);
+        try {
+            $this->authorize('view', $blog);
+        } catch (Throwable $th) {
+            abort(403);
+        }
+
+        $comments = $blog->comments()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        foreach ($comments as $comment) {
+            $comment->username = $comment->user->username;
+            $comment->children = Comment_Child::where('parent_id', $comment->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+            foreach ($comment->children as $child) {
+                $child->username = $child->user->username;
+            }
+        }
+
+        return $comments->toJson();
+    }
+
+
+    /**
+     * @param Request $request
+     * @param string $id
+     * @return string
+     * @throws ValidationException
+     */
     public function comment(Request $request, string $id): string
     {
         $blog = Blog::find($id);
         try {
             $this->authorize('view', $blog);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             abort(403);
         }
 
@@ -33,7 +73,7 @@ class CommentController extends Controller
         }
 
         if (isset($parent)) {
-            $comment= new Comment_Child();
+            $comment = new Comment_Child();
             $comment->parent_id = $request->input('parent_id');
         } else {
             $comment = new Comment();
@@ -47,6 +87,10 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param string $id
+     * @return string
+     */
     public function delete(string $id): string
     {
         $comment = Comment::find($id);
@@ -57,7 +101,7 @@ class CommentController extends Controller
 
         try {
             $this->authorize('delete', $comment);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             abort(403);
         }
 
