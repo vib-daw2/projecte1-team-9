@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Blog\Interaction\Comment;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Comment;
-use App\Models\Comment_Child;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
@@ -40,17 +40,15 @@ class NewController extends Controller
             }
         }
 
-        if (isset($parent)) {
-            $comment = new Comment_Child();
-            $comment->parent_id = $request->input('parent_id');
-        } else {
-            $comment = new Comment();
-        }
-
+        $comment = new Comment();
         $comment->blog_id = $blog->id;
         $comment->user_id = Auth::id();
         $comment->body = $request->input('body');
         $comment->save();
+
+        if ($request->input('parent_id')) {
+            DB::insert('INSERT INTO comments_relations (parent_id, comment_id) VALUES (?, ?)', [$request->input('parent_id'), $comment->id]);
+        }
 
         return redirect()->back()->with('status', ['success' => true, 'title' => 'Comment created succesfully', 'message' => 'Your comment has been published']);
     }

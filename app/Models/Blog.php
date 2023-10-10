@@ -89,21 +89,31 @@ class Blog extends Model
     public function getComments()
     {
         $blog = Blog::find($this->id);
-        // try {
-        //     $this->authorize('view', $blog);
-        // } catch (Throwable $th) {
-        //     abort(403);
-        // }
 
-        $comments = $blog->comments()
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $comments =
+            DB::table('comments')
+                ->select('*')
+                ->where('blog_id', '=', $blog->id)
+                ->whereNotIn('comments.id', DB::table('comments_relations')->select('comment_id')->where('parent_id', '!=', null))
+                ->get()
+                ->toArray();
 
         foreach ($comments as $comment) {
-            $comment->children = Comment_Child::where('parent_id', $comment->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $comment->user = User::find($comment->user_id);
         }
+
+        foreach ($comments as $comment) {
+            $comment->children =
+                DB::table('comments')
+                    ->select('*')
+                    ->whereIn('comments.id', DB::table('comments_relations')->select('comment_id')->where('parent_id', '=', $comment->id))
+                    ->get()
+                    ->toArray();
+
+            dd($comment->children);
+        }
+
+        dd($comments);
 
         return $comments;
     }
