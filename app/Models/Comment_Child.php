@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Comment extends Model
+class Comment_Child extends Model
 {
     use HasFactory;
 
-    protected $table = 'comments';
+    protected $table = 'comments_childs';
 
     public function blog(): BelongsTo
     {
@@ -22,4 +22,8 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
 }
