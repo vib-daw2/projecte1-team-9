@@ -7,44 +7,12 @@ use App\Models\Blog;
 use App\Models\Comment;
 use App\Models\Comment_Child;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
-class CommentController extends Controller
+class NewController extends Controller
 {
-    /**
-     * @param string $id
-     * @return string
-     */
-    public function getBlogComments(string $id): string
-    {
-        $blog = Blog::find($id);
-        try {
-            $this->authorize('view', $blog);
-        } catch (Throwable $th) {
-            abort(403);
-        }
-
-        $comments = $blog->comments()
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        foreach ($comments as $comment) {
-            $comment->username = $comment->user->username;
-            $comment->children = Comment_Child::where('parent_id', $comment->id)
-                ->orderBy('created_at', 'desc')
-                ->get();
-            foreach ($comment->children as $child) {
-                $child->username = $child->user->username;
-            }
-        }
-
-        return $comments->toJson();
-    }
-
-
     /**
      * @param Request $request
      * @param string $id
@@ -83,29 +51,6 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->body = $request->input('body');
         $comment->save();
-
-        return redirect()->back();
-    }
-
-    /**
-     * @param string $id
-     * @return string
-     */
-    public function delete(string $id): string
-    {
-        $comment = Comment::find($id);
-
-        if (!$comment) {
-            $comment = Comment_Child::find($id);
-        }
-
-        try {
-            $this->authorize('delete', $comment);
-        } catch (Throwable $th) {
-            abort(403);
-        }
-
-        Comment::destroy($comment->id);
 
         return redirect()->back();
     }

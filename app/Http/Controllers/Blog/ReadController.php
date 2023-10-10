@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Throwable;
 
-class ReadBlogController extends Controller
+class ReadController extends Controller
 {
     /**
      * @param string $id

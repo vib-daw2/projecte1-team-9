@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
-class UpdateBlogController extends Controller
+class UpdateController extends Controller
 {
     /**
      * @param string $id

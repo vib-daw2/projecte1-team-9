@@ -1,18 +1,25 @@
 <?php
 
-use App\Http\Controllers\Admin\EditUserController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\User\UpdateController as UpdateUserController;
+use App\Http\Controllers\Admin\User\ReadController as ReadUserController;
+use App\Http\Controllers\Admin\User\DeleteController as DeleteUserController;
+
 use App\Http\Controllers\Auth\External\GithubController;
 use App\Http\Controllers\Auth\External\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
-use App\Http\Controllers\Blog\DeleteController;
-use App\Http\Controllers\Blog\Interaction\Comment\CommentController;
+
+use App\Http\Controllers\Blog\DeleteController as DeleteBlogController;
+use App\Http\Controllers\Blog\NewController as NewBlogController;
+use App\Http\Controllers\Blog\ReadController as ReadBlogController;
+use App\Http\Controllers\Blog\UpdateController as UpdateBlogController;
+
+use App\Http\Controllers\Blog\Interaction\Comment\DeleteController as DeleteCommentController;
+use App\Http\Controllers\Blog\Interaction\Comment\NewController as NewCommentController;
+
 use App\Http\Controllers\Blog\Interaction\LikeController;
-use App\Http\Controllers\Blog\NewBlogController;
-use App\Http\Controllers\Blog\ReadBlogController;
-use App\Http\Controllers\Blog\UpdateBlogController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Profile\ChangePasswordController;
 use App\Http\Controllers\Profile\ChangeProfilePictureController;
@@ -65,14 +72,14 @@ Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
  *
  * All the routes that are related to the blogs
  * */
+Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog', [HomeController::class, 'render']); // Home view
 Route::get('/blog/new', [NewBlogController::class, 'render'])->middleware('auth'); // New blog view
 Route::post('/blog/new', [NewBlogController::class, 'new'])->middleware('auth'); // New blog action
-Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [ReadBlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [UpdateBlogController::class, 'render'])->middleware('auth'); // Edit blog view
 Route::post('/blog/{id}/edit', [UpdateBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
-Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middleware('auth'); // Delete blog action
+Route::post('/blog/{id}/delete', [DeleteBlogController::class, 'delete'])->middleware('auth'); // Delete blog action
 
 
 /*
@@ -81,8 +88,8 @@ Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middlewar
  * All the routes that are related to the blogs interaction
  * */
 Route::post('/blog/{id}/like', [LikeController::class, 'like'])->middleware('auth'); // Like/dislike blog action
-Route::post('/blog/{id}/comment', [CommentController::class, 'comment'])->middleware('auth'); // Comment blog action
-Route::post('/comment/{id}/delete', [CommentController::class, 'delete'])->middleware('auth'); // Delete comment action
+Route::post('/blog/{id}/comment', [NewCommentController::class, 'comment'])->middleware('auth'); // Comment blog action
+Route::post('/comment/{id}/delete', [DeleteCommentController::class, 'delete'])->middleware('auth'); // Delete comment action
 
 
 /*
@@ -115,7 +122,7 @@ Route::post('/me/profilepicture', [ChangeProfilePictureController::class, 'chang
  *
  * All the routes that are related to the admin panel
  * */
-Route::get('/admin/users', [UserController::class, 'render']); // List all users
-Route::post('/admin/users/{id}/delete', [UserController::class, 'delete']); // Delete a user action
-Route::get('/admin/users/{id}/edit', [EditUserController::class, 'render']); // Edit a user view
-Route::post('/admin/users/{id}/edit', [EditUserController::class, 'edit']); // Edit a user action
+Route::get('/admin/users', [ReadUserController::class, 'render']); // List all users
+Route::post('/admin/users/{id}/delete', [DeleteUserController::class, 'delete']); // Delete a user action
+Route::get('/admin/users/{id}/edit', [UpdateUserController::class, 'render']); // Edit a user view
+Route::post('/admin/users/{id}/edit', [UpdateUserController::class, 'edit']); // Edit a user action

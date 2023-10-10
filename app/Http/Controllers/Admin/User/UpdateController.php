@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
-class EditUserController extends Controller
+class UpdateController extends Controller
 {
     public function render(string $id): Factory|\Illuminate\Foundation\Application|View|Redirector|Application|RedirectResponse
     {
@@ -52,7 +52,7 @@ class EditUserController extends Controller
         }
 
         //Check if the password is the current user password
-        if (!Hash::check($validated['password'], Auth::user()->password)) {
+        if (!Hash::check($validated['password'], User::find(Auth::id())->password)) {
             return redirect()->back()->withErrors(['password' => 'Invalid password'])->withInput();
         }
 

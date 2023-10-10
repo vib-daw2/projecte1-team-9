@@ -12,7 +12,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class NewBlogController extends Controller
+class NewController extends Controller
 {
     /**
      * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
