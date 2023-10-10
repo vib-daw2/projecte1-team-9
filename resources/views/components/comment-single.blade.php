@@ -18,7 +18,7 @@
     </div>
     @endif
     <div class="w-fit ml-4">
-        <div class="font-semibold">@ {{ $comment->user->username }}</div>
+        <a href="/user/{{$comment->user->id}}" class="font-semibold hover:underline underline-offset-2">@ {{ $comment->user->username }}</a>
         <div class="mt-2">{{ $comment->body }}</div>
     </div>
     @auth
