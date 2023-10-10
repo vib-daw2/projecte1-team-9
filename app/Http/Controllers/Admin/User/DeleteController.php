@@ -29,6 +29,6 @@ class DeleteController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect('/admin/users')->with('status', ['success' => true, 'title' => 'User ' . $id . ' deleted succesfully', 'message' => ""]);
+        return redirect('/admin/users')->with('status', ['success' => true, 'title' => 'User ' . $user->username . ' deleted succesfully', 'message' => ""]);
     }
 }
