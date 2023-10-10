@@ -21,11 +21,10 @@ class ReadController extends Controller
         } catch (Throwable $th) {
             abort(403, $th->getMessage());
         }
+        $query = request()->query('s');
 
-        $users = DB::table('users')
-            ->select('users.*')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $users = User::search($query)
+            ->paginate(25)->withQueryString();
 
         return view('admin/users', ['users' => $users]);
     }

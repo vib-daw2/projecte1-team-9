@@ -12,9 +12,9 @@
                 class="w-full border-b-black outline-none border-b px-2 py-1">
         </div>
         @error('email')
-        <div>
-            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-        </div>
+            <div>
+                <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+            </div>
         @enderror
         <div>
             <label for="username" class="block">Username</label>
@@ -22,26 +22,30 @@
                 class="w-full border-b-black outline-none border-b px-2 py-1">
         </div>
         @error('username')
-        <div>
-            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-        </div>
+            <div>
+                <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+            </div>
         @enderror
         <div>
             <label for="role" class="block">Role</label>
-            <select defaultValue="{{$user->role}}" name="role" id="role" required class="w-full border-b-black bg-white py-1 border-b outline-none">
-                <option value="user" {{$user->role == "user" ? 'selected' : ""}}>User</option>
-                <option value="moderator" {{$user->role == "moderator" ? "selected" : ""}}>Moderator</option>
-                <option value="admin" {{$user->role == "admin" ? 'selected' : ""}}>Admin</option>
+            <select defaultValue="{{ $user->role }}" name="role" id="role" required
+                class="w-full border-b-black bg-white py-1 border-b outline-none">
+                <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                <option value="moderator" {{ $user->role == 'moderator' ? 'selected' : '' }}>Moderator</option>
+                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
             </select>
         </div>
-        <div>
-            <label for="password" class="block">Admin Password</label>
-            <input type="password" name="password" id="password" class="w-full border-b-black outline-none border-b px-2 py-1">
-        </div>
-        @error('password')
-        <div>
-            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-        </div>
+        @if (Auth::user()->auth_provider == null)
+            <div>
+                <label for="password" class="block">Admin Password</label>
+                <input type="password" name="password" id="password"
+                    class="w-full border-b-black outline-none border-b px-2 py-1">
+            </div>
+            @error('password')
+                <div>
+                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                </div>
+            @endif
         @enderror
         <div class="w-full flex justify-end">
 

@@ -31,7 +31,7 @@ class UpdateController extends Controller
             $validated = $this->validate(request(), [
                 'username' => 'required|min:3|max:255',
                 'email' => 'required|email|max:255',
-                'password' => 'required|min:8|max:255',
+                'password' => Auth::user()->auth_provider == null ? 'required|min:8|max:255' : '',
                 'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
         } catch (ValidationException $e) {
@@ -39,7 +39,7 @@ class UpdateController extends Controller
         }
 
         //Check if the password is the current user password
-        if (!Hash::check($validated['password'], Auth::user()->password)) {
+        if (Auth::user()->auth_provider == null && !Hash::check($validated['password'], Auth::user()->password)) {
             return redirect()->back()->withErrors(['password' => 'Invalid password'])->withInput();
         }
 

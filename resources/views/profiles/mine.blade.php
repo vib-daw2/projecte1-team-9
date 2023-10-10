@@ -8,30 +8,47 @@
                 @csrf
                 <input type="file" name="profile_picture" id="profile_picture" class="hidden" accept="jpeg,png,svg">
                 <div class="w-1/4">
-                    <label for="profile_picture" class="w-36 h-36 bg-black mx-auto cursor-pointer group relative flex justify-center items-center text-white text-4xl rounded-full">
-                        @if(isset($profile_picture))
-                            @if(str_starts_with($profile_picture, "https"))
-                            <img id="picture" src="{{$profile_picture}}" alt="{{strtoupper($username[0])}}" class="object-fit rounded-full w-full h-full m-auto">
-
+                    <label for="profile_picture"
+                        class="w-36 h-36 bg-black mx-auto cursor-pointer group relative flex justify-center items-center text-white text-4xl rounded-full">
+                        @if (isset($profile_picture))
+                            @if (str_starts_with($profile_picture, 'https'))
+                                <img id="picture" src="{{ $profile_picture }}" alt="{{ strtoupper($username[0]) }}"
+                                    class="object-fit rounded-full w-full h-full m-auto">
                             @else
-                            <img id="picture" src="{{asset("storage/".$profile_picture)}}" alt="{{strtoupper($username[0])}}" class="object-fit rounded-full w-full h-full m-auto">
+                                <img id="picture" src="{{ asset('storage/' . $profile_picture) }}"
+                                    alt="{{ strtoupper($username[0]) }}"
+                                    class="object-fit rounded-full w-full h-full m-auto">
                             @endif
-                            @else
-                            <div>{{strtoupper($username[0])}}</div>
+                        @else
+                            <div>{{ strtoupper($username[0]) }}</div>
                         @endif
-                        {{-- <div class="group-hover:hidden">{{strtoupper($username[0])}}</div> --}}
-                        <div class="group-hover:flex absolute flex-col justify-center items-center hidden w-36 h-36 bg-gray-900 bg-opacity-50 backdrop-blur text-white rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-plus"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/><line x1="16" x2="22" y1="5" y2="5"/><line x1="19" x2="19" y1="2" y2="8"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                        <div
+                            class="group-hover:flex absolute flex-col justify-center items-center hidden w-36 h-36 bg-gray-900 bg-opacity-50 backdrop-blur text-white rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-image-plus">
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+                                <line x1="16" x2="22" y1="5" y2="5" />
+                                <line x1="19" x2="19" y1="2" y2="8" />
+                                <circle cx="9" cy="9" r="2" />
+                                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                            </svg>
                             <div class="text-sm text-center">Upload Image</div>
                         </div>
-                        @if(isset($profile_picture))
-                        <button type="button" onclick="resetImage()" class="z-50 absolute bottom-0 right-0 w-8 h-8 flex justify-center items-center rounded-full bg-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                        </button>
+                        @if (isset($profile_picture))
+                            <button type="button" onclick="resetImage()"
+                                class="z-50 absolute bottom-0 right-0 w-8 h-8 flex justify-center items-center rounded-full bg-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                </svg>
+                            </button>
                         @endif
-                        </label>
+                    </label>
                     @error('profile_picture')
-                        <div class="text-sm text-red-600">{{$message}}</div>
+                        <div class="text-sm text-red-600">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="w-3/4 flex flex-col gap-3 px-4">
@@ -41,35 +58,40 @@
                             class="px-2 py-1 border-b-black border-b outline-none w-full text-gray-700">
                     </div>
                     @error('username')
-                     <div class="text-sm text-red-500">{{$message}}</div>   
+                        <div class="text-sm text-red-500">{{ $message }}</div>
                     @enderror
                     <div class="w-full">
                         <label class="block">Email</label>
                         <input type="email" name="email" id="email" value="{{ $email }}"
+                            @if (Auth::user()->auth_provider != null) @readonly(true) @endif
                             class="px-2 py-1 border-b-black border-b outline-none w-full text-gray-700">
                     </div>
                     @error('email')
-                     <div class="text-sm text-red-500">{{$message}}</div>   
+                        <div class="text-sm text-red-500">{{ $message }}</div>
                     @enderror
-                    <div class="w-full">
-                        <label class="block">Password</label>
-                        <input type="password" name="password" id="password"
-                            class="px-2 py-1 border-b-black border-b outline-none text-gray-700 w-full">
-                    </div>
+                    @if (Auth::user()->auth_provider == null)
+                        <div class="w-full">
+                            <label class="block">Password</label>
+                            <input type="password" name="password" id="password"
+                                class="px-2 py-1 border-b-black border-b outline-none text-gray-700 w-full">
+                        </div>
+                    @endif
                     @error('password')
-                     <div class="text-sm text-red-500">{{$message}}</div>   
+                        <div class="text-sm text-red-500">{{ $message }}</div>
                     @enderror
                     <div class="w-full flex justify-end gap-3">
-                        <a href="/me/password"
-                            class="w-28 min-w-fit px-2 py-2 rounded-md bg-white hover:bg-gray-100 ring-1 ring-black text-black font-medium flex justify-center items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-key-round">
-                                <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z" />
-                                <circle cx="16.5" cy="7.5" r=".5" />
-                            </svg>
-                            Change Password
-                        </a>
+                        @if (Auth::user()->auth_provider == null)
+                            <a href="/me/password"
+                                class="w-28 min-w-fit px-2 py-2 rounded-md bg-white hover:bg-gray-100 ring-1 ring-black text-black font-medium flex justify-center items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round">
+                                    <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z" />
+                                    <circle cx="16.5" cy="7.5" r=".5" />
+                                </svg>
+                                Change Password
+                            </a>
+                        @endif
                         <button
                             class="w-28 py-2 rounded-md bg-gray-900 hover:bg-gray-900/90 text-white font-medium flex justify-center items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -107,6 +129,6 @@
         pic.src = "";
         image.value = "";
         label.style.backgroundImage = `url()`;
-       
+
     }
 </script>

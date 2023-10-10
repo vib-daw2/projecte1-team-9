@@ -45,14 +45,15 @@ class UpdateController extends Controller
                 'username' => 'required|min:3|max:255',
                 'email' => 'required|email|max:255',
                 'role' => 'required|in:admin,user,moderator',
-                'password' => 'required|min:8|max:255'
+                'password' => Auth::user()->auth_provider == null ? 'required|min:8|max:255' : ''
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
+        $authUser = Auth::user();
         //Check if the password is the current user password
-        if (!Hash::check($validated['password'], User::find(Auth::id())->password)) {
+        if (Auth::user()->auth_provider == null && !Hash::check($validated['password'], User::find(Auth::id())->password)) {
             return redirect()->back()->withErrors(['password' => 'Invalid password'])->withInput();
         }
 
