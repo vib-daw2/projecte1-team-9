@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Interaction;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Comment;
+use App\Models\Comment_Child;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,11 +32,16 @@ class CommentController extends Controller
             }
         }
 
-        $comment = new Comment();
+        if (isset($parent)) {
+            $comment= new Comment_Child();
+            $comment->parent_id = $request->input('parent_id');
+        } else {
+            $comment = new Comment();
+        }
+
         $comment->blog_id = $blog->id;
         $comment->user_id = Auth::id();
         $comment->body = $request->input('body');
-        $comment->parent_id = $request->input('parent_id');
         $comment->save();
 
         return redirect()->back();
@@ -44,6 +50,11 @@ class CommentController extends Controller
     public function delete(string $id): string
     {
         $comment = Comment::find($id);
+
+        if (!$comment) {
+            $comment = Comment_Child::find($id);
+        }
+
         try {
             $this->authorize('delete', $comment);
         } catch (\Throwable $th) {
