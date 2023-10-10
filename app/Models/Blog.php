@@ -33,6 +33,11 @@ class Blog extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * Function to know if the user liked or disliked the blog
      * @return bool|null
