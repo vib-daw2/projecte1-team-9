@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\DeleteController;
 use App\Http\Controllers\Blog\EditBlogController;
 use App\Http\Controllers\Blog\Interaction\CommentController;
 use App\Http\Controllers\Blog\Interaction\LikeController;
@@ -35,7 +36,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){ return View('landing');}); // Home view
+Route::get('/', function () {
+    return View('landing');
+}); // Home view
 
 
 /*
@@ -69,6 +72,7 @@ Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [BlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
 Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
+Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middleware('auth'); // Delete blog action
 
 
 /*

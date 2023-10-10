@@ -49,4 +49,20 @@ class BlogPolicy
 
         return Response::deny('You must be logged in to update a blog');
     }
+
+    /**
+     * @param User|null $user
+     * @param Blog $blog
+     * @return Response
+     */
+    public function delete(?User $user, Blog $blog): Response
+    {
+        if ($user && ($user->id === $blog->user_id)) {
+            return Response::allow();
+        } else if ($user && ($user->role === 'admin')) {
+            return Response::allow();
+        }
+
+        return Response::deny('You must be logged in to delete a blog');
+    }
 }
