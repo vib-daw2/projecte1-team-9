@@ -85,4 +85,26 @@ class Blog extends Model
     {
         return $this->status === 'published';
     }
+
+    public function getComments()
+    {
+        $blog = Blog::find($this->id);
+        // try {
+        //     $this->authorize('view', $blog);
+        // } catch (Throwable $th) {
+        //     abort(403);
+        // }
+
+        $comments = $blog->comments()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        foreach ($comments as $comment) {
+            $comment->children = Comment_Child::where('parent_id', $comment->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        return $comments;
+    }
 }

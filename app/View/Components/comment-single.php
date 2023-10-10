@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Comment;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -12,9 +13,9 @@ class commentSingle extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $message,
-        public string $user,
-        public bool $isResponse = false
+        public Comment $comment,
+        public bool $isResponse = false,
+        public int $id
     )
     {
     }

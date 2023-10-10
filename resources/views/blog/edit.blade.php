@@ -1,18 +1,5 @@
 @extends('layout')
-<script>
 
-    function saveAsDraft(e){
-        e.preventDefault();
-        document.getElementById('status').value = 'draft';
-        document.forms[0].submit();
-    }
-
-    function publish(e){
-        e.preventDefault();
-        document.getElementById('status').value = 'published';
-        document.forms[0].submit();
-    }
-</script>
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
     <form class="max-w-5xl w-full mx-auto flex flex-col justify-start items-center gap-3" method="POST">
         @csrf
@@ -44,7 +31,8 @@
                     </svg>
                     Publish
                 </button>
-                <button
+                    <button
+                    onclick="deletePost(event, {{$blog->id}})"
                     class="w-28 py-2 rounded-md bg-red-600 hover:bg-red-600/90 text-white font-medium flex justify-center items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -56,7 +44,7 @@
                         <line x1="14" x2="14" y1="11" y2="17" />
                     </svg>
                     Delete
-                </button>
+                    </button>
             </div>
         </div>
         <textarea style="resize:none" maxlength="255" name="title" id="title" placeholder="Title" rows="2"
@@ -78,3 +66,28 @@
             <trix-editor class="w-full" input="body"></trix-editor>
     </form>
 </div>
+
+<script>
+    function deletePost(event, id){
+        event.preventDefault();
+        const form = document.createElement('form');
+        form.action = '/blog/'+id+'/delete';
+        form.method = 'POST';
+        form.innerHTML = '@csrf';
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+
+    function saveAsDraft(e){
+        e.preventDefault();
+        document.getElementById('status').value = 'draft';
+        document.forms[0].submit();
+    }
+
+    function publish(e){
+        e.preventDefault();
+        document.getElementById('status').value = 'published';
+        document.forms[0].submit();
+    }
+</script>

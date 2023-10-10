@@ -8,19 +8,32 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
     <div class="text-2xl">Comments</div>
-    <div class="w-full flex items-center">
-        <textarea name="" id="" class="w-full max-w-xl rounded-r-none p-1 rounded-md border border-gray-600 border-r-0 outline-none" rows="3"></textarea>
+    <div id="has-parent" class="w-full bg-gray-200 hidden text-black py-1 border border-black rounded-t-md h-10 mt-2 justify-between items-center px-1">
+        <div>Responding to <span id="responds-to" class="inline font-medium hover:underline underline-offset-2">@abogado</span></div>
+        <button onclick="deleteParent()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fill-gray-600 stroke-gray-200"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+        </button>
+    </div>
+    <form class="w-full flex items-center" method="POST" action="/blog/{{request('id')}}/comment">
+        @csrf
+        <input type="hidden" name="parent_id">
+        <textarea name="body" id="body" class="w-full max-w-xl rounded-r-none rounded-t-none p-1 rounded-md border border-gray-600 border-r-0 outline-none" rows="3">{{old('body')}}</textarea>
         <button class="h-full bg-white w-12 hover:bg-gray-100 rounded-r-md flex justify-center items-center border border-gray-600 border-l-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-black"><path d="m3 3 3 9-3 9 19-9Z"/><path d="M6 12h16"/></svg>
         </button>
-    </div>
+    </form>
+    @error('body')
+    <div class="text-red-500 text-sm">{{$message}}</div>
+    @enderror
     <div class="flex flex-col w-full pr-4 gap-2 overflow-y-auto py-4">
-        @for ($i = 0; $i < 12; $i++)
-            <x-comment-single :user="'user'.$i" :message="'hablaré con mi abogado'" :isResponse="false" />
-        @endfor
-        <x-comment-single :user="'abogado'" :message="'Qué abogado?'" :isResponse="true" />
-        <x-comment-single :user="'abogado'" :message="'El que tengo aquí colgado'" :isResponse="true" />
+        @foreach ($comments as $comment)
+            <x-comment-single :isResponse="false" :comment="$comment" />
+            @foreach($comment->children as $child)
+                <x-comment-single :isResponse="true" :comment="$child" />
+            @endforeach
+        @endforeach
     </div>
+    
 </div>
 
 <script>
@@ -37,15 +50,18 @@
         e.stopPropagation();
         input.checked = false
     }
-    //     const modal = document.getElementById("comments-modal")
-    //     modal.classList.remove("animate-slidein")
-    //     modal.classList.add("animate-slideout")
-    //     setTimeout(() => {
-    //         modal.classList.add("animate-slidein")
-    //         modal.classList.add("animate-slideout")
-    //         console.log("Delayed")
-    //         console.log(modal.classList)
-    //         input.checked = false
-    //     }, 700);
-    // }
+
+    function deleteParent(){
+        const comments = document.querySelectorAll(".comment")
+        comments.forEach(comment => {
+            comment.classList.remove("border-2", "border-black")
+            comment.classList.remove("opacity-30")
+        })
+
+        const input = document.querySelector("input[name=parent]")
+        input.value = ""
+
+        const parentMark = document.getElementById("has-parent")
+        parentMark.classList.add("hidden")
+    }
 </script>
