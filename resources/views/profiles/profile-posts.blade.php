@@ -5,9 +5,7 @@
         <div class="flex flex-col items-center w-full h-fit justify-between mt-4 gap-4">
             <x-profilestats :username="$username" />
             <div class="max-w-5xl mt-4 w-full mx-auto flex flex-col justify-start items-center gap-3">
-                @if ($blogs->count() == 0)
-                    <div class="w-fit mx-auto font-medium text-xl">This user doesn't have any posts yet</div>
-                @endif
+                AlbertBruCortsAlbertBruCorts
                 @foreach ($blogs as $blog)
                     <x-postlist :username="$blog->username" :title="$blog->title" :id="$blog->id" :subtitle="$blog->subtitle"
                         :ownerid="$blog->owner_id" :liked="$blog->liked ?? ''" :likes="$blog->likes ?? 0" :dislikes="$blog->dislikes ?? 0" />
