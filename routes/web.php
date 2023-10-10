@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 use App\Http\Controllers\Blog\DeleteController;
-use App\Http\Controllers\Blog\EditBlogController;
+use App\Http\Controllers\Blog\UpdateBlogController;
 use App\Http\Controllers\Blog\Interaction\Comment\CommentController;
 use App\Http\Controllers\Blog\Interaction\LikeController;
 use App\Http\Controllers\Blog\NewBlogController;
@@ -70,8 +70,8 @@ Route::get('/blog/new', [NewBlogController::class, 'render'])->middleware('auth'
 Route::post('/blog/new', [NewBlogController::class, 'new'])->middleware('auth'); // New blog action
 Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [ReadBlogController::class, 'render']); // Blog view
-Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
-Route::post('/blog/{id}/edit', [EditBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
+Route::get('/blog/{id}/edit', [UpdateBlogController::class, 'render'])->middleware('auth'); // Edit blog view
+Route::post('/blog/{id}/edit', [UpdateBlogController::class, 'edit'])->middleware('auth'); // Edit blog action
 Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middleware('auth'); // Delete blog action
 
 
