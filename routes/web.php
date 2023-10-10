@@ -83,7 +83,6 @@ Route::post('/blog/{id}/delete', [DeleteController::class, 'delete'])->middlewar
 Route::post('/blog/{id}/like', [LikeController::class, 'like'])->middleware('auth'); // Like/dislike blog action
 Route::post('/blog/{id}/comment', [CommentController::class, 'comment'])->middleware('auth'); // Comment blog action
 Route::post('/comment/{id}/delete', [CommentController::class, 'delete'])->middleware('auth'); // Delete comment action
-Route::get('/blog/{id}/comments', [CommentController::class, 'getBlogComments']); // Get comments action
 
 
 /*
