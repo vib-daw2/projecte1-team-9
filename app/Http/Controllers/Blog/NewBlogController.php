@@ -4,21 +4,32 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class NewBlogController extends Controller
 {
-    public function render(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    /**
+     * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+     */
+    public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('blog/new');
     }
 
-    public function create(): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    /**
+     * @return Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+     */
+    public function new(): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $blog = new Blog();
 
-        if (!auth()->check()){
+        if (!auth()->check()) {
             abort(403);
         }
 
@@ -34,7 +45,7 @@ class NewBlogController extends Controller
         $blog->status = $validated['status'];
         $blog->user_id = Auth::id();
         if (isset($validated['image'])) {
-            $imageName = time().'.'. $blog->title . Auth::id() . '.' . $validated['image']->extension();
+            $imageName = time() . '.' . $blog->title . Auth::id() . '.' . $validated['image']->extension();
             $validated['image']->move(public_path('images'), $imageName);
             $blog->picture = $imageName;
         }

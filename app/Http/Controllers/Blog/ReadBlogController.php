@@ -7,9 +7,14 @@ use App\Models\Blog;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Throwable;
 
 class ReadBlogController extends Controller
 {
+    /**
+     * @param string $id
+     * @return View|\Illuminate\Foundation\Application|Factory|Application
+     */
     public function render(string $id): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $blog = Blog::find($id);
@@ -19,7 +24,7 @@ class ReadBlogController extends Controller
 
         try {
             $this->authorize('view', $blog);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             if ($blog->status !== 'published') {
                 abort(403);
             }

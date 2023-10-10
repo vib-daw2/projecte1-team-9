@@ -67,7 +67,7 @@ Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
  * */
 Route::get('/blog', [HomeController::class, 'render']); // Home view
 Route::get('/blog/new', [NewBlogController::class, 'render'])->middleware('auth'); // New blog view
-Route::post('/blog/new', [NewBlogController::class, 'create'])->middleware('auth'); // New blog action
+Route::post('/blog/new', [NewBlogController::class, 'new'])->middleware('auth'); // New blog action
 Route::get('/search', [SearchController::class, 'search']); // Search view
 Route::get('/blog/{id}', [ReadBlogController::class, 'render']); // Blog view
 Route::get('/blog/{id}/edit', [EditBlogController::class, 'render'])->middleware('auth'); // Edit blog view
