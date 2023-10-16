@@ -45,7 +45,7 @@ class NewController extends Controller
         $comment->user_id = Auth::id();
         $comment->body = $request->input('body');
         $comment->save();
-
+        
         if ($request->input('parent_id')) {
             DB::insert('INSERT INTO comments_relations (parent_id, comment_id) VALUES (?, ?)', [$request->input('parent_id'), $comment->id]);
         }
