@@ -19,7 +19,6 @@ class ReadController extends Controller
         $blogs = DB::table('blogs')
             ->select('blogs.*', 'users.username', 'users.id as owner_id', 'likes.type as liked')
             ->join('users', 'users.id', '=', 'blogs.user_id')
-            ->where('blogs.status', '=', 'published')
             ->leftJoin('likes', function ($join) use ($user) {
                 $join->on('likes.blog_id', '=', 'blogs.id')
                     ->where('likes.user_id', '=', $user->id);
@@ -37,15 +36,18 @@ class ReadController extends Controller
             $blog->dislikes = $query->dislikes;
         }
 
-        return view('profiles/profile-posts',
-            ['id' => $user->id,
+        return view(
+            'profiles/profile-posts',
+            [
+                'id' => $user->id,
                 'posts_count' => $profile_stats->posts_count,
                 'up_since' => $profile_stats->up_since,
                 'likes' => $profile_stats->likes,
                 'username' => $user->username,
                 'email' => $user->email,
                 'blogs' => $blogs,
-            ]);
+            ]
+        );
 
     }
 }

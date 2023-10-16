@@ -53,6 +53,11 @@ class UpdateController extends Controller
         $blog->body = $validated['body'];
         $blog->status = $validated['status'];
         $blog->user_id = Auth::id();
+        if (isset($validated['image'])) {
+            $imageName = time() . '.' . $blog->title . Auth::id() . '.' . $validated['image']->extension();
+            $validated['image']->move(storage_path('app/public'), $imageName);
+            $blog->picture = $imageName;
+        }
         $blog->save();
 
         return redirect('/blog/' . request('id'))->with('status', ['success' => true, 'title' => 'Blog edited succesfully', 'message' => 'Your new blog is up!']);

@@ -17,6 +17,7 @@
 
 <body>
     <x-sidebar />
+    {{-- <x-search-modal /> --}}
     @yield('content')
     <x-toast />
 </body>

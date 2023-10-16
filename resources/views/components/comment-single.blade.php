@@ -41,7 +41,7 @@
                 </svg>
             </button>
         @endif
-        @if ($comment->user->id == Auth::id() || Auth::user()->role == 'admin' || Auth::user()->role == 'mod')
+        @if ($comment->user->id == Auth::id() || Auth::user()->role == 'admin' || Auth::user()->role == 'moderator')
             <form action="/comment/{{ $comment->id }}/delete" method="POST">
                 @csrf
                 <input type="hidden" name="comment_id" value="{{ $comment->id }}">

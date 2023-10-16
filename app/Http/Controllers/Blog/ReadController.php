@@ -46,7 +46,8 @@ class ReadController extends Controller
         return view('blog/blog', [
             'blog' => $blog,
             'id' => $id,
-            'liked' => $liked, // If the user has liked the blog or not (null if not logged in, "liked" if liked, "disliked" if disliked)
+            'liked' => $liked,
+            // If the user has liked the blog or not (null if not logged in, "liked" if liked, "disliked" if disliked)
             'likes' => $likesAndDislikes->likes,
             'dislikes' => $likesAndDislikes->dislikes,
             'comments' => $blog->getComments()

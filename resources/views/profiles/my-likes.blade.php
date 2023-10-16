@@ -9,8 +9,8 @@
                     <div class="w-fit mx-auto font-medium text-xl">You haven't liked any posts yet</div>
                 @endif
                 @foreach ($blogs as $blog)
-                    <x-postlist :username="$blog->username" :title="$blog->title" :id="$blog->id" :subtitle="$blog->subtitle"
-                        :ownerid="$blog->owner_id" :liked="$blog->liked ?? ''" :likes="$blog->likes ?? 0" :dislikes="$blog->dislikes ?? 0" />
+                    <x-postlist :image="$blog->picture" :username="$blog->username" :title="$blog->title" :id="$blog->id"
+                        :subtitle="$blog->subtitle" :ownerid="$blog->owner_id" :liked="$blog->liked ?? ''" :likes="$blog->likes ?? 0" :dislikes="$blog->dislikes ?? 0" />
                 @endforeach
             </div>
             <div class="mx-auto mt-4">

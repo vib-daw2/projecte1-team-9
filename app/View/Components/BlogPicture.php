@@ -6,22 +6,16 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Postlist extends Component
+class BlogPicture extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $username,
-        public string $title,
-        public string $id,
-        public string $subtitle,
-        public string $ownerid,
-        public string $liked,
-        public string $likes,
-        public string $dislikes,
-        public string|null $image = null
+        public string $src,
+        public string $alt
     ) {
+        //
     }
 
     /**
@@ -29,6 +23,6 @@ class Postlist extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.postlist');
+        return view('components.blog-picture');
     }
 }

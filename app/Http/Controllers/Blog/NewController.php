@@ -46,7 +46,7 @@ class NewController extends Controller
         $blog->user_id = Auth::id();
         if (isset($validated['image'])) {
             $imageName = time() . '.' . $blog->title . Auth::id() . '.' . $validated['image']->extension();
-            $validated['image']->move(public_path('images'), $imageName);
+            $validated['image']->move(storage_path('app/public'), $imageName);
             $blog->picture = $imageName;
         }
         $blog->save();
