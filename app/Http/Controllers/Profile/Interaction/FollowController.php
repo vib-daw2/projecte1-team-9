@@ -37,7 +37,7 @@ class FollowController extends Controller
                 'follower_id' => Auth::id(),
                 'followee_id' => $user->id
             ]);
-            return redirect()->back()->with('status', ['success' => true, 'title' => 'Youre now following ' . $user->username, 'message' => 'Enjoy his content!']);
+            return redirect()->back()->with('status', ['success' => true, 'title' => "You're now following " . $user->username, 'message' => 'Enjoy his content!']);
 
         }
 

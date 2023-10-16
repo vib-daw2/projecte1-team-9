@@ -33,6 +33,7 @@ composer install && \
 php artisan migrate:fresh && \
 php artisan key:generate && \
 php artisan db:seed && \
+php artisan storage:link && \
 (php artisan serve & npm run dev &
 sleep 2 && \
 echo "Done. Press any key to stop the server.")
