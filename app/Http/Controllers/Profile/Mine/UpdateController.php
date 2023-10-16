@@ -65,7 +65,7 @@ class UpdateController extends Controller
 
         $user->save();
 
-        return redirect('/me')->with('status', ['success' => true, 'title' => 'Youre account has been updated', 'message' => 'Let the world see it!']);
+        return redirect('/me')->with('status', ['success' => true, 'title' => "Your account has been updated", 'message' => 'Let the world see it!']);
 
     }
 }
