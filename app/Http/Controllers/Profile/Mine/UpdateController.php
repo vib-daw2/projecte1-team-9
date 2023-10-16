@@ -56,8 +56,6 @@ class UpdateController extends Controller
             $imageName = time() . '.' . $user->username . '.' . $validated['profile_picture']->extension();
             $validated['profile_picture']->move(storage_path('app/public'), $imageName);
             $user->profile_picture = $imageName;
-        } else {
-            $user->profile_picture = null;
         }
         $user->username = $validated['username'];
         $user->email = $validated['email'];
