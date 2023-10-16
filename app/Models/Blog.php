@@ -110,10 +110,11 @@ class Blog extends Model
                     ->get()
                     ->toArray();
 
-            dd($comment->children);
-        }
+            foreach ($comment->children as $child) {
+                $child->user = User::find($child->user_id);
+            }
 
-        dd($comments);
+        }
 
         return $comments;
     }

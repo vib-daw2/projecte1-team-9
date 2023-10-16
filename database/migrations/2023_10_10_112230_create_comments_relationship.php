@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments_relations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comment_id')->constrained('comments')->onDelete('cascade');
-            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
+            $table->foreignId('comment_id')->references('id')->on('comments')->onDelete('cascade');
+            $table->foreignId('parent_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }
 

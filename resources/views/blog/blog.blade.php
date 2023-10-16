@@ -1,4 +1,7 @@
 @extends('layout')
+@php
+// dd($comments);
+@endphp
 <div class="w-full min-h-screen flex justify-start flex-col items-center px-12 py-8">
     <div class="max-w-5xl w-full mx-auto flex flex-col justify-start items-start gap-3">
         <div class="w-full flex justify-between items-start py-2">
