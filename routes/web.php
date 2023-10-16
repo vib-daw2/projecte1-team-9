@@ -22,7 +22,6 @@ use App\Http\Controllers\Profile\Mine\ReadController as ReadMyProfileController;
 use App\Http\Controllers\Profile\Mine\ReadLikedController;
 use App\Http\Controllers\Profile\Mine\UpdateController as UpdateMyProfileController;
 use App\Http\Controllers\Profile\Mine\UpdatePasswordController;
-use App\Http\Controllers\Profile\Mine\UpdateProfilePictureController;
 use App\Http\Controllers\Profile\Post\ReadController as ReadPostsController;
 use App\Http\Controllers\Profile\ReadController as ReadProfileController;
 use App\Http\Controllers\SearchController;
@@ -110,8 +109,6 @@ Route::post('/follow/{id}', [FollowController::class, 'follow'])->middleware('au
 Route::post('/me', [UpdateMyProfileController::class, 'edit'])->middleware('auth'); // Edit profile action
 Route::get('/me/password', [UpdatePasswordController::class, 'render'])->middleware('auth'); // Change password view
 Route::post('/me/password', [UpdatePasswordController::class, 'changePassword'])->middleware('auth'); // Change password action
-Route::post('/me/profilepicture', [UpdateProfilePictureController::class, 'change'])->middleware('auth'); // Change profile picture action
-
 
 /*
  * ADMIN PANEL
