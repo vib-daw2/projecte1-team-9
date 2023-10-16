@@ -57,6 +57,9 @@ class UpdateController extends Controller
             $validated['profile_picture']->move(storage_path('app/public'), $imageName);
             $user->profile_picture = $imageName;
         }
+        if (isset($validated['profile_picture']) && $validated['profile_picture'] == "") {
+            $user->profile_picture = null;
+        }
         $user->username = $validated['username'];
         $user->email = $validated['email'];
 
