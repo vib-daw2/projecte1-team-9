@@ -68,7 +68,9 @@
             <div class="text-red-500">{{ $message }}</div>
         @enderror
         <label for="image"
-            class="flex w-full h-24 rounded-md border-dashed justify-center items-center border-4 border-gray-600"></label>
+            class="flex w-full text-gray-600 hover:bg-gray-100 cursor-pointer h-20 rounded-lg border-dashed justify-center items-center border-4 border-gray-600">
+            <div>Add an Image</div>
+        </label>
         {{-- <textarea style="resize:none" class="w-full px-2 py-2 font-light outline-none decoration-transparent"
                        name="body" id="content"
                        rows="20" placeholder="Content"></textarea> --}}
