@@ -67,3 +67,15 @@
 
     </div>
 </div>
+
+<script>
+    function deletePost(event, id) {
+        event.preventDefault();
+        const form = document.createElement('form');
+        form.action = '/blog/' + id + '/delete';
+        form.method = 'POST';
+        form.innerHTML = '@csrf';
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
