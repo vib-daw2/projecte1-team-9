@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Blog;
+use App\Models\User;
+
 return [
 
     /*
@@ -133,9 +136,12 @@ return [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
-            // 'users' => [
-            //     'filterableAttributes'=> ['id', 'name', 'email'],
-            // ],
+             User::class => [
+                 'filterableAttributes'=> ['username', 'email'],
+             ],
+            Blog::class => [
+                'filterableAttributes'=> ['title', 'subtitle', 'body']
+            ],
         ],
         'queue' => [
             'connection' => 'redis',
