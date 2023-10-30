@@ -3,7 +3,7 @@
     <div class="max-w-5xl w-full mx-auto h-fit flex flex-col justify-start items-start gap-3">
         <x-profiletabs selected="profile" />
         <div class="flex flex-col w-full h-fit justify-center items-center mt-4 gap-4">
-            <x-profilestats :username="'admin'" />
+            <x-profilestats :username="Auth::user()->username" />
             <form class="flex flex-col gap-3 w-2/3 pt-6 max-w-5xl" method="POST">
                 @csrf
                 <div class="w-full">
