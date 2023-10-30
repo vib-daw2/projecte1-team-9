@@ -17,9 +17,13 @@ class UpdatePasswordController extends Controller
      * Used to render the change password page
      * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
      */
-    public function render(): \Illuminate\Contracts\View\View|Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function render(): \Illuminate\Contracts\View\View|Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
-        return view('profiles.change-password');
+        $user = Auth::user();
+        if (Auth::user()->auth_provider == null) {
+            return view('profiles.change-password');
+        }
+        return redirect('/me')->with('status', ['success' => false, 'title' => 'You cannot change your password', 'message' => 'You are using an external authentication provider']);
     }
 
     /**
