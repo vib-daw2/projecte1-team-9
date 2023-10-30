@@ -37,7 +37,11 @@
     <div class="mt-4 flex justify-between w-full gap-2 px-4 text-lg font-base">
         <div class="w-1/3 text-center">{{ $stats->followers }} Followers</div>
         <div class="w-1/3 text-center">
-            <a href="/me/following" class="hover:underline">{{ $stats->follows }} Following</a>
+            @if (Auth::id() == $user->id)
+                <a href="/me/following" class="hover:underline">{{ $stats->follows }} Following</a>
+            @else
+                <span>{{ $stats->follows }} Following</span>
+            @endif
         </div>
         @guest
             <div class="w-1/3"></div>
