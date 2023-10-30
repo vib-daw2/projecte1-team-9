@@ -57,6 +57,12 @@
         <div class="text-red-500 text-sm">{{ $message }}</div>
     @enderror
     <div class="flex flex-col w-full pr-4 gap-2 overflow-y-auto pt-4 md:pb-4 pb-20">
+        @if (count($comments) == 0)
+            <div>There are no comments on this blog yet</div>
+        @endif
+        @guest
+            <div><a href="/login" class="underline underline-offset-2">Log in</a> to join the conversation</div>
+        @endguest
         @foreach ($comments as $comment)
             <x-comment-single :isResponse="false" :comment="$comment" />
             @foreach ($comment->children as $child)
@@ -96,4 +102,3 @@
         parentMark.classList.add("hidden")
     }
 </script>
-
