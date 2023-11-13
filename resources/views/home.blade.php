@@ -14,7 +14,7 @@
             <button class="bg-gray-900 w-32 py-2 rounded-md text-white">Search</button>
         </form>
         @foreach ($blogs as $blog)
-            <x-postlist :image="$blog->picture" :username="$blog->username" :title="$blog->title" :id="$blog->id" :subtitle="$blog->subtitle"
+            <x-postlist :image="$blog->image" :username="$blog->username" :title="$blog->title" :id="$blog->id" :subtitle="$blog->subtitle"
                 :ownerid="$blog->owner_id" :liked="$blog->liked ?? ''" :likes="$blog->likes ?? 0" :dislikes="$blog->dislikes ?? 0" />
         @endforeach
         <div class="mx-auto mt-4">
